@@ -3,6 +3,7 @@
 ## Description
 
 **Duration:** 3 week sprint
+
 **Team:** Caleb Wistuba, Andrew Nguyen, McKenna Lusk, Cole Chelton, Nicole 'Colby' Blechynden
 
 Big Brothers Big Sisters plays an important role in pairing Bigs and Littles. Currently, the process of probing through a lot of summaries, home locations, individual requirements, and using that info to match a Big and Little, has proved to be complex. Bridge-iT is an application that will help to simplify this complex process allowing the staff to concentrate more on the human aspect of making these connections.
@@ -67,13 +68,14 @@ Thanks to [Prime Digital Academy](https://www.primeacademy.io/) and our cohort p
 ## Feedback, Suggestions, Support
 
 Please reach out to us on LinkedIn if you have comments, ideas, or interest in contributing to this project
-[Caleb Wistuba](linkedin.com/in/calebwistuba)
-[Andrew Nguyen](linkedin.com/in/andrew-th-nguyen)
-[McKenna Lusk](linkedin.com/in/mckenna-lusk)
-[Cole Chelton](linkedin.com/in/cole-chelton)
-[Nicole Blechynden](linkedin.com/in/nicoleblechynden)
 
-## **_ Preliminary Instructions and Information for Development - ALL BELOW THIS LINE WILL BE REMOVED AS APPROPRIATE _**
+- [Caleb Wistuba](linkedin.com/in/calebwistuba)
+- [Andrew Nguyen](linkedin.com/in/andrew-th-nguyen)
+- [McKenna Lusk](linkedin.com/in/mckenna-lusk)
+- [Cole Chelton](linkedin.com/in/cole-chelton)
+- [Nicole Blechynden](linkedin.com/in/nicoleblechynden)
+
+## Preliminary Instructions and Information for Development - ALL BELOW THIS LINE WILL BE REMOVED AS APPROPRIATE
 
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
