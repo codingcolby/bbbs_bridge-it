@@ -2,11 +2,73 @@
 
 ## Description
 
+Duration: 3 week sprint
+Team: Caleb Wistuba, Andrew Nguyen, McKenna Lusk, Cole Chelton, Nicole 'Colby' Blechynden
+
 Big Brothers Big Sisters plays an important role in pairing Bigs and Littles. Currently, the process of probing through a lot of summaries, home locations, individual requirements, and using that info to match a Big and Little, has proved to be complex. Bridge-iT is an application that will help to simplify this complex process allowing the staff to concentrate more on the human aspect of making these connections.
 
 Bridge-iT generates a pinned location on a map once the Big or Little information has been loaded. You can reduce the number of pins by selecting preferences or radius. Once the pins have been narrowed, you can select on the toggle button to have a side by side view of the Big and Little profiles. This allows you to easily compare the two profiles and see if the two would be a good match.
 
-## Preliminary Instructions and Information for Development
+To see the fully functional site, please visit: DEPLOYED VERSION OF THE APP - COMING SOON!
+
+## Screen Shots
+
+COMING SOON!
+
+## Prerequisites
+
+COMING SOON!
+
+## Installation
+
+1. Do This
+2. Do This
+3. Do This
+
+## Usage
+
+[Tell a user story "as an admin, as a visitor, as a registered user..."]
+
+Administrator -
+
+Staff -
+
+## Built With These Technologies
+
+- Axios
+- CSS
+- Docker
+- Express
+- Google Maps API
+- Heroku
+- JavaScript
+- Lodash
+- HTML
+- Material- UI
+- Node
+- Nodemailer (if time permits)
+- PDF- Parse
+- Postgresql
+- React
+- Redux
+- Redux-Saga
+- SweetAlert
+- Twinword API
+- TypeScript
+
+## License
+
+[MIT](./LICENSE.txt)
+
+## Acknowledgement
+
+Thanks to [Prime Digital Academy](https://www.primeacademy.io/) and our cohort peers for guiding us though the fundamentals of full stack development, providing us with a solid foundation in modern technologies, and their continued support in our development as software engineers.
+
+## Feedback, Suggestions, Support
+
+Please reach out to [TBD] if you have comments, ideas, or interest in contributing to this project
+
+## **_ Preliminary Instructions and Information for Development _** ALL BELOW THIS LINE WILL BE REMOVED AS APPROPRIATE
 
 This version uses React, Redux, Express, Passport, and PostgreSQL (a full list of dependencies can be found in `package.json`).
 
