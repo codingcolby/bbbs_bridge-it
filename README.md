@@ -69,11 +69,11 @@ Thanks to [Prime Digital Academy](https://www.primeacademy.io/) and our cohort p
 
 Please reach out to us on LinkedIn if you have comments, ideas, or interest in contributing to this project
 
-- [Caleb Wistuba](linkedin.com/in/calebwistuba)
-- [Andrew Nguyen](linkedin.com/in/andrew-th-nguyen)
-- [McKenna Lusk](linkedin.com/in/mckenna-lusk)
-- [Cole Chelton](linkedin.com/in/cole-chelton)
-- [Nicole Blechynden](linkedin.com/in/nicoleblechynden)
+- [Caleb Wistuba](https://www.linkedin.com/in/calebwistuba)
+- [Andrew Nguyen](https://www.linkedin.com/in/andrew-th-nguyen)
+- [McKenna Lusk](https://www.linkedin.com/in/mckenna-lusk)
+- [Cole Chelton](https://www.linkedin.com/in/cole-chelton)
+- [Nicole Blechynden](https://www.linkedin.com/in/nicoleblechynden/)
 
 ## Preliminary Instructions and Information for Development - ALL BELOW THIS LINE WILL BE REMOVED AS APPROPRIATE
 
