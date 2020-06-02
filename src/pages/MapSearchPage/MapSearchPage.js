@@ -6,32 +6,38 @@ import {
   Button,
   Checkbox,
   FormControlLabel,
-  Typography,
+  FormGroup,
   withStyles,
   createStyles,
 } from "@material-ui/core";
 
-const customStyles = (theme) =>
-  createStyles({
-    btn: {},
-  });
+const customStyles = (theme) => createStyles({});
 
 class MapSearchPage extends Component {
   render() {
     const { classes } = this.props;
     return (
       <div>
-        <h2>Map Search Page</h2>
+        <h1>All Unmatched Bigs and Littles</h1>
         <br />
         <div>
           <Map />
         </div>
-
-        <Checkbox></Checkbox>
-
-        <Button className={classes.btn} variant="outlined">
-          Search By Name
-        </Button>
+        <FormGroup column>
+          <FormControlLabel
+            control={<Checkbox name="checkedFemale" />}
+            label="Female"
+          />
+          <FormControlLabel
+            control={<Checkbox name="checkedMale" />}
+            label="Male"
+          />
+          <FormControlLabel
+            control={<Checkbox name="checkedCouple" />}
+            label="Couple"
+          />
+        </FormGroup>
+        <Button variant="outlined">Search By Name</Button>
       </div>
     );
   }
