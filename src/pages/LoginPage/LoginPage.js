@@ -1,11 +1,21 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import mapStoreToProps from '../../redux/mapStoreToProps';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import mapStoreToProps from "../../redux/mapStoreToProps";
+
+import {
+  Button,
+  Container,
+  Paper,
+  withStyles,
+  createStyles,
+} from "@material-ui/core";
+
+const customStyles = (theme) => createStyles({});
 
 class LoginPage extends Component {
   state = {
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   };
 
   login = (event) => {
@@ -13,31 +23,28 @@ class LoginPage extends Component {
 
     if (this.state.username && this.state.password) {
       this.props.dispatch({
-        type: 'LOGIN',
+        type: "LOGIN",
         payload: {
           username: this.state.username,
           password: this.state.password,
         },
       });
     } else {
-      this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
+      this.props.dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
-  } // end login
+  }; // end login
 
-  handleInputChangeFor = propertyName => (event) => {
+  handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
       [propertyName]: event.target.value,
     });
-  }
+  };
 
   render() {
     return (
       <div>
         {this.props.store.errors.loginMessage && (
-          <h2
-            className="alert"
-            role="alert"
-          >
+          <h2 className="alert" role="alert">
             {this.props.store.errors.loginMessage}
           </h2>
         )}
@@ -50,7 +57,7 @@ class LoginPage extends Component {
                 type="text"
                 name="username"
                 value={this.state.username}
-                onChange={this.handleInputChangeFor('username')}
+                onChange={this.handleInputChangeFor("username")}
               />
             </label>
           </div>
@@ -61,7 +68,7 @@ class LoginPage extends Component {
                 type="password"
                 name="password"
                 value={this.state.password}
-                onChange={this.handleInputChangeFor('password')}
+                onChange={this.handleInputChangeFor("password")}
               />
             </label>
           </div>
@@ -78,7 +85,9 @@ class LoginPage extends Component {
           <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => {
+              this.props.dispatch({ type: "SET_TO_REGISTER_MODE" });
+            }}
           >
             Register
           </button>
@@ -88,4 +97,4 @@ class LoginPage extends Component {
   }
 }
 
-export default connect(mapStoreToProps)(LoginPage);
+export default withStyles(customStyles)(connect(mapStoreToProps)(LoginPage));
