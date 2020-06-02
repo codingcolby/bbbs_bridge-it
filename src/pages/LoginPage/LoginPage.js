@@ -10,7 +10,16 @@ import {
   createStyles,
 } from "@material-ui/core";
 
-const customStyles = (theme) => createStyles({});
+const customStyles = (theme) =>
+  createStyles({
+    paper: {
+      maxWidth: "45%",
+      backgroundColor: "green",
+      color: "white",
+      padding: "4%",
+      margin: "4%",
+    },
+  });
 
 class LoginPage extends Component {
   state = {
@@ -41,56 +50,55 @@ class LoginPage extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.roots}>
         {this.props.store.errors.loginMessage && (
           <h2 className="alert" role="alert">
             {this.props.store.errors.loginMessage}
           </h2>
         )}
-        <form className="formPanel" onSubmit={this.login}>
-          <h1>Login</h1>
-          <div>
-            <label htmlFor="username">
-              Username:
-              <input
-                type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor("username")}
-              />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="password">
-              Password:
-              <input
-                type="password"
-                name="password"
-                value={this.state.password}
-                onChange={this.handleInputChangeFor("password")}
-              />
-            </label>
-          </div>
-          <div>
-            <input
-              className="log-in"
-              type="submit"
-              name="submit"
-              value="Log In"
-            />
-          </div>
-        </form>
+
         <center>
-          <button
-            type="button"
-            className="link-button"
-            onClick={() => {
-              this.props.dispatch({ type: "SET_TO_REGISTER_MODE" });
-            }}
-          >
-            Register
-          </button>
+          <Paper className={classes.paper}>
+            <Container>
+              <form onSubmit={this.login}>
+                <h1 className={classes.font}>Login</h1>
+                <div>
+                  <label htmlFor="username" className={classes.font}>
+                    Username:
+                    <input
+                      type="text"
+                      name="username"
+                      value={this.state.username}
+                      onChange={this.handleInputChangeFor("username")}
+                    />
+                  </label>
+                </div>
+                <div>
+                  <label htmlFor="password">
+                    Password:
+                    <input
+                      type="password"
+                      name="password"
+                      value={this.state.password}
+                      onChange={this.handleInputChangeFor("password")}
+                    />
+                  </label>
+                </div>
+                <div>
+                  <Button
+                    className={classes.btn}
+                    type="submit"
+                    name="submit"
+                    value="Log In"
+                  >
+                    Log In
+                  </Button>
+                </div>
+              </form>
+            </Container>
+          </Paper>
         </center>
       </div>
     );
