@@ -35,6 +35,10 @@ CREATE TABLE "status"
     "comment" text
 );
 
+ALTER TABLE "status"
+    ADD CONSTRAINT "unique_relationship_key"
+    UNIQUE (big_id, little_id);
+
 CREATE TABLE "user"
 (
     "id" SERIAL PRIMARY KEY,
