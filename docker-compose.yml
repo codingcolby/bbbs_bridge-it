@@ -10,7 +10,7 @@ services:
     build:
       context: ./
       dockerfile: ./Dockerfile.client
-      stdin_open: true
+    stdin_open: true
     ports:
       - 3000:3000 # expose ports - HOST:CONTAINER (for create-react-app)
       - 35729:35729 # expose ports - HOST:CONTAINER (for serviceworker warm reloading)
