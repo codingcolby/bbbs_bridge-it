@@ -11,19 +11,28 @@ import {
   createStyles,
 } from "@material-ui/core";
 
-const customStyles = (theme) => createStyles({});
+const customStyles = (theme) =>
+  createStyles({
+    root: {
+      textAlign: "center",
+    },
+    position: {
+      position: "relative",
+      left: "150px",
+    },
+  });
 
 class MapSearchPage extends Component {
   render() {
     const { classes } = this.props;
     return (
-      <div>
+      <div className={classes.root}>
         <h1>All Unmatched Bigs and Littles</h1>
         <br />
-        <div>
+        <div className={classes.position}>
           <Map />
         </div>
-        <FormGroup column>
+        <FormGroup column className={classes.position}>
           <FormControlLabel
             control={<Checkbox name="checkedFemale" />}
             label="Female"
