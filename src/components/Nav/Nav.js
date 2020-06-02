@@ -21,6 +21,9 @@ const Nav = (props) => {
     <div className="nav">
       <DropdownMenu className="nav-title" />
       {/* <Link to="/home">
+
+
+BAD MERGE RUIN THE MERGE
         <h2 className="nav-title">Prime Solo Project</h2>
       </Link> */}
       <div className="nav-right">
