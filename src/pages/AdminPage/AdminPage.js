@@ -111,8 +111,12 @@ class AdminPage extends Component {
             </Container>
           </Paper>
           <div>
-            <RegistrationPage />
-            <UserPage />
+            <Paper>
+              <Container>
+                <RegistrationPage />
+                <UserPage />
+              </Container>
+            </Paper>
           </div>
         </center>
       </div>
