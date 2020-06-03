@@ -20,7 +20,7 @@ import LandingPage from "../../pages/LandingPage/LandingPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import MapSearchPage from "../../pages/MapSearchPage/MapSearchPage";
-import AdminPage from "../../pages/AdminPage/AdminPage";
+
 
 import "./App.css";
 
@@ -43,7 +43,7 @@ class App extends Component {
             {/* This needs to be LANDING PAGE not ADMINPAGE */}
             <Route exact path="/home" component={LandingPage} />
             <Route exact path="/map" component={MapSearchPage} />
-            {/* <Route exact path="/admin" component={AdminPage} /> */}
+
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
