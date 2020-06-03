@@ -19,6 +19,7 @@ const customStyles = (theme) =>
     },
     position: {
       display: "inline-block",
+      padding: "15px",
     },
   });
 
@@ -33,7 +34,7 @@ class MapSearchPage extends Component {
           <Map />
         </div>
         <div className={classes.position}>
-          <FormGroup column>
+          <FormGroup row>
             <FormControlLabel
               control={<Checkbox name="checkedFemale" />}
               label="Female"
