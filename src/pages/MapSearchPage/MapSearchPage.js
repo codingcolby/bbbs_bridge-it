@@ -18,8 +18,7 @@ const customStyles = (theme) =>
       textAlign: "center",
     },
     position: {
-      position: "relative",
-      left: "150px",
+      display: "inline-block",
     },
   });
 
@@ -30,25 +29,28 @@ class MapSearchPage extends Component {
       <div className={classes.root}>
         <h1>All Unmatched Bigs and Littles</h1>
         <br />
-        <div className={classes.position}>
+        <div>
           <Map />
         </div>
-        <FormGroup column className={classes.position}>
-          <FormControlLabel
-            control={<Checkbox name="checkedFemale" />}
-            label="Female"
-          />
-          <FormControlLabel
-            control={<Checkbox name="checkedMale" />}
-            label="Male"
-          />
-          <FormControlLabel
-            control={<Checkbox name="checkedCouple" />}
-            label="Couple"
-          />
-        </FormGroup>
-        <Button variant="outlined">Search By Name</Button>
-
+        <div className={classes.position}>
+          <FormGroup column>
+            <FormControlLabel
+              control={<Checkbox name="checkedFemale" />}
+              label="Female"
+            />
+            <FormControlLabel
+              control={<Checkbox name="checkedMale" />}
+              label="Male"
+            />
+            <FormControlLabel
+              control={<Checkbox name="checkedCouple" />}
+              label="Couple"
+            />
+          </FormGroup>
+        </div>
+        <div>
+          <Button variant="outlined">Search By Name</Button>
+        </div>
       </div>
     );
   }
@@ -57,4 +59,3 @@ class MapSearchPage extends Component {
 export default withStyles(customStyles)(
   connect(mapStoreToProps)(MapSearchPage)
 );
-
