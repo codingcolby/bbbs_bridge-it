@@ -20,7 +20,11 @@ import LandingPage from "../../pages/LandingPage/LandingPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import MapSearchPage from "../../pages/MapSearchPage/MapSearchPage";
-
+import MapListPage from "../../pages/MapListPage/MapListPage";
+import MatchTablePage from "../../pages/MatchTablePage/MatchTablePage";
+import ProfilePage from "../../pages/ProfilePage/ProfilePage";
+import SearchPage from "../../pages/SearchPage/SearchPage";
+import UploadPage from "../../pages/UploadPage/UploadPage";
 
 import "./App.css";
 
@@ -43,7 +47,12 @@ class App extends Component {
             {/* This needs to be LANDING PAGE not ADMINPAGE */}
             <Route exact path="/home" component={LandingPage} />
             <Route exact path="/map" component={MapSearchPage} />
-
+            <Route exact path="/list" component={MapListPage} />
+            <Route exact path="/table" component={MatchTablePage} />
+            <Route exact path="/profile" component={ProfilePage} />
+            <Route exact path="/search" component={SearchPage} />
+            <Route exact path="/user" component={UserPage} />
+            <Route exact path="/upload" component={UploadPage} />
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
