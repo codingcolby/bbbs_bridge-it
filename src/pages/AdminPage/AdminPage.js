@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+
+import UserPage from "../pages/UserPage/UserPage";
 import LogOutButton from "../../components/LogOutButton/LogOutButton";
 
 import {
@@ -107,6 +109,9 @@ class AdminPage extends Component {
               </div>
             </Container>
           </Paper>
+          <div>
+            <UserPage />
+          </div>
         </center>
       </div>
     );
