@@ -20,6 +20,7 @@ import LandingPage from "../../pages/LandingPage/LandingPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import MapSearchPage from "../../pages/MapSearchPage/MapSearchPage";
+import SearchPage from "../../pages/SearchPage/SearchPage";
 
 import "./App.css";
 
@@ -41,6 +42,7 @@ class App extends Component {
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/home" component={LandingPage} />
             <Route exact path="/map" component={MapSearchPage} />
+            <Route exact path="/search" component={SearchPage} />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
