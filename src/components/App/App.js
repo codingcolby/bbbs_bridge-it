@@ -20,6 +20,7 @@ import LandingPage from "../../pages/LandingPage/LandingPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
 import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import MapSearchPage from "../../pages/MapSearchPage/MapSearchPage";
+import SearchPage from "../../pages/SearchPage/SearchPage";
 
 import "./App.css";
 
