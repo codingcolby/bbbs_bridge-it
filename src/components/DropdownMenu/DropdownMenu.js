@@ -27,9 +27,9 @@ function DropdownMenu(props) {
     history.push({ pathname: "/map" });
   };
 
-  const logout = (event) => {
-    history.push({ pathname: "/login" });
-  };
+  // const logout = (event) => {
+  //   history.push({ pathname: "/login" });
+  // };
   return (
     <div>
       <ButtonBase onClick={handleClick}>
@@ -53,7 +53,7 @@ function DropdownMenu(props) {
         <MenuItem onClick={search}>Search</MenuItem>
         <MenuItem onClick={upload}>Upload</MenuItem>
         <MenuItem onClick={map}>Map</MenuItem>
-        <MenuItem onClick={logout}>Logout</MenuItem>
+        <MenuItem>Logout</MenuItem>
       </Menu>
     </div>
   );
