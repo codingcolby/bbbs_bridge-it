@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import LogOutButton from "../../components/LogOutButton/LogOutButton";
 
 import {
   Button,
@@ -43,6 +44,7 @@ class AdminPage extends Component {
     const { classes } = this.props;
     return (
       <div className={classes.roots}>
+        <h1> Admin Page</h1>
         <center>
           <Paper className={classes.paper}>
             <Container>
@@ -78,6 +80,9 @@ class AdminPage extends Component {
                 >
                   Reset User
                 </Button>
+              </div>
+              <div>
+                <LogOutButton className="log-out" />
               </div>
             </Container>
           </Paper>
