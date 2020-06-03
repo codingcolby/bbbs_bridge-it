@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import Map from "../../components/Map/Map";
+
 import {
   Button,
   Checkbox,
@@ -47,10 +48,13 @@ class MapSearchPage extends Component {
           />
         </FormGroup>
         <Button variant="outlined">Search By Name</Button>
+
       </div>
     );
   }
 }
+
 export default withStyles(customStyles)(
   connect(mapStoreToProps)(MapSearchPage)
 );
+
