@@ -14,10 +14,22 @@ const customStyles = (theme) =>
   createStyles({
     paper: {
       maxWidth: "45%",
-      backgroundColor: "green",
+      backgroundColor: "black",
       color: "white",
       padding: "4%",
       margin: "4%",
+    },
+    btn: {
+      backgroundColor: "green",
+      color: "#fff",
+      margin: "5.5%",
+      fontFamily: "",
+      "&:hover": {
+        background: "red",
+      },
+    },
+    font: {
+      fontFamily: "",
     },
   });
 
@@ -93,12 +105,23 @@ class LoginPage extends Component {
                     name="submit"
                     value="Log In"
                   >
-                    Log In
+                    Sign In
                   </Button>
                 </div>
               </form>
             </Container>
           </Paper>
+        </center>
+        <center>
+          <button
+            type="button"
+            className={classes.link_btn}
+            onClick={() => {
+              this.props.dispatch({ type: "SET_TO_REGISTER_MODE" });
+            }}
+          >
+            Add Admin
+          </button>
         </center>
       </div>
     );
