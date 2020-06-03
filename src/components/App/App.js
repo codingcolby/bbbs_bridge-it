@@ -40,9 +40,10 @@ class App extends Component {
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
             <Route exact path="/about" component={AboutPage} />
+            {/* This needs to be LANDING PAGE not ADMINPAGE */}
             <Route exact path="/home" component={LandingPage} />
             <Route exact path="/map" component={MapSearchPage} />
-            <Route exact path="/admin" component={AdminPage} />
+            {/* <Route exact path="/admin" component={AdminPage} /> */}
 
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.

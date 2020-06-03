@@ -20,7 +20,7 @@ const customStyles = (theme) =>
       margin: "4%",
     },
     btn: {
-      backgroundColor: "rgb (0, 252, 135)",
+      backgroundColor: "green",
       color: "#fff",
       margin: "5.5%",
       fontFamily: "Trebuchet",

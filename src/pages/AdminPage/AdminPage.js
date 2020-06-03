@@ -21,7 +21,7 @@ const customStyles = (theme) =>
       margin: "4%",
     },
     btn: {
-      backgroundColor: "rgb (0, 252, 135)",
+      backgroundColor: "green",
       color: "#fff",
       margin: "5.5%",
       fontFamily: "Trebuchet",
@@ -40,11 +40,19 @@ class AdminPage extends Component {
     password: "",
   };
 
+  componentDidMount() {
+    this.props.dispatch({ type: "" });
+  }
+
+  selectResetUser = (item) => (event) => {
+    this.setState({});
+  };
+
+  // Need to RESET USER with USERNAME AND PASSWORD RESET!!
   render() {
     const { classes } = this.props;
     return (
       <div className={classes.roots}>
-        <h1> Admin Page</h1>
         <center>
           <Paper className={classes.paper}>
             <Container>
@@ -56,7 +64,7 @@ class AdminPage extends Component {
                     type="text"
                     name="username"
                     value={this.state.username}
-                    onChange={this.handleInputChangeFor("username")}
+                    // onChange={("username")}
                   />
                 </label>
               </div>
@@ -67,7 +75,7 @@ class AdminPage extends Component {
                     type="password"
                     name="password"
                     value={this.state.password}
-                    onChange={this.handleInputChangeFor("password")}
+                    // onChange={"password")}
                   />
                 </label>
               </div>
