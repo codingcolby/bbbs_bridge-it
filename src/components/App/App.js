@@ -14,7 +14,7 @@ import Footer from "../Footer/Footer";
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 
 import AboutPage from "../AboutPage/AboutPage";
-import UserPage from "../../pages/UserPage/UserPage";
+import AdminPage from "../../pages/AdminPage/AdminPage";
 import InfoPage from "../InfoPage/InfoPage";
 import LandingPage from "../../pages/LandingPage/LandingPage";
 import LoginPage from "../../pages/LoginPage/LoginPage";
@@ -44,16 +44,15 @@ class App extends Component {
             {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
             <Route exact path="/about" component={AboutPage} />
-            {/* This needs to be LANDING PAGE not ADMINPAGE */}
+
             <Route exact path="/home" component={LandingPage} />
             <Route exact path="/map" component={MapSearchPage} />
             <Route exact path="/list" component={MapListPage} />
             <Route exact path="/table" component={MatchTablePage} />
             <Route exact path="/profile" component={ProfilePage} />
             <Route exact path="/search" component={SearchPage} />
-            <Route exact path="/user" component={UserPage} />
+            <Route exact path="/admin" component={AdminPage} />
             <Route exact path="/upload" component={UploadPage} />
-
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

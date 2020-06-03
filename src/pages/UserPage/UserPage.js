@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import LogOutButton from "../../components/LogOutButton/LogOutButton";
+
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
 // this could also be written with destructuring parameters as:
@@ -8,9 +8,10 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 // and then instead of `props.user.username` you could use `user.username`
 const UserPage = (props) => (
   <div>
-    <h1 id="welcome">Welcome, {props.store.user.username}!</h1>
-    <p>Your ID is: {props.store.user.id}</p>
-    <LogOutButton className="log-in" />
+    <h3 id="welcome">
+      BBBS KC Users:
+      {props.store.user.email}
+    </h3>
   </div>
 );
 

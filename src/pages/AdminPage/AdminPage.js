@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-import LogOutButton from "../../components/LogOutButton/LogOutButton";
+
+import RegistrationPage from "../RegisterPage/RegisterPage";
+import UserPage from "../UserPage/UserPage";
 
 import {
   Button,
@@ -36,7 +38,7 @@ const customStyles = (theme) =>
 
 class AdminPage extends Component {
   state = {
-    username: "",
+    email: "",
     password: "",
   };
 
@@ -61,13 +63,13 @@ class AdminPage extends Component {
             <Container>
               <h1 className={classes.font}>Admin</h1>
               <div>
-                <label htmlFor="username" className={classes.font}>
-                  Username:
+                <label htmlFor="email" className={classes.font}>
+                  Email:
                   <input
                     type="text"
-                    name="username"
-                    value={this.state.username}
-                    onChange={this.handleInputChangeFor("username")}
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.handleInputChangeFor("email")}
                   />
                 </label>
               </div>
@@ -81,6 +83,9 @@ class AdminPage extends Component {
                     onChange={this.handleInputChangeFor("password")}
                   />
                 </label>
+                <label htmlFor="user_logged_in" className={classes.font}>
+                  <UserPage />
+                </label>
               </div>
               <div>
                 <Button
@@ -93,7 +98,7 @@ class AdminPage extends Component {
                       type: "RESET_PASSWORD",
                       payload: {
                         ...this.props.match.params,
-                        newUsername: this.state.username,
+                        newEmail: this.state.email,
                         newPassword: this.state.password,
                       },
                     });
@@ -102,11 +107,16 @@ class AdminPage extends Component {
                   Reset User
                 </Button>
               </div>
-              <div>
-                <LogOutButton className="log-out" />
-              </div>
+              <div></div>
             </Container>
           </Paper>
+          <div>
+            <Paper variant="outlined">
+              <Container>
+                <RegistrationPage />
+              </Container>
+            </Paper>
+          </div>
         </center>
       </div>
     );
