@@ -4,18 +4,18 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 
 class RegisterPage extends Component {
   state = {
-    username: "",
+    email: "",
     password: "",
   };
 
   registerUser = (event) => {
     event.preventDefault();
 
-    if (this.state.username && this.state.password) {
+    if (this.state.email && this.state.password) {
       this.props.dispatch({
         type: "REGISTER",
         payload: {
-          username: this.state.username,
+          email: this.state.email,
           password: this.state.password,
         },
       });
@@ -41,13 +41,14 @@ class RegisterPage extends Component {
         <form className="formPanel" onSubmit={this.registerUser}>
           <h1>Register User</h1>
           <div>
-            <label htmlFor="username">
-              Username:
+            <label htmlFor="email">
+              email:
               <input
                 type="text"
-                name="username"
-                value={this.state.username}
-                onChange={this.handleInputChangeFor("username")}
+                name="email"
+                value={this.state.email}
+                onChange={this.handleInputChangeFor("email")}
+
               />
             </label>
           </div>
@@ -71,6 +72,20 @@ class RegisterPage extends Component {
             />
           </div>
         </form>
+
+
+        <center>
+          <button
+            type="button"
+            className="link-button"
+            onClick={() => {
+              this.props.dispatch({ type: "SET_TO_LOGIN_MODE" });
+            }}
+          >
+            Login
+          </button>
+        </center>
+
       </div>
     );
   }
