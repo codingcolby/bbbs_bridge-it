@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   ##
@@ -7,17 +7,16 @@ services:
   ##     docker-compose up --build -d client
   ## ----------------------------------------
   client:
-    build:
+    build: 
       context: ./
       dockerfile: ./Dockerfile.client
-    stdin_open: true
     ports:
       - 3000:3000 # expose ports - HOST:CONTAINER (for create-react-app)
       - 35729:35729 # expose ports - HOST:CONTAINER (for serviceworker warm reloading)
     volumes:
-      - "./src:/app-client/src"
-      - "./public:/app-client/public"
-      - "/app-client/node_modules"
+      - './src:/app-client/src'
+      - './public:/app-client/public'
+      - '/app-client/node_modules'
     depends_on:
       - server
     command: npm run client
@@ -32,7 +31,7 @@ services:
     image: postgres:latest
     restart: always
     ports:
-      - ${DOCKER_DB_PORT}0:${DOCKER_DB_PORT}
+      - ${DOCKER_DB_PORT}:${DOCKER_DB_PORT}
     environment:
       POSTGRES_USER: ${DOCKER_DB_USER}
       POSTGRES_PASSWORD: ${DOCKER_DB_PASS}
@@ -47,7 +46,7 @@ services:
   ##     docker-compose up --build -d server
   ## ----------------------------------------
   server:
-    build:
+    build: 
       context: ./
       dockerfile: ./Dockerfile.server
     ports:
@@ -58,13 +57,13 @@ services:
       POSTGRES_PASSWORD: ${DOCKER_DB_PASS}
       POSTGRES_DB: ${DATABASE_NAME}
       POSTGRES_HOST: database
-      CHOKIDAR_USEPOLLING: "true"
+      CHOKIDAR_USEPOLLING: 'true'
       NODE_ENV: ${NODE_ENV}
     volumes:
-      - "./server:/app-server/server"
-      - "./server/dist:/app-server/dist"
-      - "./public:/app-server/public"
-      - "/app-server/node_modules"
+      - './server:/app-server/server'
+      - './server/dist:/app-server/dist'
+      - './public:/app-server/public'
+      - '/app-server/node_modules'
     depends_on:
       - database
     command: npm run server
