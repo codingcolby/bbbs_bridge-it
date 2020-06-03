@@ -4,7 +4,6 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 
 import RegistrationPage from "../RegisterPage/RegisterPage";
 import UserPage from "../UserPage/UserPage";
-import LogOutButton from "../../components/LogOutButton/LogOutButton";
 
 import {
   Button,
@@ -108,9 +107,7 @@ class AdminPage extends Component {
                   Reset User
                 </Button>
               </div>
-              <div>
-                <LogOutButton className="log-out" />
-              </div>
+              <div></div>
             </Container>
           </Paper>
           <div>
