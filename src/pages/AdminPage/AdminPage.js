@@ -40,13 +40,16 @@ class AdminPage extends Component {
     password: "",
   };
 
-  componentDidMount() {
-    this.props.dispatch({ type: "" });
-  }
-
-  selectResetUser = (item) => (event) => {
-    this.setState({});
+  handleInputChangeFor = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
   };
+  componentDidUpdate() {
+    if (this.props.store.resetReducer) {
+      this.props.dispatch({ type: "CLEAR_RESET" });
+    }
+  }
 
   // Need to RESET USER with USERNAME AND PASSWORD RESET!!
   render() {
@@ -64,7 +67,7 @@ class AdminPage extends Component {
                     type="text"
                     name="username"
                     value={this.state.username}
-                    // onChange={("username")}
+                    onChange={this.handleInputChangeFor("username")}
                   />
                 </label>
               </div>
@@ -75,7 +78,7 @@ class AdminPage extends Component {
                     type="password"
                     name="password"
                     value={this.state.password}
-                    // onChange={"password")}
+                    onChange={this.handleInputChangeFor("password")}
                   />
                 </label>
               </div>
@@ -85,6 +88,16 @@ class AdminPage extends Component {
                   type="submit"
                   name="submit"
                   value="Reset User"
+                  onClick={() => {
+                    this.props.dispatch({
+                      type: "RESET_PASSWORD",
+                      payload: {
+                        ...this.props.match.params,
+                        newUsername: this.state.username,
+                        newPassword: this.state.password,
+                      },
+                    });
+                  }}
                 >
                   Reset User
                 </Button>
