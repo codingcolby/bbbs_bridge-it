@@ -48,6 +48,7 @@ class RegisterPage extends Component {
                 name="email"
                 value={this.state.email}
                 onChange={this.handleInputChangeFor("email")}
+
               />
             </label>
           </div>
@@ -71,6 +72,8 @@ class RegisterPage extends Component {
             />
           </div>
         </form>
+
+
         <center>
           <button
             type="button"
@@ -82,6 +85,7 @@ class RegisterPage extends Component {
             Login
           </button>
         </center>
+
       </div>
     );
   }
