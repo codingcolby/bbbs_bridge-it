@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
-import RegistrationPage from "../pages/RegistrationPage/RegistrationPage";
-import UserPage from "../pages/UserPage/UserPage";
+import RegistrationPage from "../RegisterPage/RegisterPage";
+import UserPage from "../UserPage/UserPage";
 import LogOutButton from "../../components/LogOutButton/LogOutButton";
 
 import {
@@ -84,6 +84,9 @@ class AdminPage extends Component {
                     onChange={this.handleInputChangeFor("password")}
                   />
                 </label>
+                <label htmlFor="user_logged_in" className={classes.font}>
+                  <UserPage />
+                </label>
               </div>
               <div>
                 <Button
@@ -114,7 +117,6 @@ class AdminPage extends Component {
             <Paper variant="outlined">
               <Container>
                 <RegistrationPage />
-                <UserPage />
               </Container>
             </Paper>
           </div>
