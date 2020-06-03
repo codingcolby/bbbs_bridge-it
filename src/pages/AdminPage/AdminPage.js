@@ -21,16 +21,16 @@ const customStyles = (theme) =>
       margin: "4%",
     },
     btn: {
-      backgroundColor: "green",
+      backgroundColor: "rgb (0, 252, 135)",
       color: "#fff",
       margin: "5.5%",
-      fontFamily: "",
+      fontFamily: "Trebuchet",
       "&:hover": {
         background: "red",
       },
     },
     font: {
-      fontFamily: "",
+      fontFamily: "Trebuchet",
     },
   });
 
