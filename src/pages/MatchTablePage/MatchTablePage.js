@@ -81,6 +81,7 @@ class MatchTablePage extends Component {
 									<StyledTableCell align="right">
 										{row.littlename}
 									</StyledTableCell>
+									{/* TODO: Add No Match / Match buttons */}
 									<StyledTableCell align="right">{row.matchNY}</StyledTableCell>
 								</StyledTableRow>
 							))}
