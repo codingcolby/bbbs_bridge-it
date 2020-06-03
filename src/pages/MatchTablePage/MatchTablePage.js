@@ -9,6 +9,7 @@ import TableContainer from "@material-ui/core/TableContainer";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
 
 class MatchTablePage extends Component {
 	render() {
@@ -33,11 +34,16 @@ class MatchTablePage extends Component {
 			},
 		}))(TableRow);
 
-		const useStyles = makeStyles({
+		const useStyles = makeStyles((theme) => ({
+			root: {
+				"& > *": {
+					margin: theme.spacing(1),
+				},
+			},
 			table: {
 				minWidth: 700,
 			},
-		});
+		}));
 
 		const classes = useStyles();
 
@@ -81,8 +87,16 @@ class MatchTablePage extends Component {
 									<StyledTableCell align="right">
 										{row.littlename}
 									</StyledTableCell>
-									{/* TODO: Add No Match / Match buttons */}
-									<StyledTableCell align="right">{row.matchNY}</StyledTableCell>
+									{/* TODO: functional - associate buttons with boolean value for yes or no on match*/}
+									<StyledTableCell align="right">
+										{row.matchNY}
+										<div className={classes.root}>
+											<Button variant="outlined">No Match</Button>
+											<Button variant="outlined" color="primary">
+												Match
+											</Button>
+										</div>
+									</StyledTableCell>
 								</StyledTableRow>
 							))}
 						</TableBody>
