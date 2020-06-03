@@ -112,17 +112,6 @@ class LoginPage extends Component {
             </Container>
           </Paper>
         </center>
-        <center>
-          <button
-            type="button"
-            className={classes.link_btn}
-            onClick={() => {
-              this.props.dispatch({ type: "SET_TO_REGISTER_MODE" });
-            }}
-          >
-            Add Admin
-          </button>
-        </center>
       </div>
     );
   }
