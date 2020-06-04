@@ -1,4 +1,4 @@
-const resetReducer = (state = false, action) => {
+const resetUser = (state = false, action) => {
   switch (action.type) {
     case "SET_RESET":
       return true;
@@ -9,4 +9,4 @@ const resetReducer = (state = false, action) => {
   }
 };
 
-export { resetReducer };
+export { resetUser };
