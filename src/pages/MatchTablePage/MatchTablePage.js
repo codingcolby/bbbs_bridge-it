@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import MatchConfirm from "../../components/MatchConfirm/MatchConfirm";
 
 class MatchTablePage extends Component {
 	render() {
@@ -46,6 +47,34 @@ class MatchTablePage extends Component {
 			},
 		}))(TableRow);
 
+		function rand() {
+			return Math.round(Math.random() * 20) - 10;
+		}
+
+		function getModalStyle() {
+			const top = 50 + rand();
+			const left = 50 + rand();
+
+			return {
+				top: `${top}%`,
+				left: `${left}%`,
+				transform: `translate(-${top}%, -${left}%)`,
+			};
+		}
+
+		const [modalStyle] = React.useState(getModalStyle);
+		const [open, setOpen] = React.useState(false);
+
+		// const handleOpen = () => {
+		// 	setOpen(true);
+		// 	{
+		// 		Modal;
+		// 	}
+		// };
+
+		// const handleClose = () => {
+		// 	setOpen(false);
+		// };
 		// TEMP DATA FOR DEVELOPMENT
 		function createData(bocname, lname, matchNY) {
 			return { bocname, lname, matchNY };
@@ -104,8 +133,14 @@ class MatchTablePage extends Component {
 									<StyledTableCell>
 										<div className={useStyles.root}>
 											{row.matchNY} &nbsp; &nbsp;
-											<Button variant="outlined">No Match</Button> &nbsp; &nbsp;
-											<Button variant="outlined" color="primary">
+											<Button onClick={handleOpen} variant="outlined">
+												No Match
+											</Button>{" "}
+											&nbsp; &nbsp;
+											<Button
+												onClick={handleOpen}
+												variant="outlined"
+												color="primary">
 												Match
 											</Button>
 										</div>
