@@ -133,12 +133,14 @@ class MatchTablePage extends Component {
 									<StyledTableCell>
 										<div className={useStyles.root}>
 											{row.matchNY} &nbsp; &nbsp;
-											<Button onClick={handleOpen} variant="outlined">
+											<Button
+												// onClick={handleOpen}
+												variant="outlined">
 												No Match
 											</Button>{" "}
 											&nbsp; &nbsp;
 											<Button
-												onClick={handleOpen}
+												// onClick={handleOpen}
 												variant="outlined"
 												color="primary">
 												Match
