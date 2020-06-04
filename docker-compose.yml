@@ -14,6 +14,8 @@ services:
     ports:
       - 3000:3000 # expose ports - HOST:CONTAINER (for create-react-app)
       - 35729:35729 # expose ports - HOST:CONTAINER (for serviceworker warm reloading)
+    environment:
+      REACT_APP_API_GMAP: ${REACT_APP_API_GMAP}
     volumes:
       - "./src:/app-client/src"
       - "./public:/app-client/public"
@@ -60,7 +62,6 @@ services:
       POSTGRES_HOST: database
       CHOKIDAR_USEPOLLING: "true"
       NODE_ENV: ${NODE_ENV}
-      REACT_APP_API_GMAP: ${REACT_APP_API_GMAP}
       CB_API_TWINWORD: ${CB_API_TWINWORD}
     volumes:
       - "./server:/app-server/server"
