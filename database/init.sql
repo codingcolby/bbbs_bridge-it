@@ -76,7 +76,8 @@ INSERT INTO "sex_type"
     ("type")
 VALUES
     ('female'),
-    ('male');
+    ('male'),
+    ('couple');
 
 INSERT INTO "profile_type"
     ("type")
