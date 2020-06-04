@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import MatchConfirm from "../../components/MatchConfirm/MatchConfirm";
 
 class MatchTablePage extends Component {
 	render() {
@@ -104,8 +105,14 @@ class MatchTablePage extends Component {
 									<StyledTableCell>
 										<div className={useStyles.root}>
 											{row.matchNY} &nbsp; &nbsp;
-											<Button variant="outlined">No Match</Button> &nbsp; &nbsp;
-											<Button variant="outlined" color="primary">
+											<Button onClick={MatchConfirm} variant="outlined">
+												No Match
+											</Button>{" "}
+											&nbsp; &nbsp;
+											<Button
+												onClick={MatchConfirm}
+												variant="outlined"
+												color="primary">
 												Match
 											</Button>
 										</div>
