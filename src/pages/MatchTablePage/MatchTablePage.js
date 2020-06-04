@@ -47,6 +47,31 @@ class MatchTablePage extends Component {
 			},
 		}))(TableRow);
 
+		function rand() {
+			return Math.round(Math.random() * 20) - 10;
+		}
+
+		function getModalStyle() {
+			const top = 50 + rand();
+			const left = 50 + rand();
+
+			return {
+				top: `${top}%`,
+				left: `${left}%`,
+				transform: `translate(-${top}%, -${left}%)`,
+			};
+		}
+
+		const [modalStyle] = React.useState(getModalStyle);
+		const [open, setOpen] = React.useState(false);
+
+		const handleOpen = (MatchConfirm) => {
+			setOpen(true);
+		};
+
+		// const handleClose = () => {
+		// 	setOpen(false);
+		// };
 		// TEMP DATA FOR DEVELOPMENT
 		function createData(bocname, lname, matchNY) {
 			return { bocname, lname, matchNY };
@@ -105,12 +130,12 @@ class MatchTablePage extends Component {
 									<StyledTableCell>
 										<div className={useStyles.root}>
 											{row.matchNY} &nbsp; &nbsp;
-											<Button onClick={MatchConfirm} variant="outlined">
+											<Button onClick={handleOpen} variant="outlined">
 												No Match
 											</Button>{" "}
 											&nbsp; &nbsp;
 											<Button
-												onClick={MatchConfirm}
+												onClick={handleOpen}
 												variant="outlined"
 												color="primary">
 												Match
