@@ -65,9 +65,12 @@ class MatchTablePage extends Component {
 		const [modalStyle] = React.useState(getModalStyle);
 		const [open, setOpen] = React.useState(false);
 
-		const handleOpen = (MatchConfirm) => {
-			setOpen(true);
-		};
+		// const handleOpen = () => {
+		// 	setOpen(true);
+		// 	{
+		// 		Modal;
+		// 	}
+		// };
 
 		// const handleClose = () => {
 		// 	setOpen(false);
