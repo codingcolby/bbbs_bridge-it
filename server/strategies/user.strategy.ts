@@ -29,11 +29,11 @@ passport.deserializeUser((id: any, done: any): void => {
 passport.use(
   "local",
 
-  new Strategy((email: string, password: string, done: Function): void => {
-    console.log("PASSPORT EMAIL", email);
+  new Strategy((username: string, password: string, done: Function): void => {
+    console.log("PASSPORT EMAIL", username);
 
     pool
-      .query('SELECT * FROM "user" WHERE email = $1', [email])
+      .query('SELECT * FROM "user" WHERE email = $1', [username])
       .then((result: any) => {
         const user = result && result.rows && result.rows[0];
         if (user && comparePassword(password, user.password)) {
