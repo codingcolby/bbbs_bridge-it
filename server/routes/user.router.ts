@@ -12,6 +12,25 @@ router.get("/", rejectUnauthenticated, (req: Request, res: Response): void => {
   res.send(req.user);
 });
 
+router.get(
+  "/profiles",
+  rejectUnauthenticated,
+  (req: Request, res: Response): void => {
+    //get all profiles
+    const queryText: string = `SELECT * FROM "profile" ORDER BY "profile_type";`;
+
+    pool
+      .query(queryText)
+      .then((response) => res.send(response.rows))
+      .catch((err) => {
+        console.log(`Error getting profiles from database: ${err}`);
+        res.sendStatus(500);
+      });
+
+    res.send();
+  }
+);
+
 router.post(
   "/register",
   (req: Request, res: Response, next: express.NextFunction): void => {
