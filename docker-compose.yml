@@ -63,8 +63,6 @@ services:
       CHOKIDAR_USEPOLLING: "true"
       NODE_ENV: ${NODE_ENV}
       CB_API_TWINWORD: ${CB_API_TWINWORD}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     volumes:
       - "./server:/app-server/server"
       - "./server/dist:/app-server/dist"
