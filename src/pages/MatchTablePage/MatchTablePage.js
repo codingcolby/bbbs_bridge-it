@@ -24,7 +24,6 @@ class MatchTablePage extends Component {
 			},
 		}));
 
-		// const classes = useStyles();
 		const StyledTableCell = withStyles((theme) => ({
 			head: {
 				backgroundColor: "green",
@@ -52,16 +51,32 @@ class MatchTablePage extends Component {
 		}
 
 		const rows = [
-			createData("Sam Jones", "Jason Twinada", "(Y)"),
-			createData("Sam Jones", "Demonta Miller", "(N)"),
-			createData("Sam Jones", "Samuel Xu", "(N)"),
-			createData("Sam Jones", "Phil Conway", "(N)"),
-			createData("Wilma Franklin", "Maria Torres", "(N)"),
-			createData("Wilma Franklin", "Cindy Montenegro", "(Y)"),
-			createData("Wilma Franklin", "Kalinda Jones", "(N)"),
-			createData("Michael and Tamara Ross", "John Stallo", "(N)"),
-			createData("Michael and Tamara Ross", "Devon Michaels", "(N)"),
-			createData("Michael and Tamara Ross", "Randy Wilson", "(Y)"),
+			createData("Temp Data - Sam Jones", "Jason Twinada", "false"),
+			createData("Temp Data - Sam Jones", "Demonta Miller", "false"),
+
+			createData("Temp Data - Wilma Franklin", "Maria Torres", "false"),
+			createData("Temp Data - Wilma Franklin", "Kalinda Jones", "false"),
+
+			createData(
+				"Temp Data - Michael and Tamara Ross",
+				"Jason Twinada",
+				"false"
+			),
+			createData(
+				"Temp Data - Michael and Tamara Ross",
+				"Demonta Miller",
+				"false"
+			),
+			createData(
+				"Temp Data - Michael and Tamara Ross",
+				"Maria Torres",
+				"false"
+			),
+			createData(
+				"Temp Data - Michael and Tamara Ross",
+				"Kalinda Jones",
+				"false"
+			),
 		];
 		// END TEMP DATA FOR DEVELOPMENT
 
@@ -88,8 +103,16 @@ class MatchTablePage extends Component {
 									<StyledTableCell>
 										<div className={useStyles.root}>
 											{row.matchNY} &nbsp; &nbsp;
-											<Button variant="outlined">No Match</Button>
-											<Button variant="outlined" color="primary">
+											<Button
+												// onClick={handleOpen}
+												variant="outlined">
+												No Match
+											</Button>{" "}
+											&nbsp; &nbsp;
+											<Button
+												// onClick={handleOpen}
+												variant="outlined"
+												color="primary">
 												Match
 											</Button>
 										</div>

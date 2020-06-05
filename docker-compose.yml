@@ -14,10 +14,12 @@ services:
     ports:
       - 3000:3000 # expose ports - HOST:CONTAINER (for create-react-app)
       - 35729:35729 # expose ports - HOST:CONTAINER (for serviceworker warm reloading)
+    environment:
+      REACT_APP_API_GMAP: ${REACT_APP_API_GMAP}
     volumes:
       - "./src:/app-client/src"
       - "./public:/app-client/public"
-      - "/app-client/node_modules"
+      - "./package.json:/app-client/package.json"
     depends_on:
       - server
     command: npm run client
@@ -60,11 +62,15 @@ services:
       POSTGRES_HOST: database
       CHOKIDAR_USEPOLLING: "true"
       NODE_ENV: ${NODE_ENV}
+      CB_API_TWINWORD: ${CB_API_TWINWORD}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     volumes:
       - "./server:/app-server/server"
       - "./server/dist:/app-server/dist"
       - "./public:/app-server/public"
-      - "/app-server/node_modules"
+      - "./package.json:/app-server/package.json"
+
     depends_on:
       - database
     command: npm run server
