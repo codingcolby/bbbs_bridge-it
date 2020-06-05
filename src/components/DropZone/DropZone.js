@@ -1,6 +1,4 @@
 import React from "react";
-import { connect } from "react-redux";
-import mapStoreToProps from "../../redux/mapStoreToProps";
 import DropZoneS3Uploader from "react-dropzone-s3-uploader";
 
 // EXAMPLE STYLE===================
@@ -23,12 +21,8 @@ function DropZone(props) {
   const s3Url = "https://bridge-it-bucket.s3.amazonaws.com";
 
   const handleFinishedUpload = (info) => {
-    const pdfUrl = info.fileUrl;
-
-    props.dispatch({
-      type: "UPLOAD_PDF_SUMMARY",
-      payload: { pdfUrl },
-    }); // pdf is now in our s3 bucket, send it to our server
+    props.setReady(true); // tell the Upload Page that it's ready
+    props.setPdfUrl(info.fileUrl); // pdf is now in our s3 bucket, prep it to send to the server on Upload Page
   };
   //    end S3 Uploader Stuff
   //
@@ -49,4 +43,4 @@ function DropZone(props) {
   );
 }
 
-export default connect(mapStoreToProps)(DropZone);
+export default DropZone;
