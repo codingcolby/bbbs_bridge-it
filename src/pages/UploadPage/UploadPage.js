@@ -52,7 +52,6 @@ function UploadPage(props) {
   };
 
   return (
-    // <div key={keyValue}>
     <div>
       <FormControl required>
         <InputLabel id="s3-dropzone-uploader-mat-ui-label">Type</InputLabel>
