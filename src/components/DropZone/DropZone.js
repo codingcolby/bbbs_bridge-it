@@ -41,6 +41,8 @@ function DropZone(props) {
         maxSize={1024 * 1024 * 5}
         upload={uploadOptions}
         disabled={props.disabled}
+        multiple={false} // we only want 1 pdf at a time
+        //  TODO: remove files from display after upload
         //   style={dropzoneStyle}  // style like so
       />
     </div>
