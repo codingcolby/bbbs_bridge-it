@@ -16,8 +16,6 @@ services:
       - 35729:35729 # expose ports - HOST:CONTAINER (for serviceworker warm reloading)
     environment:
       REACT_APP_API_GMAP: ${REACT_APP_API_GMAP}
-      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
-      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     volumes:
       - "./src:/app-client/src"
       - "./public:/app-client/public"
@@ -65,6 +63,8 @@ services:
       CHOKIDAR_USEPOLLING: "true"
       NODE_ENV: ${NODE_ENV}
       CB_API_TWINWORD: ${CB_API_TWINWORD}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
     volumes:
       - "./server:/app-server/server"
       - "./server/dist:/app-server/dist"
