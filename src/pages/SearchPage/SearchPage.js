@@ -42,6 +42,7 @@ const customStyles = (theme) =>
 		},
 		inputInput: {
 			border: "solid 2px black",
+			borderRadius: "12px",
 			padding: theme.spacing(1, 1, 1, 10),
 			// vertical padding + font size from searchIcon
 			paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
@@ -57,8 +58,26 @@ const customStyles = (theme) =>
 	});
 
 class SearchPage extends Component {
+	state = {
+		searchTerm: "",
+	};
+
+	componentDidMount() {
+		// load up all information from the server
+		this.props.dispatch({
+			type: "FETCH_PROFILES",
+		});
+	}
+
+	changeSearch = (event) => {
+		this.props.dispatch({
+			type: "SET_SEARCH",
+			payload: event.target.value,
+		});
+	};
 	render() {
 		const { classes } = this.props;
+		console.log("PROFILES", this.props.store.profiles);
 
 		const handleClick = () => {
 			this.props.history.push("/map");
@@ -78,7 +97,7 @@ class SearchPage extends Component {
 							input: classes.inputInput,
 						}}
 						inputProps={{ "aria-label": "search" }}
-						// onChange={this.changeSearch}
+						onChange={this.changeSearch}
 					/>
 				</div>
 				<Button
