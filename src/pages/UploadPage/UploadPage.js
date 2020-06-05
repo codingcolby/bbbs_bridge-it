@@ -61,8 +61,10 @@ function UploadPage(props) {
           onChange={handleChange}
           value={docType}
         >
-          <MenuItem value={"big"}>Big</MenuItem>
-          <MenuItem value={"little"}>Little</MenuItem>
+          {/* I hardcoded docTypes in reference to the ids in "profile_type" table */}
+          <MenuItem value={1}>Big</MenuItem>
+          <MenuItem value={2}>Little</MenuItem>
+          <MenuItem value={3}>Couple</MenuItem>
         </Select>
         <FormHelperText>Please select a document type</FormHelperText>
       </FormControl>
