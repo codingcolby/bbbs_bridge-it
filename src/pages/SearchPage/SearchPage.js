@@ -75,9 +75,19 @@ class SearchPage extends Component {
       payload: event.target.value,
     });
   };
+
   render() {
     const { classes } = this.props;
-    console.log("PROFILES", this.props.store.profiles);
+    const profiles = Array.from(this.props.store.profiles);
+    const profilesFilter = profiles.filter((item, index) => {
+      const profileName = item.first_name + " " + item.last_name;
+      console.log(profileName);
+
+      return profileName;
+    });
+
+    console.log("PROFILES FILTER", profilesFilter);
+
     return (
       <div className={classes.root}>
         <h2>Search Page</h2>
@@ -94,6 +104,10 @@ class SearchPage extends Component {
             inputProps={{ "aria-label": "search" }}
             onChange={this.changeSearch}
           />
+        </div>
+        <br />
+        <div>
+          <h3>Name</h3>
         </div>
         <Button className={classes.btn} variant="outlined">
           Search By Map
