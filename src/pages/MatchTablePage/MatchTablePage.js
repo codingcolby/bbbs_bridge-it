@@ -10,48 +10,78 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import MatchConfirm from "../../modals/MatchConfirm";
+import swal from "@sweetalert/with-react";
+//import swal from "sweetalert";
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		"& > *": {
+			margin: theme.spacing(1),
+		},
+	},
+	table: {
+		minWidth: 700,
+	},
+}));
+
+const StyledTableCell = withStyles((theme) => ({
+	head: {
+		backgroundColor: "green",
+		color: theme.palette.common.white,
+	},
+	body: {
+		fontSize: 16,
+	},
+}))(TableCell);
+
+const StyledTableRow = withStyles((theme) => ({
+	root: {
+		"&:nth-of-type(odd)": {
+			backgroundColor: theme.palette.action.hover,
+		},
+	},
+	TableHead: {
+		fontSize: 20,
+	},
+}))(TableRow);
 
 class MatchTablePage extends Component {
+	onClick = () => {
+		swal({
+			text:
+				"Please confirm your Match selection below, or cancel and return to the Match Table",
+			buttons: {
+				cancel: "Cancel",
+				catch: {
+					text: "It's a Match!",
+					value: "match",
+				},
+
+				nomatch: true,
+			},
+		}).then((value) => {
+			switch (value) {
+				case "nomatch":
+					swal("So many Littles, so many Bigs", "You'll find a match soon!");
+					break;
+
+				case "match":
+					swal(
+						"Hooray",
+						"Congratulations on a successful Big/Little match!",
+						"success"
+					);
+					break;
+
+				default:
+					swal(
+						"No changes made - You can safely return to the Match Table and make your selection"
+					);
+			}
+		});
+	};
+
 	render() {
-		const useStyles = makeStyles((theme) => ({
-			root: {
-				"& > *": {
-					margin: theme.spacing(1),
-				},
-			},
-			table: {
-				minWidth: 700,
-			},
-		}));
-
-		const StyledTableCell = withStyles((theme) => ({
-			head: {
-				backgroundColor: "green",
-				color: theme.palette.common.white,
-			},
-			body: {
-				fontSize: 16,
-			},
-		}))(TableCell);
-
-		const [setOpen] = React.useState(false);
-
-		const StyledTableRow = withStyles((theme) => ({
-			root: {
-				"&:nth-of-type(odd)": {
-					backgroundColor: theme.palette.action.hover,
-				},
-			},
-			TableHead: {
-				fontSize: 20,
-			},
-		}))(TableRow);
-
-		const handleOpen = () => {
-			setOpen(true);
-		};
-
 		// TEMP DATA FOR DEVELOPMENT
 		function createData(bocname, lname, matchNY) {
 			return { bocname, lname, matchNY };
@@ -106,16 +136,16 @@ class MatchTablePage extends Component {
 										{row.bocname}
 									</StyledTableCell>
 									<StyledTableCell>{row.lname}</StyledTableCell>
-									{/* TODO: functional - associate buttons with boolean value for yes or no on match*/}
+
 									<StyledTableCell>
-										<div className={useStyles.root} component={MatchConfirm}>
+										<div className={useStyles.root}>
 											{row.matchNY} &nbsp; &nbsp;
-											<Button onClick={handleOpen} variant="outlined">
+											<Button onClick={this.onClick} variant="outlined">
 												No Match
 											</Button>{" "}
 											&nbsp; &nbsp;
 											<Button
-												onClick={handleOpen}
+												onClick={this.onClick}
 												variant="outlined"
 												color="primary">
 												Match
@@ -132,4 +162,4 @@ class MatchTablePage extends Component {
 	}
 }
 
-export default makeStyles(connect(mapStoreToProps)(MatchTablePage));
+export default connect(mapStoreToProps)(MatchTablePage);
