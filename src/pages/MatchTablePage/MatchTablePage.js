@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
+import MatchConfirm from "../../modals/MatchConfirm";
 
 class MatchTablePage extends Component {
 	render() {
@@ -34,6 +35,8 @@ class MatchTablePage extends Component {
 			},
 		}))(TableCell);
 
+		const [setOpen] = React.useState(false);
+
 		const StyledTableRow = withStyles((theme) => ({
 			root: {
 				"&:nth-of-type(odd)": {
@@ -44,6 +47,10 @@ class MatchTablePage extends Component {
 				fontSize: 20,
 			},
 		}))(TableRow);
+
+		const handleOpen = () => {
+			setOpen(true);
+		};
 
 		// TEMP DATA FOR DEVELOPMENT
 		function createData(bocname, lname, matchNY) {
@@ -101,16 +108,14 @@ class MatchTablePage extends Component {
 									<StyledTableCell>{row.lname}</StyledTableCell>
 									{/* TODO: functional - associate buttons with boolean value for yes or no on match*/}
 									<StyledTableCell>
-										<div className={useStyles.root}>
+										<div className={useStyles.root} component={MatchConfirm}>
 											{row.matchNY} &nbsp; &nbsp;
-											<Button
-												// onClick={handleOpen}
-												variant="outlined">
+											<Button onClick={handleOpen} variant="outlined">
 												No Match
 											</Button>{" "}
 											&nbsp; &nbsp;
 											<Button
-												// onClick={handleOpen}
+												onClick={handleOpen}
 												variant="outlined"
 												color="primary">
 												Match
@@ -127,4 +132,4 @@ class MatchTablePage extends Component {
 	}
 }
 
-export default connect(mapStoreToProps)(MatchTablePage);
+export default makeStyles(connect(mapStoreToProps)(MatchTablePage));
