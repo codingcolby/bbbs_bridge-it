@@ -4,7 +4,6 @@ import rejectUnauthenticated from "../modules/authentication-middleware";
 import pool from "../modules/pool";
 import userStrategy from "../strategies/user.strategy";
 import { encryptPassword } from "../modules/encryption";
-
 const router: express.Router = express.Router();
 
 router.get("/", rejectUnauthenticated, (req: Request, res: Response): void => {
@@ -13,23 +12,24 @@ router.get("/", rejectUnauthenticated, (req: Request, res: Response): void => {
 	//@ts-ignore
 	res.send(req.user);
 });
-
 router.get("/profiles", (req: Request, res: Response): void => {
-	//get all profiles
-	const queryText: string = `SELECT * FROM "profile";`;
 
-	pool
-		.query(queryText)
-		.then((response) => {
-			res.send(response.rows);
-		})
-		.catch((err) => {
-			console.log(`Error getting profiles from database: ${err}`);
-			res.sendStatus(500);
-		});
+
+  //get all profiles
+  const queryText: string = `SELECT * FROM "profile";`;
+  pool
+    .query(queryText)
+    .then((response) => {
+      res.send(response.rows);
+    })
+    .catch((err) => {
+      console.log(`Error getting profiles from database: ${err}`);
+      res.sendStatus(500);
+    });
+
 });
-
 router.post(
+
 	"/register",
 	(req: Request, res: Response, next: express.NextFunction): void => {
 		//@ts-ignore
@@ -46,8 +46,8 @@ router.post(
 				res.sendStatus(500);
 			});
 	}
-);
 
+);
 router.post(
 	"/login",
 	userStrategy.authenticate("local"),
@@ -55,11 +55,21 @@ router.post(
 		res.sendStatus(200);
 	}
 );
-
 router.post("/logout", (req: Request, res: Response): void => {
 	//@ts-ignore
 	req.logout();
 	res.sendStatus(200);
 });
 
+router.put("/reset/:id", (req: Request, res: Response): void => {
+  const id = req.params.id;
+  console.log(id, req.body);
+  const queryText = `UPDATE "user" SET email=$1, password=$2 WHERE id=$3;`;
+  pool
+    .query(queryText, [req.body.email, req.body.password, id])
+    .then(() => res.sendStatus(200))
+    .catch((err) => {
+      console.log("error in RESET user", err);
+    });
+});
 export default router;
