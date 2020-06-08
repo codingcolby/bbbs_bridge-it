@@ -37,7 +37,6 @@ function UploadPageResetter(props) {
 function UploadPage(props) {
   const [docType, setDocType] = useState("");
   const [ready, setReady] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState(null);
 
   const handleChange = (event) => {
     setDocType(event.target.value);
@@ -46,7 +45,7 @@ function UploadPage(props) {
   const handleClick = (event) => {
     props.dispatch({
       type: "UPLOAD_PDF_SUMMARY",
-      payload: { pdfUrl, docType },
+      // payload: { pdfUrl, docType },
     });
     props.resetComponent();
   };
@@ -68,13 +67,7 @@ function UploadPage(props) {
         <FormHelperText>Please select a document type</FormHelperText>
       </FormControl>
 
-      {/* Drop zone is disabled until type is selected*/}
-      <DropZone
-        setReady={setReady}
-        setPdfUrl={setPdfUrl}
-        disabled={!Boolean(docType)}
-      />
-      {ready && <Button onClick={handleClick}>Save</Button>}
+      <DropZone disabled={!Boolean(docType)} />
     </div>
   );
 }
