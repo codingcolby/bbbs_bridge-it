@@ -100,6 +100,7 @@ class AdminPage extends Component {
                         ...this.props.match.params,
                         newEmail: this.state.email,
                         newPassword: this.state.password,
+                        id: this.props.store.id,
                       },
                     });
                   }}
