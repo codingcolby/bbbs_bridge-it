@@ -70,9 +70,15 @@ class SearchPage extends Component {
   }
 
   changeSearch = (event) => {
+    this.setState({
+      searchTerm: event.target.value,
+    });
+  };
+
+  handleClick = (event) => {
     this.props.dispatch({
       type: "SET_SEARCH",
-      payload: event.target.value,
+      payload: this.state.searchTerm,
     });
   };
 
@@ -81,12 +87,13 @@ class SearchPage extends Component {
     const profiles = Array.from(this.props.store.profiles);
     const profilesFilter = profiles.filter((item, index) => {
       const profileName = item.first_name + " " + item.last_name;
-      console.log(profileName);
 
-      return profileName;
+      if (this.props.store.search) {
+        return profileName.indexOf(this.props.store.search) !== -1;
+      }
+
+      return true;
     });
-
-    console.log("PROFILES FILTER", profilesFilter);
 
     return (
       <div className={classes.root}>
@@ -104,10 +111,21 @@ class SearchPage extends Component {
             inputProps={{ "aria-label": "search" }}
             onChange={this.changeSearch}
           />
+
+          <Button
+            onClick={this.handleClick}
+            className={classes.btn}
+            variant="outlined"
+          >
+            Search
+          </Button>
         </div>
         <br />
         <div>
-          <h3>Name</h3>
+          {this.props.store.search &&
+            profilesFilter.map((item, index) => (
+              <div key={index}>{item.first_name + " " + item.last_name}</div>
+            ))}
         </div>
         <Button className={classes.btn} variant="outlined">
           Search By Map
