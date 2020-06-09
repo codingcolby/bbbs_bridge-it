@@ -59,19 +59,24 @@ class AdminPage extends Component {
     swal({
       text: "Are you sure?",
       buttons: {
-        reset: "Reset User",
-        catch: {
-          text: "Are you sure?",
+        reset: {
+          text: "Yes",
           value: "reset",
         },
+        cancel: "No",
       },
     }).then((value) => {
       switch (value) {
-        case "reset User":
-          swal("User Reset!");
+        case "reset":
+          swal("Ready to Reset?", "Reset User!", "success");
+
+          break;
+        default:
+          swal("Reset cancelled", "No changes made", "info");
       }
     });
   };
+
   // Need to RESET USER with USERNAME AND PASSWORD RESET!!
   render() {
     const { classes } = this.props;
@@ -112,17 +117,18 @@ class AdminPage extends Component {
                   type="submit"
                   name="submit"
                   value="Reset User"
-                  onClick={() => {
-                    this.props.dispatch({
-                      type: "RESET_PASSWORD",
-                      payload: {
-                        ...this.props.match.params,
-                        newEmail: this.state.email,
-                        newPassword: this.state.password,
-                        id: this.props.store.id,
-                      },
-                    });
-                  }}
+                  onClick={this.onClick}
+                  // onClick={() => {
+                  //   this.props.dispatch({
+                  //     type: "RESET_PASSWORD",
+                  //     payload: {
+                  //       ...this.props.match.params,
+                  //       newEmail: this.state.email,
+                  //       newPassword: this.state.password,
+                  //       id: this.props.store.id,
+                  //     },
+                  //   });
+                  // }}
                 >
                   Reset User
                 </Button>
