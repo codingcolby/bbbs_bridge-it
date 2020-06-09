@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
+import swal from "@sweetalert/with-react";
+
 import RegistrationPage from "../RegisterPage/RegisterPage";
 import UserPage from "../UserPage/UserPage";
 
@@ -47,12 +49,29 @@ class AdminPage extends Component {
       [propertyName]: event.target.value,
     });
   };
+
   componentDidUpdate() {
     if (this.props.store.resetReducer) {
       this.props.dispatch({ type: "CLEAR_RESET" });
     }
   }
-
+  onClick = () => {
+    swal({
+      text: "Are you sure?",
+      buttons: {
+        reset: "Reset User",
+        catch: {
+          text: "Are you sure?",
+          value: "reset",
+        },
+      },
+    }).then((value) => {
+      switch (value) {
+        case "reset User":
+          swal("User Reset!");
+      }
+    });
+  };
   // Need to RESET USER with USERNAME AND PASSWORD RESET!!
   render() {
     const { classes } = this.props;
