@@ -46,6 +46,28 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 class MatchTablePage extends Component {
+<<<<<<< HEAD
+	onClick = () => {
+		swal({
+			text:
+				"Please confirm your Match selection below, or cancel and return to the Match Table",
+			buttons: {
+				catch: {
+					text: "It's a Match!",
+					value: "match",
+				},
+
+				nomatch: {
+					text: "No Match",
+				},
+				cancel: "Cancel",
+			},
+		}).then((value) => {
+			switch (value) {
+				case "nomatch":
+					swal("So many Littles, so many Bigs", "You'll find a match soon!");
+					break;
+=======
   onClick = () => {
     swal({
       text:
@@ -64,6 +86,7 @@ class MatchTablePage extends Component {
         case "nomatch":
           swal("So many Littles, so many Bigs", "You'll find a match soon!");
           break;
+>>>>>>> b2ad3efb0f78c8b5fc25d0a76d06563724b70853
 
         case "match":
           swal(
@@ -87,6 +110,65 @@ class MatchTablePage extends Component {
       return { bocname, lname, matchNY };
     }
 
+<<<<<<< HEAD
+		const rows = [
+			createData("Temp Data - Sam Jones", "Jason Twinada"),
+			createData("Temp Data - Sam Jones", "Demonta Miller"),
+
+			createData("Temp Data - Wilma Franklin", "Maria Torres"),
+			createData("Temp Data - Wilma Franklin", "Kalinda Jones"),
+
+			createData("Temp Data - Michael and Tamara Ross", "Jason Twinada"),
+			createData("Temp Data - Michael and Tamara Ross", "Demonta Miller"),
+			createData("Temp Data - Michael and Tamara Ross", "Maria Torres"),
+			createData("Temp Data - Michael and Tamara Ross", "Kalinda Jones"),
+		];
+		// END TEMP DATA FOR DEVELOPMENT
+
+		return (
+			<div>
+				<h2>Match Table Page</h2>
+				<TableContainer component={Paper}>
+					<Table className={useStyles.table} aria-label="customized table">
+						<TableHead>
+							<TableRow>
+								<StyledTableCell>Big or Couple Name</StyledTableCell>
+								<StyledTableCell>Little Name</StyledTableCell>
+								<StyledTableCell>Match / No Match</StyledTableCell>
+							</TableRow>
+						</TableHead>
+						<TableBody>
+							{rows.map((row) => (
+								<StyledTableRow key={row.index}>
+									<StyledTableCell component="th" scope="row">
+										{row.bocname}
+									</StyledTableCell>
+									<StyledTableCell>{row.lname}</StyledTableCell>
+
+									<StyledTableCell>
+										<div className={useStyles.root}>
+											{row.matchNY} &nbsp; &nbsp;
+											<Button
+												onClick={this.onClick}
+												variant="outlined"
+												color="primary">
+												Match
+											</Button>{" "}
+											&nbsp; &nbsp;
+											<Button onClick={this.onClick} variant="outlined">
+												No Match
+											</Button>
+										</div>
+									</StyledTableCell>
+								</StyledTableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+			</div>
+		);
+	}
+=======
     const rows = [
       createData("Temp Data - Sam Jones", "Jason Twinada", "false"),
       createData("Temp Data - Sam Jones", "Demonta Miller", "false"),
@@ -161,6 +243,7 @@ class MatchTablePage extends Component {
       </div>
     );
   }
+>>>>>>> b2ad3efb0f78c8b5fc25d0a76d06563724b70853
 }
 
 export default connect(mapStoreToProps)(MatchTablePage);
