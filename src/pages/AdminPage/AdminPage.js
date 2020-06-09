@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 
+import swal from "@sweetalert/with-react";
+
 import RegistrationPage from "../RegisterPage/RegisterPage";
 import UserPage from "../UserPage/UserPage";
 
@@ -47,11 +49,41 @@ class AdminPage extends Component {
       [propertyName]: event.target.value,
     });
   };
+
   componentDidUpdate() {
     if (this.props.store.resetReducer) {
       this.props.dispatch({ type: "CLEAR_RESET" });
     }
   }
+  onClick = () => {
+    swal({
+      text: "Are you sure?",
+      buttons: {
+        reset: {
+          text: "Yes",
+          value: "reset",
+        },
+        cancel: "No",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "reset":
+          swal("Ready to Reset?", "Reset User!", "success");
+          this.props.dispatch({
+            type: "RESET_PASSWORD",
+            payload: {
+              ...this.props.match.params,
+              newEmail: this.state.email,
+              newPassword: this.state.password,
+              id: this.props.store.id,
+            },
+          });
+          break;
+        default:
+          swal("Reset cancelled", "No changes made", "info");
+      }
+    });
+  };
 
   // Need to RESET USER with USERNAME AND PASSWORD RESET!!
   render() {
@@ -93,17 +125,8 @@ class AdminPage extends Component {
                   type="submit"
                   name="submit"
                   value="Reset User"
-                  onClick={() => {
-                    this.props.dispatch({
-                      type: "RESET_PASSWORD",
-                      payload: {
-                        ...this.props.match.params,
-                        newEmail: this.state.email,
-                        newPassword: this.state.password,
-                        id: this.props.store.id,
-                      },
-                    });
-                  }}
+                  onClick={this.onClick}
+                  // onClick={() => {
                 >
                   Reset User
                 </Button>
