@@ -30,6 +30,9 @@ const customStyles = (theme) =>
         width: "auto",
       },
     },
+    ul: {
+      listStyleType: "none",
+    },
     searchIcon: {
       padding: theme.spacing(0, 2),
       height: "100%",
@@ -82,14 +85,26 @@ class SearchPage extends Component {
     });
   };
 
+  handleNameClick = (id) => (event) => {
+    console.log(id);
+
+    this.props.dispatch({
+      type: "SET_SELECTED_PROFILES",
+      payload: id,
+    });
+    this.props.history.push(`/list/${id}`);
+  };
+
   render() {
     const { classes } = this.props;
     const profiles = Array.from(this.props.store.profiles);
     const profilesFilter = profiles.filter((item, index) => {
       const profileName = item.first_name + " " + item.last_name;
-
+      const lowerProfileName = profileName.toLowerCase();
       if (this.props.store.search) {
-        return profileName.indexOf(this.props.store.search) !== -1;
+        return (
+          lowerProfileName.indexOf(this.props.store.search.toLowerCase()) !== -1
+        );
       }
 
       return true;
@@ -128,7 +143,11 @@ class SearchPage extends Component {
         <div>
           {this.props.store.search &&
             profilesFilter.map((item, index) => (
-              <div key={index}>{item.first_name + " " + item.last_name}</div>
+              <ul key={index} className={classes.ul}>
+                <li onClick={this.handleNameClick(item.id)}>
+                  {item.first_name + " " + item.last_name}
+                </li>
+              </ul>
             ))}
         </div>
         <Button
