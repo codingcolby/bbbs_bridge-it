@@ -51,13 +51,15 @@ class MatchTablePage extends Component {
 			text:
 				"Please confirm your Match selection below, or cancel and return to the Match Table",
 			buttons: {
-				cancel: "Cancel",
 				catch: {
 					text: "It's a Match!",
 					value: "match",
 				},
 
-				nomatch: true,
+				nomatch: {
+					text: "No Match",
+				},
+				cancel: "Cancel",
 			},
 		}).then((value) => {
 			switch (value) {
@@ -88,32 +90,16 @@ class MatchTablePage extends Component {
 		}
 
 		const rows = [
-			createData("Temp Data - Sam Jones", "Jason Twinada", "false"),
-			createData("Temp Data - Sam Jones", "Demonta Miller", "false"),
+			createData("Temp Data - Sam Jones", "Jason Twinada"),
+			createData("Temp Data - Sam Jones", "Demonta Miller"),
 
-			createData("Temp Data - Wilma Franklin", "Maria Torres", "false"),
-			createData("Temp Data - Wilma Franklin", "Kalinda Jones", "false"),
+			createData("Temp Data - Wilma Franklin", "Maria Torres"),
+			createData("Temp Data - Wilma Franklin", "Kalinda Jones"),
 
-			createData(
-				"Temp Data - Michael and Tamara Ross",
-				"Jason Twinada",
-				"false"
-			),
-			createData(
-				"Temp Data - Michael and Tamara Ross",
-				"Demonta Miller",
-				"false"
-			),
-			createData(
-				"Temp Data - Michael and Tamara Ross",
-				"Maria Torres",
-				"false"
-			),
-			createData(
-				"Temp Data - Michael and Tamara Ross",
-				"Kalinda Jones",
-				"false"
-			),
+			createData("Temp Data - Michael and Tamara Ross", "Jason Twinada"),
+			createData("Temp Data - Michael and Tamara Ross", "Demonta Miller"),
+			createData("Temp Data - Michael and Tamara Ross", "Maria Torres"),
+			createData("Temp Data - Michael and Tamara Ross", "Kalinda Jones"),
 		];
 		// END TEMP DATA FOR DEVELOPMENT
 
@@ -126,7 +112,7 @@ class MatchTablePage extends Component {
 							<TableRow>
 								<StyledTableCell>Big or Couple Name</StyledTableCell>
 								<StyledTableCell>Little Name</StyledTableCell>
-								<StyledTableCell>No Match / Match</StyledTableCell>
+								<StyledTableCell>Match / No Match</StyledTableCell>
 							</TableRow>
 						</TableHead>
 						<TableBody>
@@ -140,15 +126,15 @@ class MatchTablePage extends Component {
 									<StyledTableCell>
 										<div className={useStyles.root}>
 											{row.matchNY} &nbsp; &nbsp;
-											<Button onClick={this.onClick} variant="outlined">
-												No Match
-											</Button>{" "}
-											&nbsp; &nbsp;
 											<Button
 												onClick={this.onClick}
 												variant="outlined"
 												color="primary">
 												Match
+											</Button>{" "}
+											&nbsp; &nbsp;
+											<Button onClick={this.onClick} variant="outlined">
+												No Match
 											</Button>
 										</div>
 									</StyledTableCell>
