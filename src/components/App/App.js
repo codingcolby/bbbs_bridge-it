@@ -22,7 +22,7 @@ import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import MapSearchPage from "../../pages/MapSearchPage/MapSearchPage";
 import MapListPage from "../../pages/MapListPage/MapListPage";
 import MatchTablePage from "../../pages/MatchTablePage/MatchTablePage";
-import MatchConfirm from "../MatchConfirm/MatchConfirm";
+import MatchConfirm from "../../modals/MatchConfirm";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import SearchPage from "../../pages/SearchPage/SearchPage";
 import UploadPage from "../../pages/UploadPage/UploadPage";

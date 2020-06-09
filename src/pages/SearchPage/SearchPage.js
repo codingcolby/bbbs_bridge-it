@@ -75,7 +75,7 @@ class SearchPage extends Component {
     });
   };
 
-  handleClick = (event) => {
+  handleSearchClick = (event) => {
     this.props.dispatch({
       type: "SET_SEARCH",
       payload: this.state.searchTerm,
@@ -95,6 +95,10 @@ class SearchPage extends Component {
       return true;
     });
 
+    const handleClick = () => {
+      this.props.history.push("/map");
+    };
+
     return (
       <div className={classes.root}>
         <h2>Search Page</h2>
@@ -113,7 +117,7 @@ class SearchPage extends Component {
           />
 
           <Button
-            onClick={this.handleClick}
+            onClick={this.handleSearchClick}
             className={classes.btn}
             variant="outlined"
           >
@@ -127,7 +131,11 @@ class SearchPage extends Component {
               <div key={index}>{item.first_name + " " + item.last_name}</div>
             ))}
         </div>
-        <Button className={classes.btn} variant="outlined">
+        <Button
+          onClick={handleClick}
+          className={classes.btn}
+          variant="outlined"
+        >
           Search By Map
         </Button>
       </div>

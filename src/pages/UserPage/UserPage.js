@@ -11,6 +11,7 @@ const UserPage = (props) => (
     <h3 id="welcome">
       BBBS KC Users:
       {props.store.user.email}
+      {props.store.user.id}
     </h3>
   </div>
 );
