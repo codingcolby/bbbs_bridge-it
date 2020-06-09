@@ -50,6 +50,7 @@ class AdminPage extends Component {
 		});
 	};
 
+<<<<<<< HEAD
 	componentDidUpdate() {
 		if (this.props.store.resetReducer) {
 			this.props.dispatch({ type: "CLEAR_RESET" });
@@ -155,6 +156,109 @@ class AdminPage extends Component {
 			</div>
 		);
 	}
+=======
+  handleInputChangeFor = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  };
+
+  componentDidUpdate() {
+    if (this.props.store.resetReducer) {
+      this.props.dispatch({ type: "CLEAR_RESET" });
+    }
+  }
+  onClick = () => {
+    swal({
+      text: "Are you sure?",
+      buttons: {
+        reset: {
+          text: "Yes",
+          value: "reset",
+        },
+        cancel: "No",
+      },
+    }).then((value) => {
+      switch (value) {
+        case "reset":
+          swal("Ready to Reset?", "Reset User!", "success");
+          this.props.dispatch({
+            type: "RESET_PASSWORD",
+            payload: {
+              ...this.props.match.params,
+              newEmail: this.state.email,
+              newPassword: this.state.password,
+              id: this.props.store.id,
+            },
+          });
+          break;
+        default:
+          swal("Reset cancelled", "No changes made", "info");
+      }
+    });
+  };
+
+  // Need to RESET USER with USERNAME AND PASSWORD RESET!!
+  render() {
+    const { classes } = this.props;
+    return (
+      <div className={classes.roots}>
+        <center>
+          <Paper className={classes.paper}>
+            <Container>
+              <h1 className={classes.font}>Admin</h1>
+              <div>
+                <label htmlFor="email" className={classes.font}>
+                  Email:
+                  <input
+                    type="text"
+                    name="email"
+                    value={this.state.email}
+                    onChange={this.handleInputChangeFor("email")}
+                  />
+                </label>
+              </div>
+              <div>
+                <label htmlFor="password">
+                  Password:
+                  <input
+                    type="password"
+                    name="password"
+                    value={this.state.password}
+                    onChange={this.handleInputChangeFor("password")}
+                  />
+                </label>
+                <label htmlFor="user_logged_in" className={classes.font}>
+                  <UserPage />
+                </label>
+              </div>
+              <div>
+                <Button
+                  className={classes.btn}
+                  type="submit"
+                  name="submit"
+                  value="Reset User"
+                  onClick={this.onClick}
+                  // onClick={() => {
+                >
+                  Reset User
+                </Button>
+              </div>
+              <div></div>
+            </Container>
+          </Paper>
+          <div>
+            <Paper variant="outlined">
+              <Container>
+                <RegistrationPage />
+              </Container>
+            </Paper>
+          </div>
+        </center>
+      </div>
+    );
+  }
+>>>>>>> b2ad3efb0f78c8b5fc25d0a76d06563724b70853
 }
 
 export default withStyles(customStyles)(connect(mapStoreToProps)(AdminPage));
