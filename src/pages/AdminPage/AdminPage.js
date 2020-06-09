@@ -69,7 +69,15 @@ class AdminPage extends Component {
       switch (value) {
         case "reset":
           swal("Ready to Reset?", "Reset User!", "success");
-
+          this.props.dispatch({
+            type: "RESET_PASSWORD",
+            payload: {
+              ...this.props.match.params,
+              newEmail: this.state.email,
+              newPassword: this.state.password,
+              id: this.props.store.id,
+            },
+          });
           break;
         default:
           swal("Reset cancelled", "No changes made", "info");
@@ -119,16 +127,6 @@ class AdminPage extends Component {
                   value="Reset User"
                   onClick={this.onClick}
                   // onClick={() => {
-                  //   this.props.dispatch({
-                  //     type: "RESET_PASSWORD",
-                  //     payload: {
-                  //       ...this.props.match.params,
-                  //       newEmail: this.state.email,
-                  //       newPassword: this.state.password,
-                  //       id: this.props.store.id,
-                  //     },
-                  //   });
-                  // }}
                 >
                   Reset User
                 </Button>
