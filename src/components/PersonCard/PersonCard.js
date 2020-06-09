@@ -41,24 +41,25 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const likelyClick = () => {
-	console.log("Likely");
-	// this.setState(review.value);
-};
+// TO DO - NEED TO DECIDE IF THE BUTTONS WILL RENDER ON THE CARD OR ON THE PROFILE PAGE
+// const likelyClick = () => {
+// 	console.log("Likely");
+// 	// this.setState(review.value);
+// };
 
-const maybeClick = () => {
-	console.log("Maybe");
-	// this.setState(review.value);
-};
+// const maybeClick = () => {
+// 	console.log("Maybe");
+// 	// this.setState(review.value);
+// };
 
-const unlikelyClick = () => {
-	console.log("Unlikely");
-	// this.setState(review.value);
-};
+// const unlikelyClick = () => {
+// 	console.log("Unlikely");
+// 	// this.setState(review.value);
+// };
 
-const addCommentsClick = () => {
-	console.log("Wants to add comments");
-};
+// const addCommentsClick = () => {
+// 	console.log("Wants to add comments");
+// };
 
 /**
  * TODO: Inherit details from props
