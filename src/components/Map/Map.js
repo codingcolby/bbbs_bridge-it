@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import GoogleMapReact from "google-map-react";
 import { withRouter } from "react-router-dom";
+
 class Map extends Component {
   componentDidMount() {}
   static defaultProps = {
