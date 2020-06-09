@@ -9,7 +9,7 @@ const router: express.Router = express.Router();
  * Upload, parse and save new pdf files
  */
 router.post(
-  "/upload",
+  "/upload/big",
   (req: Request, res: Response, next: express.NextFunction): void => {
     // check for file
     try {
@@ -30,9 +30,16 @@ router.post(
         console.log(data.version);
         // PDF text
         console.log(data.text);
-      });
 
-      res.sendStatus(201);
+        const originalString = data.text; // hold the original pdf text
+        const result = {}; // <-- let's build this out
+        // time to start splitting
+        // ----------------------------------------------------
+        //
+        // 1. Find out the document type. All that matters is Big or Little here.
+
+        const header1 = res.sendStatus(200);
+      });
     } catch (err) {
       console.log("err: no files on req.files", err);
     }

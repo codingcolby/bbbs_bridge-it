@@ -6,12 +6,16 @@ import CustomSubmit from "./CustomSubmit";
 
 function DropZone(props) {
   const disabled = props.disabled;
-  // see ProtectedRoute for what's going on w/ otherProps
-  // const {
-  //   , ...otherProps} = props
+  const docType = props.docType;
   // specify upload params and url for your files
   const getUploadParams = ({ meta }) => {
-    return { url: "/api/pdf/upload" };
+    let pdfType = "";
+    if (docType === 1) {
+      pdfType = "big";
+    } else {
+      pdfType = "little";
+    }
+    return { url: `/api/pdf/upload/${pdfType}` };
   };
 
   // receives array of files that are done uploading when submit button is clicked

@@ -62,12 +62,12 @@ function UploadPage(props) {
           {/* I hardcoded docTypes in reference to the ids in "profile_type" table */}
           <MenuItem value={1}>Big</MenuItem>
           <MenuItem value={2}>Little</MenuItem>
-          <MenuItem value={3}>Couple</MenuItem>
+          {/* <MenuItem value={3}>Couple</MenuItem> TODO: handle couples */}
         </Select>
         <FormHelperText>Please select a document type</FormHelperText>
       </FormControl>
 
-      <DropZone disabled={!Boolean(docType)} />
+      <DropZone docType={docType} disabled={!Boolean(docType)} />
     </div>
   );
 }
