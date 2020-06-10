@@ -5,6 +5,7 @@ import user from "./user.reducer";
 import profiles from "./profiles.reducer";
 import { resetUser } from "./resetUser.reducer";
 import search from "./search.reducer";
+import selectedProfile from "./selected.profile.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   profiles, //will have all of the profiles
   resetUser,
   search, //will contain search term
+  selectedProfile, // will contain searched/selected Big or Little
 });
 
 export default rootReducer;
