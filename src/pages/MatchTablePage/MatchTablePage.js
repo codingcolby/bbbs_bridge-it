@@ -64,7 +64,26 @@ class MatchTablePage extends Component {
 		}).then((value) => {
 			switch (value) {
 				case "nomatch":
-					swal("So many Littles, so many Bigs", "You'll find a match soon!");
+					swal(
+						"So many Littles, so many Bigs",
+						"You'll find a match soon!",
+						"error"
+					);
+					break;
+				case "match":
+					swal(
+						"Hooray",
+						"Congratulations on a successful Big/Little match!",
+						"success"
+					);
+					break;
+
+				default:
+					swal(
+						"No changes made",
+						"You can safely return to the Match Table and make your selection",
+						"info"
+					);
 			}
 		});
 	};
@@ -76,32 +95,16 @@ class MatchTablePage extends Component {
 		}
 
 		const rows = [
-			createData("Temp Data - Sam Jones", "Jason Twinada", "false"),
-			createData("Temp Data - Sam Jones", "Demonta Miller", "false"),
+			createData("Temp Data - Sam Jones", "Jason Twinada"),
+			createData("Temp Data - Sam Jones", "Demonta Miller"),
 
-			createData("Temp Data - Wilma Franklin", "Maria Torres", "false"),
-			createData("Temp Data - Wilma Franklin", "Kalinda Jones", "false"),
+			createData("Temp Data - Wilma Franklin", "Maria Torres"),
+			createData("Temp Data - Wilma Franklin", "Kalinda Jones"),
 
-			createData(
-				"Temp Data - Michael and Tamara Ross",
-				"Jason Twinada",
-				"false"
-			),
-			createData(
-				"Temp Data - Michael and Tamara Ross",
-				"Demonta Miller",
-				"false"
-			),
-			createData(
-				"Temp Data - Michael and Tamara Ross",
-				"Maria Torres",
-				"false"
-			),
-			createData(
-				"Temp Data - Michael and Tamara Ross",
-				"Kalinda Jones",
-				"false"
-			),
+			createData("Temp Data - Michael and Tamara Ross", "Jason Twinada"),
+			createData("Temp Data - Michael and Tamara Ross", "Demonta Miller"),
+			createData("Temp Data - Michael and Tamara Ross", "Maria Torres"),
+			createData("Temp Data - Michael and Tamara Ross", "Kalinda Jones"),
 		];
 		// END TEMP DATA FOR DEVELOPMENT
 
