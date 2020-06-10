@@ -10,6 +10,7 @@ import {
   Container,
   FormControlLabel,
   RadioGroup,
+
   Grid,
   Slider,
   withStyles,
@@ -36,6 +37,7 @@ const marks = [
 ];
 
 class MapListPage extends Component {
+
   componentDidMount() {
     this.props.dispatch({
       type: "FETCH_PROFILES",
@@ -54,18 +56,14 @@ class MapListPage extends Component {
       this.props.history.push("/profile");
     };
 
-    const id = Number(this.props.match.params.id);
-    const profiles = this.props.store.profiles;
 
-    const profilesBigFilter = profiles.filter((item, index) => {
-      return item.id === id;
-    });
 
     const profilesLittlesFilter = profiles.filter((item, index) => {
       return item.profile_type === 2;
     });
 
     console.log(profilesLittlesFilter);
+
 
     return (
       <div>
@@ -76,7 +74,8 @@ class MapListPage extends Component {
               <Slider
                 defaultValue={5}
                 valueLabelFormat={this.valueLabelFormat}
-                getAriaValueText={this.valuetext}
+      getAriaValueText={this.valuetext}
+
                 aria-labelledby="discrete-slider-restrict"
                 step={null}
                 valueLabelDisplay="auto"
@@ -84,6 +83,7 @@ class MapListPage extends Component {
               />
               <Card>
                 <CardContent>
+
                   <RadioGroup>
                     <FormControlLabel
                       control={<Radio name="Interests" />}
@@ -94,6 +94,7 @@ class MapListPage extends Component {
                       label="Preferences"
                     />
                   </RadioGroup>
+
                 </CardContent>
               </Card>
               <Button variant="outlined" onClick={handleClick}>
@@ -101,6 +102,7 @@ class MapListPage extends Component {
               </Button>
             </Grid>
             <Grid item xs={12} sm={4} md={4}>
+
               <div>
                 {profilesBigFilter.map((item, index) => {
                   return (
@@ -135,6 +137,7 @@ class MapListPage extends Component {
                   );
                 })}
               </div>
+
             </Grid>
           </Grid>
         </Container>
