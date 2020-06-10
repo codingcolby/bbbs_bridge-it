@@ -44,6 +44,14 @@ class Map extends Component {
       if (checked == "female") {
         console.log("FEMALE");
       }
+
+      if (checked == "male") {
+        console.log("MALE");
+      }
+
+      if (checked == "couple") {
+        console.log("COUPLE");
+      }
     }
 
     const profilesFiltered = profiles.filter((item, index) => {
