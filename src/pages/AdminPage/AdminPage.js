@@ -50,6 +50,12 @@ class AdminPage extends Component {
     });
   };
 
+  handleInputChangeFor = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  };
+
   componentDidUpdate() {
     if (this.props.store.resetReducer) {
       this.props.dispatch({ type: "CLEAR_RESET" });
@@ -72,10 +78,9 @@ class AdminPage extends Component {
           this.props.dispatch({
             type: "RESET_PASSWORD",
             payload: {
-              // ...this.props.match.params,
               newEmail: this.state.email,
               newPassword: this.state.password,
-              id: this.props.store.user.id,
+              userid: this.props.store.user.id,
             },
           });
           break;
@@ -84,7 +89,6 @@ class AdminPage extends Component {
       }
     });
   };
-
   // Need to RESET USER with USERNAME AND PASSWORD RESET!!
   render() {
     const { classes } = this.props;

@@ -58,11 +58,14 @@ router.post("/logout", (req: Request, res: Response): void => {
 });
 
 router.put("/reset", (req: Request, res: Response): void => {
+  console.log(req.body);
+
   const queryText = `UPDATE "user" SET email=$1, password=$2 WHERE id=$3;`;
   //@ts-ignore
   const password: string | null = encryptPassword(req.body.password);
+
   pool
-    .query(queryText, [req.body.email, password, req.body.userReset])
+    .query(queryText, [req.body.email, password, req.body.userid])
     .then(() => res.sendStatus(200))
     .catch((err) => {
       console.log("error in RESET user", err);

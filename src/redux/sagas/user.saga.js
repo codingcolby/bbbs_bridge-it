@@ -29,7 +29,7 @@ function* resetCredentials(action) {
     yield axios.put(`api/user/reset`, {
       email: action.payload.newEmail,
       password: action.payload.newPassword,
-      userReset: action.payload.id,
+      userid: action.payload.userid,
     });
     yield put({ type: "SET_RESET" });
   } catch (error) {
