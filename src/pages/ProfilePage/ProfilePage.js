@@ -83,7 +83,10 @@ class ProfilePage extends Component {
 					<h3>Anchor Person</h3>
 					<PersonCard />
 					<br />
-					<Button variant="outlined" onClick={handleClick}>
+					<Button
+						variant="outlined"
+						className={classes.button}
+						onClick={handleClick}>
 						Map List View
 					</Button>
 				</div>
@@ -100,19 +103,21 @@ class ProfilePage extends Component {
 
 					<PersonCard />
 					<br />
-					<Button variant="outlined" onClick={likelyClick} value="3">
-						Likely
-					</Button>
-					<Button variant="outlined" onClick={maybeClick} value="2">
-						Maybe
-					</Button>
-					<Button variant="outlined" onClick={unlikelyClick} value="1">
-						Unlikely
-					</Button>
-					{/* Input for comments? */}
-					<Button variant="outlined" onClick={addCommentsClick}>
-						Add Comments
-					</Button>
+					<div className={classes.button}>
+						<Button variant="outlined" onClick={likelyClick} value="3">
+							Likely
+						</Button>
+						<Button variant="outlined" onClick={maybeClick} value="2">
+							Maybe
+						</Button>
+						<Button variant="outlined" onClick={unlikelyClick} value="1">
+							Unlikely
+						</Button>
+						{/* Input for comments? */}
+						<Button variant="outlined" onClick={addCommentsClick}>
+							Add Comments
+						</Button>
+					</div>
 				</div>
 			</div>
 		);
