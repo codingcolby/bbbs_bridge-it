@@ -65,8 +65,8 @@ router.post(
             originalString,
             big_head.first_header,
             big_head.description_of_volunteer
-          ), // VOLUNTEER SUMMARY through DESCRIPTION OF VOLUNTEER
-          description_of_volunteer_header: big_head.description_of_volunteer, // since we'll be using this heading as part of the regex, don't include the newline
+          ),
+          description_of_volunteer_header: big_head.description_of_volunteer,
           description_of_volunteer: chunker(
             originalString,
             big_head.description_of_volunteer,
@@ -148,6 +148,10 @@ router.post(
             big_head.last_header
           ),
         };
+
+        //
+        // now the pdf is in chunks, we'll display headers on the client-side. Time to start building the profile object out
+        //
 
         res.sendStatus(200);
       });

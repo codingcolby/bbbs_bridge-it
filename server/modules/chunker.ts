@@ -1,5 +1,5 @@
 /**
- *
+ * Returns text from between 2 pdf summary headers.
  * @param pdf_text pdf document text (after parsed)
  * @param header_1 header before the chunk of text to select
  * @param header_2 header after the chunk of text to select
