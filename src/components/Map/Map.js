@@ -17,27 +17,6 @@ class Map extends Component {
   render() {
     const profiles = this.props.store.profiles;
 
-    // const renderThesePins = this.props.store.checked
-    //   ? profiles.map((item, index) => {
-    //       return (
-    //         <Marker
-    //           key={index}
-    //           lat={item.latitude}
-    //           lng={item.longitude}
-    //           name={item.first_name + " " + item.last_name}
-    //         />
-    //       );
-    //     })
-    //   : profiles.map((item, index) => {
-    //       return (
-    //         <Marker
-    //           key={index}
-    //           lat={item.latitude}
-    //           lng={item.longitude}
-    //           name={item.first_name + " " + item.last_name}
-    //         />
-    //       );
-    //     });
     let checked = this.props.store.checked;
 
     if (checked) {
