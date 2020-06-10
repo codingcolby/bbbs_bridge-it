@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import GoogleMapReact from "google-map-react";
 import { withRouter } from "react-router-dom";
+import Marker from "./Marker";
 
 class Map extends Component {
   componentDidMount() {}
@@ -14,6 +15,12 @@ class Map extends Component {
     zoom: 10,
   };
   render() {
+    const profiles = this.props.store.profiles;
+    const renderThesePins = profiles.map((item, index) => {
+      return <Marker key={index} lat={item.latitude} lng={item.longitude} />;
+    });
+    console.log(profiles);
+
     return (
       <div>
         <div style={{ height: "70vh", width: "100%" }}>
@@ -21,7 +28,9 @@ class Map extends Component {
             bootstrapURLKeys={{ key: process.env.REACT_APP_API_GMAP }}
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
-          ></GoogleMapReact>
+          >
+            {renderThesePins}
+          </GoogleMapReact>
         </div>
       </div>
     );
