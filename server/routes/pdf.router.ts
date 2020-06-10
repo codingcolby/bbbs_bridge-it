@@ -2,6 +2,8 @@ import { Request, Response } from "express";
 import express from "express";
 import pool from "../modules/pool";
 import pdf from "pdf-parse";
+import * as big_head from "../modules/headers/big.json";
+import chunker from "../modules/chunker";
 
 const router: express.Router = express.Router();
 
@@ -31,7 +33,7 @@ router.post(
         // PDF text
         console.log(data.text);
 
-        const originalString: String = data.text; // hold the original pdf text
+        const originalString: string = data.text; // hold the original pdf text
 
         //  let's build out our profile structure
         const profile: Object = {
@@ -55,45 +57,71 @@ router.post(
         };
 
         // time to start splitting, first we're going to need chunks organized by heading
-        // regex for text between headings: /(?<=DESCRIPTION OF VOLUNTEER:[\n | \r])(.*[\s\S]*?)(?=EXPERIENCE WITH CHILDREN)/gm
-        // that regex gets the Big's description
         // ----------------------------------------------------
         //
         const chunks: Object = {
-          personal_info: null, // VOLUNTEER SUMMARY through DESCRIPTION OF VOLUNTEER
-          description_of_volunteer_header: "DESCRIPTION OF VOLUNTEER:", // since we'll be using this heading as part of the regex, don't include the newline
-          description_of_volunteer: null,
-          experience_with_children_header: "EXPERIENCE WITH CHILDREN:",
-          experience_with_children: null,
-          occupational_information_header: "OCCUPATIONAL INFORMATION:",
-          occupational_information: null,
+          pdf_header: big_head.first_header,
+          personal_info: chunker(
+            originalString,
+            big_head.first_header,
+            big_head.description_of_volunteer
+          ), // VOLUNTEER SUMMARY through DESCRIPTION OF VOLUNTEER
+          description_of_volunteer_header: big_head.description_of_volunteer, // since we'll be using this heading as part of the regex, don't include the newline
+          description_of_volunteer: chunker(
+            originalString,
+            big_head.description_of_volunteer,
+            big_head.experience_with_children
+          ),
+          experience_with_children_header: big_head.experience_with_children,
+          experience_with_children: chunker(
+            originalString,
+            big_head.experience_with_children,
+            big_head.occupational_information
+          ),
+          occupational_information_header: big_head.occupational_information,
+          occupational_information: chunker(
+            originalString,
+            big_head.occupational_information,
+            big_head.background_family_relationships
+          ),
           background_family_relationships_header:
-            "BACKGROUND/FAMILY RELATIONSHIPS:",
-          background_family_relationships: null,
-          home_environment_header: "HOME ENVIRONMENT:",
-          home_environment: null,
+            big_head.background_family_relationships,
+          background_family_relationships: chunker(
+            originalString,
+            big_head.background_family_relationships,
+            big_head.home_environment
+          ),
+          home_environment_header: big_head.home_environment,
+          home_environment: chunker(
+            originalString,
+            big_head.home_environment,
+            big_head.cm_assessment_of_home_environment
+          ),
           cm_assessment_of_home_environment_header:
-            "CM ASSESSMENT OF HOME ENVIRONMENT (A minimum of 2-4 sentences required. Please incl. any safety concerns, if there were others present during the HV, VOLS interaction, if any, with others in the home):",
-          cm_assessment_of_home_environment: null,
-          close_relationships_header: "CLOSE RELATIONSHIPS:",
-          close_relationships: null,
-          friends_leisure_time_header: "FRIENDS/LEISURE TIME:",
-          friends_leisure_time: null,
-          personal_well_being_header: "PERSONAL WELL BEING:",
-          personal_well_being: null,
-          sexuality_header: "SEXUALITY", // no colon on sample
-          sexuality: null,
+            big_head.cm_assessment_of_home_environment,
+          cm_assessment_of_home_environment: chunker(
+            originalString,
+            big_head.cm_assessment_of_home_environment,
+            big_head.close_relationships
+          ),
+          close_relationships_header: big_head.close_relationships,
+          close_relationships: chunker(originalString, big_head.close_relationships, big_head.friends_leisure_time),
+          friends_leisure_time_header: big_head.friends_leisure_time,
+          friends_leisure_time: chunker(originalString, big_head.friends_leisure_time, big_head.personal_well_being),
+          personal_well_being_header: big_head.personal_well_being,
+          personal_well_being: chunker(originalString, big_head.personal_well_being, big_head.sexuality),
+          sexuality_header: big_head.sexuality,
+          sexuality: chunker(originalString, big_head.sexuality, big_head.authorities),
           authorities_header:
-            "AUTHORITIES (DUI/DWI, moving violations, accidents, suspensions/revocations, etc.):", // the whole header is needed for regex
-          authorities: null,
+            big_head.authorities,
+          authorities: chunker(originalString, big_head.authorities, big_head.match_expectations_and_preferences),
           match_expectations_and_preferences_header:
-            "MATCH EXPECTATIONS & PREFERENCES:",
-          match_expectations_and_preferences: null,
+            big_head.match_expectations_and_preferences,
+          match_expectations_and_preferences: chunker(originalString, big_head.match_expectations_and_preferences, big_head.cm_match_recommendation),
           cm_match_recommendation_header:
-            "CM MATCH RECOMMENDATION (Please provide detail on what CM considers to be the ideal match situation. A minimum of 1-3 sentences required):",
+            "CM MATCH RECOMMENDATION (Please provide detail on what CM considers to be the ideal match situation. A minimum of 1-3 sentences required):", ./kjlsad;fljasd;lkfj
           cm_match_recommendation: null,
         };
-        // 1. Find out the document type. All that matters is Big or Little here.
 
         const header1 = res.sendStatus(200);
       });
