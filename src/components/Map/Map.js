@@ -71,6 +71,8 @@ class Map extends Component {
                   lat={item.latitude}
                   lng={item.longitude}
                   name={item.first_name + " " + item.last_name}
+                  type={item.profile_type}
+                  id={item.id}
                 />
               );
             })}
