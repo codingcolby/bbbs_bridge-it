@@ -77,7 +77,7 @@ INSERT INTO "sex_type"
 VALUES
     ('female'),
     ('male'),
-    ('couple');
+    ('couple m/f');
 
 INSERT INTO "profile_type"
     ("type")
@@ -85,3 +85,12 @@ VALUES
     ('big'),
     ('little'),
     ('couple');
+
+INSERT INTO "status"
+    ("big_id", "little_id", "match", "review", "comment")
+VALUES
+    ($1, $2, $3, $4, $5)
+ON CONFLICT ON CONSTRAINT unique_relationship_key
+DO
+UPDATE SET 
+"match" = $3, "review" = $4, "comment" = $5;

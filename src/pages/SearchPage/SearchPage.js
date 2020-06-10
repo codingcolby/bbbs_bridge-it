@@ -30,6 +30,9 @@ const customStyles = (theme) =>
         width: "auto",
       },
     },
+    ul: {
+      listStyleType: "none",
+    },
     searchIcon: {
       padding: theme.spacing(0, 2),
       height: "100%",
@@ -42,6 +45,7 @@ const customStyles = (theme) =>
     },
     inputInput: {
       border: "solid 2px black",
+      borderRadius: "12px",
       padding: theme.spacing(1, 1, 1, 10),
       // vertical padding + font size from searchIcon
       paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
@@ -57,8 +61,58 @@ const customStyles = (theme) =>
   });
 
 class SearchPage extends Component {
+  state = {
+    searchTerm: "",
+  };
+
+  componentDidMount() {
+    // load up all information from the server
+    this.props.dispatch({
+      type: "FETCH_PROFILES",
+    });
+  }
+
+  changeSearch = (event) => {
+    this.setState({
+      searchTerm: event.target.value,
+    });
+  };
+
+  handleSearchClick = (event) => {
+    this.props.dispatch({
+      type: "SET_SEARCH",
+      payload: this.state.searchTerm,
+    });
+  };
+
+  handleNameClick = (id) => (event) => {
+    console.log(id);
+
+    this.props.dispatch({
+      type: "SET_SELECTED_PROFILES",
+      payload: id,
+    });
+    this.props.history.push(`/list/${id}`);
+  };
+
   render() {
     const { classes } = this.props;
+    const profiles = Array.from(this.props.store.profiles);
+    const profilesFilter = profiles.filter((item, index) => {
+      const profileName = item.first_name + " " + item.last_name;
+      const lowerProfileName = profileName.toLowerCase();
+      if (this.props.store.search) {
+        return (
+          lowerProfileName.indexOf(this.props.store.search.toLowerCase()) !== -1
+        );
+      }
+
+      return true;
+    });
+
+    const handleClick = () => {
+      this.props.history.push("/map");
+    };
 
     return (
       <div className={classes.root}>
@@ -74,10 +128,33 @@ class SearchPage extends Component {
               input: classes.inputInput,
             }}
             inputProps={{ "aria-label": "search" }}
-            // onChange={this.changeSearch}
+            onChange={this.changeSearch}
           />
+
+          <Button
+            onClick={this.handleSearchClick}
+            className={classes.btn}
+            variant="outlined"
+          >
+            Search
+          </Button>
         </div>
-        <Button className={classes.btn} variant="outlined">
+        <br />
+        <div>
+          {this.props.store.search &&
+            profilesFilter.map((item, index) => (
+              <ul key={index} className={classes.ul}>
+                <li onClick={this.handleNameClick(item.id)}>
+                  {item.first_name + " " + item.last_name}
+                </li>
+              </ul>
+            ))}
+        </div>
+        <Button
+          onClick={handleClick}
+          className={classes.btn}
+          variant="outlined"
+        >
           Search By Map
         </Button>
       </div>

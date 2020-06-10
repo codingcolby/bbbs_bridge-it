@@ -24,9 +24,12 @@ function* fetchUser() {
   }
 }
 
-function* resetPassword(action) {
+function* resetCredentials(action) {
   try {
-    yield axios.put("api/user/reset/password", action.payload);
+    yield axios.put(`api/user/reset/${action.payload.id}`, {
+      email: action.payload.newEmail,
+      password: action.payload.newPassword,
+    });
     yield put({ type: "SET_RESET" });
   } catch (error) {
     console.error(`User get request failed: ${error}`);
@@ -35,7 +38,7 @@ function* resetPassword(action) {
 
 function* userSaga() {
   yield takeLatest("FETCH_USER", fetchUser);
-  yield takeLatest("RESET_PASSWORD", resetPassword);
+  yield takeLatest("RESET_PASSWORD", resetCredentials);
 }
 
 export default userSaga;
