@@ -46,7 +46,7 @@ class MapSearchPage extends Component {
         <br />
         <div>
           <Map>
-            <Marker />
+            <Marker lat=39.0756894 lng= -94.5305843 />
           </Map>
         </div>
         <div className={classes.position}>
