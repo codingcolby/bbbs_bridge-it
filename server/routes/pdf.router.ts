@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import express from "express";
 import pool from "../modules/pool";
 import pdf from "pdf-parse";
-import * as big_head from "../modules/headers/big.json";
+import * as big_head from "../constants/headers/big.json";
 import chunker from "../modules/chunker";
 
 const router: express.Router = express.Router();
@@ -105,25 +105,51 @@ router.post(
             big_head.close_relationships
           ),
           close_relationships_header: big_head.close_relationships,
-          close_relationships: chunker(originalString, big_head.close_relationships, big_head.friends_leisure_time),
+          close_relationships: chunker(
+            originalString,
+            big_head.close_relationships,
+            big_head.friends_leisure_time
+          ),
           friends_leisure_time_header: big_head.friends_leisure_time,
-          friends_leisure_time: chunker(originalString, big_head.friends_leisure_time, big_head.personal_well_being),
+          friends_leisure_time: chunker(
+            originalString,
+            big_head.friends_leisure_time,
+            big_head.personal_well_being
+          ),
           personal_well_being_header: big_head.personal_well_being,
-          personal_well_being: chunker(originalString, big_head.personal_well_being, big_head.sexuality),
+          personal_well_being: chunker(
+            originalString,
+            big_head.personal_well_being,
+            big_head.sexuality
+          ),
           sexuality_header: big_head.sexuality,
-          sexuality: chunker(originalString, big_head.sexuality, big_head.authorities),
-          authorities_header:
+          sexuality: chunker(
+            originalString,
+            big_head.sexuality,
+            big_head.authorities
+          ),
+          authorities_header: big_head.authorities,
+          authorities: chunker(
+            originalString,
             big_head.authorities,
-          authorities: chunker(originalString, big_head.authorities, big_head.match_expectations_and_preferences),
+            big_head.match_expectations_and_preferences
+          ),
           match_expectations_and_preferences_header:
             big_head.match_expectations_and_preferences,
-          match_expectations_and_preferences: chunker(originalString, big_head.match_expectations_and_preferences, big_head.cm_match_recommendation),
-          cm_match_recommendation_header:
-            "CM MATCH RECOMMENDATION (Please provide detail on what CM considers to be the ideal match situation. A minimum of 1-3 sentences required):", ./kjlsad;fljasd;lkfj
-          cm_match_recommendation: null,
+          match_expectations_and_preferences: chunker(
+            originalString,
+            big_head.match_expectations_and_preferences,
+            big_head.cm_match_recommendation
+          ),
+          cm_match_recommendation_header: big_head.cm_match_recommendation,
+          cm_match_recommendation: chunker(
+            originalString,
+            big_head.cm_match_recommendation,
+            big_head.last_header
+          ),
         };
 
-        const header1 = res.sendStatus(200);
+        res.sendStatus(200);
       });
     } catch (err) {
       console.log("err: no files on req.files", err);

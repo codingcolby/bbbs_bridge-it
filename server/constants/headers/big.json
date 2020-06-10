@@ -12,5 +12,6 @@
   "sexuality": "SEXUALITY",
   "authorities": "AUTHORITIES (DUI/DWI, moving violations, accidents, suspensions/revocations, etc.):",
   "match_expectations_and_preferences": "MATCH EXPECTATIONS & PREFERENCES:",
-  "cm_match_recommendation": "CM MATCH RECOMMENDATION (Please provide detail on what CM considers to be the ideal match situation. A minimum of 1-3 sentences required):"
+  "cm_match_recommendation": "CM MATCH RECOMMENDATION (Please provide detail on what CM considers to be the ideal match situation. A minimum of 1-3 sentences required):",
+  "last_header": "I acknowledge that I have completed this file according to agency standards"
 }
