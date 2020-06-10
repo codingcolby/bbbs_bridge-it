@@ -26,9 +26,10 @@ function* fetchUser() {
 
 function* resetCredentials(action) {
   try {
-    yield axios.put(`api/user/reset/${action.payload.id}`, {
+    yield axios.put(`api/user/reset`, {
       email: action.payload.newEmail,
       password: action.payload.newPassword,
+      userReset: action.payload.id,
     });
     yield put({ type: "SET_RESET" });
   } catch (error) {
