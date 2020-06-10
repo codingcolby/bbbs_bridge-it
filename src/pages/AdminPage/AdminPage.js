@@ -49,7 +49,6 @@ class AdminPage extends Component {
       [propertyName]: event.target.value,
     });
   };
-  git;
 
   handleInputChangeFor = (propertyName) => (event) => {
     this.setState({
@@ -90,7 +89,6 @@ class AdminPage extends Component {
       }
     });
   };
-
   // Need to RESET USER with USERNAME AND PASSWORD RESET!!
   render() {
     const { classes } = this.props;
