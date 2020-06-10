@@ -1,43 +1,46 @@
 import React from "react";
-import DropZoneS3Uploader from "react-dropzone-s3-uploader";
+import DropZoneUploader from "react-dropzone-uploader";
+import "react-dropzone-uploader/dist/styles.css";
 
-// EXAMPLE STYLE===================
-// const dropzoneStyle = {
-//   position: "relative",
-//   width: "400px",
-//   height: "300px",
-//   border: "2px dashed rgb(153, 153, 153)",
-//   borderRadius: "5px",
-//   cursor: "pointer",
-//   overflow: "hidden",
-// };
+import CustomSubmit from "./CustomSubmit";
 
 function DropZone(props) {
-  //
-  //  S3 Uploader Stuff
-  const uploadOptions = {
-    server: "http://localhost:5000", // change server for deployment, do not end the url with a "/", it will 404
+  const disabled = props.disabled;
+  const docType = props.docType;
+  // specify upload params and url for your files
+  const getUploadParams = ({ meta }) => {
+    let pdfType = "";
+    if (docType === 1) {
+      pdfType = "big";
+    } else {
+      pdfType = "little";
+    }
+    return { url: `/api/pdf/upload/${pdfType}` };
   };
-  const s3Url = "https://bridge-it-bucket.s3.amazonaws.com";
 
-  const handleFinishedUpload = (info) => {
-    props.setReady(true); // tell the Upload Page that it's ready
-    props.setPdfUrl(info.fileUrl); // pdf is now in our s3 bucket, prep it to send to the server on Upload Page
+  // receives array of files that are done uploading when submit button is clicked
+  const handleSubmit = (files, allFiles) => {
+    console.log(files.map((f) => f.meta));
+    allFiles.forEach((f) => {
+      f.restart();
+    });
   };
-  //    end S3 Uploader Stuff
-  //
-
+  console.log(props.disabled);
   return (
     <div>
-      <DropZoneS3Uploader
-        onFinish={handleFinishedUpload}
-        s3Url={s3Url}
-        maxSize={1024 * 1024 * 5}
-        upload={uploadOptions}
-        disabled={props.disabled}
-        multiple={false} // we only want 1 pdf at a time
-        //  TODO: remove files from display after upload
-        //   style={dropzoneStyle}  // style like so
+      <DropZoneUploader
+        getUploadParams={getUploadParams}
+        onSubmit={handleSubmit}
+        styles={{ dropzone: { minHeight: 200, maxHeight: 250 } }}
+        accept={"application/pdf"}
+        submitButtonContent={"Submit"}
+        SubmitButtonComponent={(props) => (
+          <CustomSubmit {...props} disabled={disabled} />
+        )}
+        canRestart={false}
+        autoUpload={false}
+        multiple={false}
+        maxFiles={1}
       />
     </div>
   );

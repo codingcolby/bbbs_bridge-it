@@ -37,7 +37,6 @@ function UploadPageResetter(props) {
 function UploadPage(props) {
   const [docType, setDocType] = useState("");
   const [ready, setReady] = useState(false);
-  const [pdfUrl, setPdfUrl] = useState(null);
 
   const handleChange = (event) => {
     setDocType(event.target.value);
@@ -46,7 +45,7 @@ function UploadPage(props) {
   const handleClick = (event) => {
     props.dispatch({
       type: "UPLOAD_PDF_SUMMARY",
-      payload: { pdfUrl, docType },
+      // payload: { pdfUrl, docType },
     });
     props.resetComponent();
   };
@@ -63,18 +62,12 @@ function UploadPage(props) {
           {/* I hardcoded docTypes in reference to the ids in "profile_type" table */}
           <MenuItem value={1}>Big</MenuItem>
           <MenuItem value={2}>Little</MenuItem>
-          <MenuItem value={3}>Couple</MenuItem>
+          {/* <MenuItem value={3}>Couple</MenuItem> TODO: handle couples */}
         </Select>
         <FormHelperText>Please select a document type</FormHelperText>
       </FormControl>
 
-      {/* Drop zone is disabled until type is selected*/}
-      <DropZone
-        setReady={setReady}
-        setPdfUrl={setPdfUrl}
-        disabled={!Boolean(docType)}
-      />
-      {ready && <Button onClick={handleClick}>Save</Button>}
+      <DropZone docType={docType} disabled={!Boolean(docType)} />
     </div>
   );
 }
