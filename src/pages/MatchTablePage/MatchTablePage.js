@@ -47,7 +47,7 @@ const StyledTableRow = withStyles((theme) => ({
 
 class MatchTablePage extends Component {
 	componentDidMount() {
-		this.props.dispatch({ type: "SET_TABLE" });
+		this.props.dispatch({ type: "FETCH_TABLE" });
 	}
 
 	onClick = () => {
@@ -93,6 +93,8 @@ class MatchTablePage extends Component {
 	};
 
 	render() {
+		console.log(this.props.store);
+
 		// TEMP DATA FOR DEVELOPMENT
 		// function createData(bocname, lname, matchNY) {
 		// 	return { bocname, lname, matchNY };
