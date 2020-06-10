@@ -9,7 +9,7 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 const UserPage = (props) => (
   <div>
     <h3 id="welcome">
-      BBBS KC Users:
+      BBBS KC User Logged in:
       {props.store.user.email}
       {props.store.user.id}
     </h3>
