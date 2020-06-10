@@ -22,7 +22,6 @@ import RegisterPage from "../../pages/RegisterPage/RegisterPage";
 import MapSearchPage from "../../pages/MapSearchPage/MapSearchPage";
 import MapListPage from "../../pages/MapListPage/MapListPage";
 import MatchTablePage from "../../pages/MatchTablePage/MatchTablePage";
-import MatchConfirm from "../../modals/MatchConfirm";
 import ProfilePage from "../../pages/ProfilePage/ProfilePage";
 import SearchPage from "../../pages/SearchPage/SearchPage";
 import UploadPage from "../../pages/UploadPage/UploadPage";
@@ -51,7 +50,6 @@ class App extends Component {
 							<Route exact path="/map" component={MapSearchPage} />
 							<Route exact path="/list/:id" component={MapListPage} />
 							<Route exact path="/table" component={MatchTablePage} />
-							<Route exact path="/confirm" component={MatchConfirm} />
 							<Route exact path="/profile" component={ProfilePage} />
 							<Route exact path="/search" component={SearchPage} />
 							<Route exact path="/admin" component={AdminPage} />
