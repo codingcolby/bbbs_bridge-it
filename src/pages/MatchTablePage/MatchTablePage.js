@@ -11,7 +11,6 @@ import TableRow from "@material-ui/core/TableRow";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import swal from "@sweetalert/with-react";
-// //import swal from "sweetalert";
 
 const useStyles = makeStyles((theme) => ({
 	root: {
@@ -46,6 +45,10 @@ const StyledTableRow = withStyles((theme) => ({
 }))(TableRow);
 
 class MatchTablePage extends Component {
+	componentDidMount() {
+		this.props.dispatch({ type: "SET_TABLE" });
+	}
+
 	onClick = () => {
 		swal({
 			text:
@@ -90,22 +93,22 @@ class MatchTablePage extends Component {
 
 	render() {
 		// TEMP DATA FOR DEVELOPMENT
-		function createData(bocname, lname, matchNY) {
-			return { bocname, lname, matchNY };
-		}
+		// function createData(bocname, lname, matchNY) {
+		// 	return { bocname, lname, matchNY };
+		// }
 
-		const rows = [
-			createData("Temp Data - Sam Jones", "Jason Twinada"),
-			createData("Temp Data - Sam Jones", "Demonta Miller"),
+		// const rows = [
+		// 	createData("Temp Data - Sam Jones", "Jason Twinada"),
+		// 	createData("Temp Data - Sam Jones", "Demonta Miller"),
 
-			createData("Temp Data - Wilma Franklin", "Maria Torres"),
-			createData("Temp Data - Wilma Franklin", "Kalinda Jones"),
+		// 	createData("Temp Data - Wilma Franklin", "Maria Torres"),
+		// 	createData("Temp Data - Wilma Franklin", "Kalinda Jones"),
 
-			createData("Temp Data - Michael and Tamara Ross", "Jason Twinada"),
-			createData("Temp Data - Michael and Tamara Ross", "Demonta Miller"),
-			createData("Temp Data - Michael and Tamara Ross", "Maria Torres"),
-			createData("Temp Data - Michael and Tamara Ross", "Kalinda Jones"),
-		];
+		// 	createData("Temp Data - Michael and Tamara Ross", "Jason Twinada"),
+		// 	createData("Temp Data - Michael and Tamara Ross", "Demonta Miller"),
+		// 	createData("Temp Data - Michael and Tamara Ross", "Maria Torres"),
+		// 	createData("Temp Data - Michael and Tamara Ross", "Kalinda Jones"),
+		// ];
 		// END TEMP DATA FOR DEVELOPMENT
 
 		return (
@@ -120,17 +123,17 @@ class MatchTablePage extends Component {
 								<StyledTableCell>No Match / Match</StyledTableCell>
 							</TableRow>
 						</TableHead>
+
 						<TableBody>
-							{rows.map((row) => (
-								<StyledTableRow key={row.index}>
-									<StyledTableCell component="th" scope="row">
-										{row.bocname}
+							{this.props.store.matchtableReducer.map((item, index) => (
+								<StyledTableRow>
+									<StyledTableCell component="th" scope="row" key={index}>
+										{item.first_name}
 									</StyledTableCell>
-									<StyledTableCell>{row.lname}</StyledTableCell>
+									<StyledTableCell>{item.last_name}</StyledTableCell>
 
 									<StyledTableCell>
 										<div className={useStyles.root}>
-											{row.matchNY} &nbsp; &nbsp;
 											<Button onClick={this.onClick} variant="outlined">
 												No Match
 											</Button>{" "}
