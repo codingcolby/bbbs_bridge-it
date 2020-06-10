@@ -16,10 +16,39 @@ class Map extends Component {
   };
   render() {
     const profiles = this.props.store.profiles;
-    const renderThesePins = profiles.map((item, index) => {
-      return <Marker key={index} lat={item.latitude} lng={item.longitude} />;
+
+    // const renderThesePins = this.props.store.checked
+    //   ? profiles.map((item, index) => {
+    //       return (
+    //         <Marker
+    //           key={index}
+    //           lat={item.latitude}
+    //           lng={item.longitude}
+    //           name={item.first_name + " " + item.last_name}
+    //         />
+    //       );
+    //     })
+    //   : profiles.map((item, index) => {
+    //       return (
+    //         <Marker
+    //           key={index}
+    //           lat={item.latitude}
+    //           lng={item.longitude}
+    //           name={item.first_name + " " + item.last_name}
+    //         />
+    //       );
+    //     });
+    const checked = this.props.store.checked;
+    console.log("CHECKED", checked);
+    if (checked) {
+      if (checked == "female") {
+        console.log("FEMALE");
+      }
+    }
+
+    const profilesFiltered = profiles.filter((item, index) => {
+      return item.sex === 1;
     });
-    console.log(profiles);
 
     return (
       <div>
@@ -29,7 +58,16 @@ class Map extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            {renderThesePins}
+            {profilesFiltered.map((item, index) => {
+              return (
+                <Marker
+                  key={index}
+                  lat={item.latitude}
+                  lng={item.longitude}
+                  name={item.first_name + " " + item.last_name}
+                />
+              );
+            })}
           </GoogleMapReact>
         </div>
       </div>

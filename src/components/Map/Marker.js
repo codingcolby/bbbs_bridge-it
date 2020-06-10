@@ -12,6 +12,7 @@ class Marker extends Component {
     return (
       <div className="map-marker">
         <RoomRoundedIcon fontSize="large" id="pin" />
+        <p>{this.props.name}</p>
       </div>
     );
   }

@@ -25,19 +25,65 @@ const customStyles = (theme) =>
   });
 
 class MapSearchPage extends Component {
+  state = {
+    checked: "",
+  };
+
   componentDidMount() {
     this.props.dispatch({
       type: "FETCH_PROFILES",
     });
   }
+
   render() {
     const { classes } = this.props;
 
-    const profiles = this.props.store.profiles;
-    console.log("Profiles", profiles);
-
     const handleClick = () => {
       this.props.history.push("/search");
+    };
+
+    const handleChange = (sex) => (event) => {
+      if (sex === "female") {
+        this.setState(
+          {
+            checked: "female",
+          },
+          () => {
+            this.props.dispatch({
+              type: "SET_CHECKED",
+              payload: this.state,
+            });
+          }
+        );
+      }
+
+      if (sex === "male") {
+        this.setState(
+          {
+            checked: "male",
+          },
+          () => {
+            this.props.dispatch({
+              type: "SET_CHECKED",
+              payload: this.state,
+            });
+          }
+        );
+      }
+
+      if (sex === "couple") {
+        this.setState(
+          {
+            checked: "couple",
+          },
+          () => {
+            this.props.dispatch({
+              type: "SET_CHECKED",
+              payload: this.state,
+            });
+          }
+        );
+      }
     };
 
     return (
@@ -45,23 +91,24 @@ class MapSearchPage extends Component {
         <h1>All Unmatched Bigs and Littles</h1>
         <br />
         <div>
-          <Map>
-            <Marker lat={39.0756894} lng={-94.5305843} />
-          </Map>
+          <Map checked={this.checked} />
         </div>
         <div className={classes.position}>
           <FormGroup row>
             <FormControlLabel
               control={<Checkbox name="checkedFemale" />}
               label="Female"
+              onChange={handleChange("female")}
             />
             <FormControlLabel
               control={<Checkbox name="checkedMale" />}
               label="Male"
+              onChange={handleChange("male")}
             />
             <FormControlLabel
               control={<Checkbox name="checkedCouple" />}
               label="Couple"
+              onChange={handleChange("couple")}
             />
           </FormGroup>
         </div>
