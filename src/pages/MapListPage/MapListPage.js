@@ -6,10 +6,11 @@ import {
   Button,
   Card,
   CardContent,
-  Checkbox,
+  Radio,
   Container,
   FormControlLabel,
-  FormGroup,
+  RadioGroup,
+
   Grid,
   Slider,
   withStyles,
@@ -36,7 +37,13 @@ const marks = [
 ];
 
 class MapListPage extends Component {
-  valueText = (value) => {
+
+  componentDidMount() {
+    this.props.dispatch({
+      type: "FETCH_PROFILES",
+    });
+  }
+  valuetext = (value) => {
     return `${value}`;
   };
 
@@ -49,6 +56,15 @@ class MapListPage extends Component {
       this.props.history.push("/profile");
     };
 
+
+
+    const profilesLittlesFilter = profiles.filter((item, index) => {
+      return item.profile_type === 2;
+    });
+
+    console.log(profilesLittlesFilter);
+
+
     return (
       <div>
         <Container maxWidth={false}>
@@ -58,7 +74,8 @@ class MapListPage extends Component {
               <Slider
                 defaultValue={5}
                 valueLabelFormat={this.valueLabelFormat}
-                getAriaValueText={this.valueText}
+      getAriaValueText={this.valuetext}
+
                 aria-labelledby="discrete-slider-restrict"
                 step={null}
                 valueLabelDisplay="auto"
@@ -66,16 +83,18 @@ class MapListPage extends Component {
               />
               <Card>
                 <CardContent>
-                  <FormGroup>
+
+                  <RadioGroup>
                     <FormControlLabel
-                      control={<Checkbox name="Interests" />}
+                      control={<Radio name="Interests" />}
                       label="Interests"
                     />
                     <FormControlLabel
-                      control={<Checkbox name="Preferences" />}
+                      control={<Radio name="Preferences" />}
                       label="Preferences"
                     />
-                  </FormGroup>
+                  </RadioGroup>
+
                 </CardContent>
               </Card>
               <Button variant="outlined" onClick={handleClick}>
@@ -83,10 +102,42 @@ class MapListPage extends Component {
               </Button>
             </Grid>
             <Grid item xs={12} sm={4} md={4}>
-              <h1>Big Name</h1>
-              <Card>
-                <CardContent>Littles name</CardContent>
-              </Card>
+
+              <div>
+                {profilesBigFilter.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <h1>{item.first_name + " " + item.last_name}</h1>
+                      <h3>
+                        {"Age: " + item.dob_or_age + " " + "Race: " + item.race}
+                      </h3>
+                      <h3>{"Address: " + item.address}</h3>
+                    </div>
+                  );
+                })}
+              </div>
+              <div>
+                {profilesLittlesFilter.map((item, index) => {
+                  return (
+                    <Card key={index}>
+                      <CardContent>
+                        <div>
+                          <h3>{item.first_name + " " + item.last_name}</h3>
+                          <h4>
+                            {"Age: " +
+                              item.dob_or_age +
+                              " " +
+                              "Race: " +
+                              item.race}
+                          </h4>
+                          <p>{item.summary}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
+
             </Grid>
           </Grid>
         </Container>

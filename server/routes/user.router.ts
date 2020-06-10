@@ -26,6 +26,7 @@ router.get("/profiles", (req: Request, res: Response): void => {
       res.sendStatus(500);
     });
 });
+
 router.post(
   "/register",
   (req: Request, res: Response, next: express.NextFunction): void => {
@@ -44,6 +45,7 @@ router.post(
       });
   }
 );
+
 router.post(
   "/login",
   userStrategy.authenticate("local"),
@@ -51,6 +53,7 @@ router.post(
     res.sendStatus(200);
   }
 );
+
 router.post("/logout", (req: Request, res: Response): void => {
   //@ts-ignore
   req.logout();
