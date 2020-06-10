@@ -1,4 +1,4 @@
-const profilesReducer = (state = {}, action) => {
+const profilesReducer = (state = [], action) => {
   switch (action.type) {
     //set profilesReducer with profiles returned from server
     case "SET_PROFILES":
