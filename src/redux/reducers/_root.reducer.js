@@ -6,7 +6,10 @@ import profiles from "./profiles.reducer";
 import { resetUser } from "./resetUser.reducer";
 import search from "./search.reducer";
 import selectedProfile from "./selected.profile.reducer";
+
+import checked from "./checked.reducer";
 import matchTable from "./matchtable.reducer";
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -22,7 +25,11 @@ const rootReducer = combineReducers({
   resetUser,
   search, //will contain search term
   selectedProfile, // will contain searched/selected Big or Little
+
+  checked, //will contain checked sex
+
   matchTable, // contains active "status" table info
+
 });
 
 export default rootReducer;
