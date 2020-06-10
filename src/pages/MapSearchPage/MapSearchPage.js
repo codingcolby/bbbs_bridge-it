@@ -51,7 +51,7 @@ class MapSearchPage extends Component {
           () => {
             this.props.dispatch({
               type: "SET_CHECKED",
-              payload: this.state,
+              payload: this.state.checked,
             });
           }
         );
@@ -65,7 +65,7 @@ class MapSearchPage extends Component {
           () => {
             this.props.dispatch({
               type: "SET_CHECKED",
-              payload: this.state,
+              payload: this.state.checked,
             });
           }
         );
@@ -79,7 +79,7 @@ class MapSearchPage extends Component {
           () => {
             this.props.dispatch({
               type: "SET_CHECKED",
-              payload: this.state,
+              payload: this.state.checked,
             });
           }
         );
@@ -91,7 +91,7 @@ class MapSearchPage extends Component {
         <h1>All Unmatched Bigs and Littles</h1>
         <br />
         <div>
-          <Map checked={this.checked} />
+          <Map />
         </div>
         <div className={classes.position}>
           <FormGroup row>

@@ -38,24 +38,22 @@ class Map extends Component {
     //         />
     //       );
     //     });
-    const checked = this.props.store.checked;
-    console.log("CHECKED", checked);
+    let checked = this.props.store.checked;
+
     if (checked) {
-      if (checked == "female") {
-        console.log("FEMALE");
-      }
-
-      if (checked == "male") {
-        console.log("MALE");
-      }
-
-      if (checked == "couple") {
-        console.log("COUPLE");
+      if (checked === "female") {
+        checked = 1;
+      } else if (checked === "male") {
+        checked = 2;
+      } else if (checked === "couple") {
+        checked = 3;
+      } else {
+        checked = this.props.store.checked;
       }
     }
 
     const profilesFiltered = profiles.filter((item, index) => {
-      return item.sex === 1;
+      return item.sex === checked;
     });
 
     return (
