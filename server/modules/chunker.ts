@@ -15,5 +15,6 @@ export default function chunker(
     `(?<=${header_1}[\n | \r])(.*[\s\S]*?)(?=${header_2})`,
     "gm"
   );
-  return pdf_text.match(regexp)[0]; // match returns array, get the first match & return
+  const result = pdf_text.match(regexp); // match returns array, get the first match & return
+  return result ? result[0] : result; // return match if exists, null if now
 }
