@@ -5,7 +5,6 @@ const matchtableReducer = (state = [], action) => {
 			return action.payload;
 		case "UNSET_TABLE":
 			return [];
-		// return {};
 		default:
 			return state;
 	}
