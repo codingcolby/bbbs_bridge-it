@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Menu, MenuItem, ButtonBase } from "@material-ui/core";
 import { useHistory } from "react-router";
 import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
 
 const useStyles = makeStyles((theme) => {
   return createStyles({
@@ -43,6 +44,10 @@ function DropdownMenu(props) {
     history.push({ pathname: "/map" });
   };
 
+  const logout = (event) => {
+    props.dispatch({ type: "LOGOUT" });
+  };
+
   // const logout = (event) => {
   //   history.push({ pathname: "/login" });
   // };
@@ -69,10 +74,10 @@ function DropdownMenu(props) {
         <MenuItem onClick={search}>Search</MenuItem>
         <MenuItem onClick={map}>Map</MenuItem>
         <MenuItem onClick={upload}>Upload</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
     </div>
   );
 }
 
-export default DropdownMenu;
+export default connect()(DropdownMenu);
