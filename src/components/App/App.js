@@ -33,7 +33,33 @@ class App extends Component {
     this.props.dispatch({ type: "FETCH_USER" });
   }
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+	render() {
+		return (
+			<div>
+				<Router>
+					<div>
+						<Nav />
+						<Switch>
+							{/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+							<Redirect exact from="/" to="/home" />
+							{/* Visiting localhost:3000/about will show the about page.
+=======
+  render() {
+    return (
+      <div className="maincontainer">
+        <Router>
+          <div>
+            <Nav />
+            <Switch>
+              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+              <Redirect exact from="/" to="/home" />
+              {/* Visiting localhost:3000/about will show the about page.
+>>>>>>> 3f2896a5578fe09a25a6b6b03e899f30f559b447
+=======
 
+>>>>>>> 2071e98be61bf9e6542fcc7a574e4e3e17764ded
             This is a route anyone can see, no login necessary */}
               <Route exact path="/about" component={AboutPage} />
 
