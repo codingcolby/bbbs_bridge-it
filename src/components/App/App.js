@@ -35,7 +35,7 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="maincontainer">
+			<div>
 				<Router>
 					<div>
 						<Nav />
