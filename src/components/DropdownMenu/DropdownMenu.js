@@ -67,8 +67,8 @@ function DropdownMenu(props) {
         }}
       >
         <MenuItem onClick={search}>Search</MenuItem>
-        <MenuItem onClick={upload}>Upload</MenuItem>
         <MenuItem onClick={map}>Map</MenuItem>
+        <MenuItem onClick={upload}>Upload</MenuItem>
         <MenuItem>Logout</MenuItem>
       </Menu>
     </div>
