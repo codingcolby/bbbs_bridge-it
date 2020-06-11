@@ -1,3 +1,4 @@
+import escapeStringRegexp from "escape-string-regexp";
 /**
  * Returns text from between 2 pdf summary headers.
  * @param pdf_text pdf document text (after parsed)
@@ -11,10 +12,29 @@ export default function chunker(
 ) {
   // example regex for text between headings: /(?<=DESCRIPTION OF VOLUNTEER:[\n | \r])(.*[\s\S]*?)(?=EXPERIENCE WITH CHILDREN)/gm
   // that regex gets the Big's description
+  const header_1_escaped: string = escapeStringRegexp(header_1);
+  const header_2_escaped: string = escapeStringRegexp(header_2);
+
   const regexp = new RegExp(
-    `(?<=${header_1}[\n | \r])(.*[\s\S]*?)(?=${header_2})`,
+    `(?<=${header_1_escaped}[\n \r])(.*[\\s\\S]*?)(?=${header_2_escaped})`,
     "gm"
   );
+
   const result = pdf_text.match(regexp); // match returns array, get the first match & return
+
+  console.log(`
+  -------------------------------
+  HEADER 1:
+  ${header_1_escaped}
+
+  HEADER 2:
+  ${header_2_escaped}
+
+  REGEX:
+  ${regexp}
+
+  RESULT:
+  ${result}
+  `);
   return result ? result[0] : result; // return match if exists, null if now
 }

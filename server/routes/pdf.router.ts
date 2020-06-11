@@ -149,6 +149,8 @@ router.post(
           ),
         };
 
+        // console.log(chunks);
+
         //
         // now the pdf is in chunks, we'll display headers on the client-side. Time to start building the profile object out
         //
