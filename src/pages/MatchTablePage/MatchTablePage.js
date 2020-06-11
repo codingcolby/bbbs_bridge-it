@@ -142,24 +142,3 @@ class MatchTablePage extends Component {
 }
 
 export default connect(mapStoreToProps)(MatchTablePage);
-
-{
-	/* // TEMP DATA FOR DEVELOPMENT
-// function createData(bocname, lname, matchNY) {
-// 	return { bocname, lname, matchNY };
-// }
-
-// const rows = [
-// 	createData("Temp Data - Sam Jones", "Jason Twinada"),
-// 	createData("Temp Data - Sam Jones", "Demonta Miller"),
-
-// 	createData("Temp Data - Wilma Franklin", "Maria Torres"),
-// 	createData("Temp Data - Wilma Franklin", "Kalinda Jones"),
-
-// 	createData("Temp Data - Michael and Tamara Ross", "Jason Twinada"),
-// 	createData("Temp Data - Michael and Tamara Ross", "Demonta Miller"),
-// 	createData("Temp Data - Michael and Tamara Ross", "Maria Torres"),
-// 	createData("Temp Data - Michael and Tamara Ross", "Kalinda Jones"),
-// ];
-// END TEMP DATA FOR DEVELOPMENT */
-}

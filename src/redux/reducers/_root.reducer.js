@@ -8,7 +8,7 @@ import search from "./search.reducer";
 import selectedProfile from "./selected.profile.reducer";
 
 import checked from "./checked.reducer";
-import table from "./matchtable.reducer";
+import table from "./table.reducer";
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
