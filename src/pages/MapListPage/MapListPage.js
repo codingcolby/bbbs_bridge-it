@@ -51,7 +51,7 @@ class MapListPage extends Component {
 
   render() {
     const handleClick = () => {
-      this.props.history.push("/profile");
+      this.props.history.push(`/profile/${id}`);
     };
 
     const id = Number(this.props.match.params.id);
