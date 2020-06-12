@@ -55,25 +55,40 @@ class MapListPage extends Component {
       this.props.history.push(`/profile/${id}`);
     };
 
+    //gets id of selected profile
     const id = Number(this.props.match.params.id);
+
+    //assigns profile reducer data to profiles
     const profiles = this.props.store.profiles;
 
-    const profilesBigFilter = profiles.filter((item, index) => {
+    //returns single selected profile
+    const profileFilter = profiles.filter((item, index) => {
       return item.id === id;
     });
 
-    const profilesLittlesFilter = profiles.filter((item, index) => {
-      return item.profile_type === 2;
+    //returns selected profile sex
+    const profileSex = profileFilter.map((item, index) => {
+      return item.sex;
     });
 
-    const distance = geolib.getPreciseDistance(
-      { latitude: 39.1000564, longitude: -94.5345545 },
-      { latitude: 39.0834741, longitude: -94.5533731 }
-    );
+    //returns selected profile coordinates
+    const profileCoordinates = profileFilter.map((item, index) => {
+      return { latitude: item.latitude, longitude: item.longitude };
+    });
+
+    const coordinates = profileCoordinates[0];
+
+    console.log("Profile Coordinates", coordinates);
+
+    //returns little profiles that match selected profile sex
+    const profilesLittlesFilter = profiles.filter((item, index) => {
+      return item.profile_type === 2 && item.sex === Number(profileSex);
+    });
 
     const miles = geolib.convertDistance(1828, "mi");
 
-    const bigProfile = profilesBigFilter.map((item, index) => {
+    //renders selected profile information
+    const bigProfile = profileFilter.map((item, index) => {
       return (
         <div key={index}>
           <h1>{item.first_name + " " + item.last_name}</h1>
@@ -83,6 +98,7 @@ class MapListPage extends Component {
       );
     });
 
+    //renders list of filtered littles as cards
     const littlesList = profilesLittlesFilter.map((item, index) => {
       return (
         <Card key={index}>
