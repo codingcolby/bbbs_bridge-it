@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import swal from "@sweetalert/with-react";
 import "./Table.css";
-import { response } from "express";
+
 import { BottomNavigationAction } from "@material-ui/core";
 // import Button from "@material-ui/core/Button";
 // import { withStyles, makeStyles } from "@material-ui/core/styles";
@@ -94,18 +94,16 @@ class MatchTablePage extends Component {
 	};
 
 	render() {
-		//	const id = Number(this.props.match.params.id);
-		const table = this.props.store.table;
+		// const id = Number(this.props.match.params.id);
+		// const table = this.props.store.table;
 
-		const tableBig = table.filter((item, index) => {
-			return item.first_name, item.last_name;
-			//	return item.id === id;
-		});
+		// const tableBig = table.filter((item, index) => {
+		// 	return item.id === id, item.first_name, item.last_name;
+		// });
 
-		const tableLittles = table.filter((item, index) => {
-			return item.first_name, item.last_name;
-			//	return item.id === id;
-		});
+		// const tableLittles = table.filter((item, index) => {
+		// 	return item.id === id, item.first_name, item.last_name;
+		// });
 
 		return (
 			<div>
@@ -115,37 +113,62 @@ class MatchTablePage extends Component {
 						<tr>
 							<th>Big or Couple Name</th>
 							<th>Little Name</th>
-							<th className="centered">No Match / Match</th>
+							<th className="centered">Match / No Match</th>
 						</tr>
 					</thead>
 					<tbody>
-						<div>
-							<tr>
-								{tableBig.map((item, index) => {
+						<tr>
+							<td>Sam Jones</td>
+							<td>Jason Twinada</td>
+							{/* {tableBig.map((item, index) => {
 									return (
 										<td key={index}>
-											{item.first_name + " " + item.last_name} Sample Big Name
+											{item.first_name + " " + item.last_name}
 										</td>
 									);
 								})}
 								{tableLittles.map((item, index) => {
 									return (
 										<td key={index}>
-											{item.first_name + " " + item.last_name} Sample Little
-											Name
+											{item.first_name + " " + item.last_name}
+										</td>
+									);
+								})} */}
+							<td className="centered">
+								<button
+									onClick={this.onClick}
+									variant="outlined"
+									className="matchselect">
+									Select Match Status
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Sam Jones</td>
+							<td>Demonta Miller</td>
+							{/* {tableBig.map((item, index) => {
+									return (
+										<td key={index}>
+											{item.first_name + " " + item.last_name}
 										</td>
 									);
 								})}
-								<td>
-									<button
-										onClick={this.onClick}
-										variant="outlined"
-										className="matchselect">
-										Select Match Status
-									</button>
-								</td>
-							</tr>
-						</div>
+								{tableLittles.map((item, index) => {
+									return (
+										<td key={index}>
+											{item.first_name + " " + item.last_name}
+										</td>
+									);
+								})} */}
+							<td className="centered">
+								<button
+									onClick={this.onClick}
+									variant="outlined"
+									className="matchselect">
+									Select Match Status
+								</button>
+							</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>
