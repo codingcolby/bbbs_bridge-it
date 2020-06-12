@@ -1,9 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+
 import Map from "../../components/Map/MapList";
 import { Element } from "react-scroll";
 import * as geolib from "geolib";
+
+
+
 
 import {
   Button,
@@ -175,6 +179,7 @@ class MapListPage extends Component {
               </Button>
             </Grid>
             <Grid item xs={12} sm={4} md={4}>
+
               <div>{bigProfile}</div>
               <Element
                 name="littles-list"
@@ -188,6 +193,8 @@ class MapListPage extends Component {
                 }}
               >
                 <div>{littlesList}</div>
+
+                      
               </Element>
             </Grid>
           </Grid>

@@ -5,7 +5,7 @@ import sessionMiddleware from "./modules/session-middleware";
 import passport from "./strategies/user.strategy";
 import userRouter from "./routes/user.router";
 import pdfRouter from "./routes/pdf.router";
-import matchtableRouter from "./routes/matchtable.router";
+import tableRouter from "./routes/table.router";
 
 require("dotenv").config();
 
@@ -28,7 +28,7 @@ app.use(passport.session());
 /* Routes */
 app.use("/api/user", userRouter);
 app.use("/api/pdf", pdfRouter);
-app.use("/api/table", matchtableRouter);
+app.use("/api/table", tableRouter);
 
 // Serve static files
 app.use(express.static("build"));
@@ -38,7 +38,7 @@ const PORT: number | string = process.env.PORT || 5000;
 
 /** Listen * */
 app.listen(PORT, (): void => {
-  console.log(`So awesome. Much wow. Listening on port: ${PORT}`);
+	console.log(`So awesome. Much wow. Listening on port: ${PORT}`);
 });
 
 export default app;
