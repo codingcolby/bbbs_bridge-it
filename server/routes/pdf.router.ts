@@ -4,8 +4,12 @@ import pool from "../modules/pool";
 import pdf from "pdf-parse";
 import * as big_pdf_head from "../constants/headers/pdf.big.json";
 import * as big_profile_head from "../constants/headers/profile.big.json";
+import * as big_preferences_head from "../constants/headers/preferences.big.json";
 import chunker from "../modules/chunker";
 import Profile from "../modules/profile.interface";
+import BigPreferences from "../modules/big.preferences.interface";
+import bigPreferenceChecker from "../modules/big-preference-checker";
+import bigPreferenceForwardChecker from "../modules/big-preference-forward-checker";
 import axios from "axios";
 
 const router: express.Router = express.Router();
@@ -197,11 +201,19 @@ router.post(
 
         //
         // 5. Get the address
-        profile.address = chunker(
-          chunks.personal_info,
-          big_profile_head.address_pre,
-          big_profile_head.address_post
-        ).trim();
+        profile.address =
+          chunker(
+            chunks.personal_info,
+            big_profile_head.address_pre,
+            big_profile_head.address_post
+          ).trim() === "49 X X Forest Avenue Kansas City, MO 64110"
+            ? // if the dummy pdf is loaded, give a real address for geocoding
+              "4037 Forest Avenue Kansas City MO 64110"
+            : chunker(
+                chunks.personal_info,
+                big_profile_head.address_pre,
+                big_profile_head.address_post
+              ).trim();
 
         //
         // 6. Get the ems / cm
@@ -236,7 +248,45 @@ router.post(
         ).trim();
 
         //
-        // Finally, Get lat & lng this is a Promise so let's do it last.
+        // Now let's get the Big's Preferences
+        const preferences: BigPreferences = {
+          age: bigPreferenceChecker(
+            big_preferences_head.age,
+            chunks.match_expectations_and_preferences
+          ).trim(),
+          race:
+            bigPreferenceChecker(
+              big_preferences_head.race,
+              chunks.match_expectations_and_preferences
+            ) !== "Open"
+              ? bigPreferenceForwardChecker(
+                  big_preferences_head.race,
+                  chunks.match_expectations_and_preferences
+                ).trim()
+              : "Open",
+          religion: bigPreferenceChecker(
+            big_preferences_head.religion,
+            chunks.match_expectations_and_preferences
+          ).trim(),
+          speak_english: bigPreferenceChecker(
+            big_preferences_head.speak_english,
+            chunks.match_expectations_and_preferences
+          ).trim(),
+          lvl_of_problems: bigPreferenceChecker(
+            big_preferences_head.lvl_of_problems,
+            chunks.match_expectations_and_preferences
+          ).trim(),
+          max_distance_miles: Number(
+            chunker(
+              chunks.match_expectations_and_preferences,
+              big_preferences_head.max_distance_miles,
+              big_preferences_head.max_distance_miles_end
+            ).trim()
+          ),
+        };
+
+        // set the preferences on the profile object
+        profile.preference = preferences;
 
         console.log(profile);
         res.sendStatus(200);

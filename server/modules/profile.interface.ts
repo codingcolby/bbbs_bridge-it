@@ -9,7 +9,7 @@ export default interface Profile {
   latitude: null | string;
   longitude: null | string;
   ems: null | string; //  enrollment & matching specialist or case manager
-  preference: null | string;
+  preference: null | object;
   interest: null | string;
   b_employer: null | string; //  Big specific, null on Little profile
   b_occupation: null | string; //  Big specific, null on Little profile
