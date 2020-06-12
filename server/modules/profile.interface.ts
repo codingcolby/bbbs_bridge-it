@@ -2,7 +2,7 @@ export default interface Profile {
   profile_type: number; //  1 = big, 2 = little, 3 = couple
   first_name: null | string;
   last_name: null | string;
-  sex: null | string;
+  sex: null | number;
   dob_or_age: null | string; // saving DOB for big
   race: null | string;
   address: null | string;

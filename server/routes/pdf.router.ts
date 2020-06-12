@@ -177,11 +177,14 @@ router.post(
 
         //
         // 2. Get the sex
-        profile.sex = chunker(
-          chunks.personal_info,
-          big_profile_head.sex_pre,
-          big_profile_head.sex_post
-        ).trim();
+        profile.sex =
+          chunker(
+            chunks.personal_info,
+            big_profile_head.sex_pre,
+            big_profile_head.sex_post
+          ).trim() === "Male"
+            ? 2
+            : 1;
 
         //
         // 3. Get the dob_or_age (this is a Big. We need age)
@@ -288,8 +291,64 @@ router.post(
         // set the preferences on the profile object
         profile.preference = preferences;
 
-        console.log(profile);
-        res.sendStatus(200);
+        //
+        // get the lat & lng from google, and the interests from twin word
+        //@ts-ignore
+        const key = encodeURIComponent(process.env.API_GMAP);
+        const address = encodeURIComponent(profile.address);
+        axios
+          .get(
+            `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${address}`
+          )
+          .then((response) => {
+            console.log(response.data);
+            profile.latitude = response.data.results![0].geometry.location.lat;
+            profile.longitude = response.data.results![0].geometry.location.lng;
+            console.log(profile);
+
+            // profile is built, save it to db
+            const queryText = `INSERT INTO "profile" ("profile_type", "first_name", "last_name", "sex", "dob_or_age", "race", "address", "latitude", "longitude", "ems", "summary", "preference", "interest", "l_parent", "l_parent_relationship_to_child", "b_employer", "b_occupation", "b_marital_status")
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18) RETURNING id;`;
+            const queryData = [
+              profile.profile_type,
+              profile.first_name,
+              profile.last_name,
+              profile.sex,
+              profile.dob_or_age,
+              profile.race,
+              profile.address,
+              profile.latitude,
+              profile.longitude,
+              profile.ems,
+              chunks,
+              profile.preference,
+              profile.interest,
+              profile.l_parent,
+              profile.l_parent_relationship_to_child,
+              profile.b_employer,
+              profile.b_marital_status,
+              profile.b_occupation,
+            ];
+            pool
+              .query(queryText, queryData)
+              .then((response) => {
+                console.log(response.rows);
+                try {
+                  res.send(response.rows[0]);
+                } catch (error) {
+                  throw "Err: no id returned from insert";
+                }
+              })
+              .catch((err) => {
+                console.log("Err in INSERT big");
+
+                console.log(err);
+                res.sendStatus(500);
+              });
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       });
     } catch (err) {
       console.log("err: no files on req.files", err);
