@@ -45,6 +45,17 @@ class App extends Component {
 							{/* Visiting localhost:3000/about will show the about page.
 
 
+
+  render() {
+    return (
+      <div className="maincontainer">
+        <Router>
+          <div>
+            <Nav />
+            <Switch>
+              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+              <Redirect exact from="/" to="/login" />
+              {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
 							<Route exact path="/about" component={AboutPage} />
 
