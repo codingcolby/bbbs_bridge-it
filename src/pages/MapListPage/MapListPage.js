@@ -6,9 +6,6 @@ import Map from "../../components/Map/MapList";
 import { Element } from "react-scroll";
 import * as geolib from "geolib";
 
-
-
-
 import {
   Button,
   Card,
@@ -66,7 +63,7 @@ class MapListPage extends Component {
 
   render() {
     const handleClick = () => {
-      this.props.history.push(`/profile/${id}`);
+      this.props.history.push(`/table`);
     };
 
     //gets id of selected profile
@@ -102,8 +99,9 @@ class MapListPage extends Component {
       return (
         <div key={index}>
           <h1>{item.first_name + " " + item.last_name}</h1>
-          <h3>{"Age: " + item.dob_or_age + " " + "Race: " + item.race}</h3>
-          <h3>{"Address: " + item.address}</h3>
+          <h3>Age: {item.dob_or_age}</h3>
+          <h3>Ethnicity: {item.race}</h3>
+          <h3>Address: {item.address}</h3>
         </div>
       );
     });
@@ -130,8 +128,9 @@ class MapListPage extends Component {
           <CardContent>
             <div>
               <h3>{item.first_name + " " + item.last_name}</h3>
-              <h4>{"Age: " + item.dob_or_age + " " + "Race: " + item.race}</h4>
-              <h4>{item.distance} miles</h4>
+              <h4>Age: {item.dob_or_age}</h4>
+              <h4>Ethnicity: {item.race}</h4>
+              <h4>Distance: {item.distance} miles</h4>
               <p>{item.summary}</p>
             </div>
           </CardContent>
@@ -160,7 +159,7 @@ class MapListPage extends Component {
                 onChange={this.handleSlider}
               />
 
-              <Card>
+              {/* <Card>
                 <CardContent>
                   <RadioGroup>
                     <FormControlLabel
@@ -173,13 +172,12 @@ class MapListPage extends Component {
                     />
                   </RadioGroup>
                 </CardContent>
-              </Card>
+              </Card> */}
               <Button variant="outlined" onClick={handleClick}>
-                Profile View
+                Match Table
               </Button>
             </Grid>
             <Grid item xs={12} sm={4} md={4}>
-
               <div>{bigProfile}</div>
               <Element
                 name="littles-list"
@@ -193,8 +191,6 @@ class MapListPage extends Component {
                 }}
               >
                 <div>{littlesList}</div>
-
-                      
               </Element>
             </Grid>
           </Grid>
