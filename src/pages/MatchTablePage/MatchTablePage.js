@@ -1,164 +1,179 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-import { withStyles, makeStyles } from "@material-ui/core/styles";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableContainer from "@material-ui/core/TableContainer";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import Paper from "@material-ui/core/Paper";
-import Button from "@material-ui/core/Button";
 import swal from "@sweetalert/with-react";
-import "../../components/styles/buttons.css";
+import "./Table.css";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    "& > *": {
-      margin: theme.spacing(1),
-    },
-  },
-  table: {
-    minWidth: 700,
-  },
-}));
+import { BottomNavigationAction } from "@material-ui/core";
+// import Button from "@material-ui/core/Button";
+// import { withStyles, makeStyles } from "@material-ui/core/styles";
+// import Table from "@material-ui/core/Table";
+// import TableBody from "@material-ui/core/TableBody";
+// import TableCell from "@material-ui/core/TableCell";
+// import TableContainer from "@material-ui/core/TableContainer";
+// import tablehea from "@material-ui/core/tablehea";
+// import tr from "@material-ui/core/tr";
+// import Paper from "@material-ui/core/Paper";
 
-const StyledTableCell = withStyles((theme) => ({
-  head: {
-    backgroundColor: "green",
-    color: theme.palette.common.white,
-  },
-  body: {
-    fontSize: 16,
-  },
-}))(TableCell);
+// const useStyles = makeStyles((theme) => ({
+// 	root: {
+// 		"& > *": {
+// 			margin: theme.spacing(72),
+// 		},
+// 	},
+// 	width: 90,
+// }));
 
-const StyledTableRow = withStyles((theme) => ({
-  root: {
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover,
-    },
-  },
-  TableHead: {
-    fontSize: 20,
-  },
-}))(TableRow);
+// const td = withStyles((theme) => ({
+// 	head: {
+// 		backgroundColor: "green",
+// 		color: theme.palette.common.white,
+// 	},
+// 	body: {
+// 		fontSize: 16,
+// 	},
+// }))(TableCell);
+
+// const Styledtr = withStyles((theme) => ({
+// 	root: {
+// 		"&:nth-of-type(odd)": {
+// 			backgroundColor: theme.palette.action.hover,
+// 		},
+// 	},
+// 	tablehea: {
+// 		fontSize: 20,
+// 	},
+// }))(tr);
 
 class MatchTablePage extends Component {
-  componentDidMount() {
-    this.props.dispatch({ type: "FETCH_TABLE" });
-  }
+	componentDidMount() {
+		this.props.dispatch({ type: "FETCH_TABLE" });
+	}
 
-  onClick = () => {
-    swal({
-      text:
-        "Please confirm your Match selection below, or cancel and return to the Match Table",
-      buttons: {
-        catch: {
-          text: "It's a Match!",
-          value: "match",
-        },
+	onClick = () => {
+		swal({
+			text:
+				"Please confirm your Match selection below, or cancel and return to the Match Table",
+			buttons: {
+				catch: {
+					text: "It's a Match!",
+					value: "match",
+					color: "green",
+				},
 
-        nomatch: {
-          text: "No Match",
-        },
-        cancel: "Cancel",
-      },
-    }).then((value) => {
-      switch (value) {
-        case "nomatch":
-          swal(
-            "So many Littles, so many Bigs",
-            "You'll find a match soon!",
-            "error"
-          );
-          break;
-        case "match":
-          swal(
-            "Hooray",
-            "Congratulations on a successful Big/Little match!",
-            "success"
-          );
-          break;
+				nomatch: {
+					text: "No Match",
+				},
+				cancel: "Cancel",
+			},
+		}).then((value) => {
+			switch (value) {
+				case "nomatch":
+					swal(
+						"So many Littles, so many Bigs",
+						"You'll find a match soon!",
+						"error"
+					);
+					break;
+				case "match":
+					swal(
+						"Hooray",
+						"Congratulations on a successful Big/Little match!",
+						"success"
+					);
+					break;
 
-        default:
-          swal(
-            "No changes made",
-            "You can safely return to the Match Table and make your selection",
-            "info"
-          );
-      }
-    });
-  };
+				default:
+					swal(
+						"No changes made",
+						"You can safely return to the Match Table and make your selection",
+						"info"
+					);
+			}
+		});
+	};
 
-  render() {
-    console.log(this.props.store);
+	render() {
+		// const id = Number(this.props.match.params.id);
+		// const table = this.props.store.table;
 
-    // TEMP DATA FOR DEVELOPMENT
-    // function createData(bocname, lname, matchNY) {
-    // 	return { bocname, lname, matchNY };
-    // }
+		// const tableBig = table.filter((item, index) => {
+		// 	return item.id === id, item.first_name, item.last_name;
+		// });
 
-    // const rows = [
-    // 	createData("Temp Data - Sam Jones", "Jason Twinada"),
-    // 	createData("Temp Data - Sam Jones", "Demonta Miller"),
+		// const tableLittles = table.filter((item, index) => {
+		// 	return item.id === id, item.first_name, item.last_name;
+		// });
 
-    // 	createData("Temp Data - Wilma Franklin", "Maria Torres"),
-    // 	createData("Temp Data - Wilma Franklin", "Kalinda Jones"),
-
-    // 	createData("Temp Data - Michael and Tamara Ross", "Jason Twinada"),
-    // 	createData("Temp Data - Michael and Tamara Ross", "Demonta Miller"),
-    // 	createData("Temp Data - Michael and Tamara Ross", "Maria Torres"),
-    // 	createData("Temp Data - Michael and Tamara Ross", "Kalinda Jones"),
-    // ];
-    // END TEMP DATA FOR DEVELOPMENT
-
-    return (
-      <div>
-        <h2>Match Table Page</h2>
-        <TableContainer component={Paper}>
-          <Table className={useStyles.table} aria-label="customized table">
-            <TableHead>
-              <TableRow>
-                <StyledTableCell>Big or Couple Name</StyledTableCell>
-                <StyledTableCell>Little Name</StyledTableCell>
-                <StyledTableCell>No Match / Match</StyledTableCell>
-              </TableRow>
-            </TableHead>
-
-            <TableBody>
-              {/* 				
-              {this.props.store.matchtableReducer.map((item, index) => (
-                <StyledTableRow>
-                  <StyledTableCell component="th" scope="row" key={index}>
-                    {item.first_name}
-                  </StyledTableCell>
-                  <StyledTableCell>{item.last_name}</StyledTableCell>
-
-                  <StyledTableCell>
-                    <div className={useStyles.root}>
-                      <Button onClick={this.onClick} variant="outlined">
-                        No Match
-                      </Button>{" "}
-                      &nbsp; &nbsp;
-                      <Button
-                        onClick={this.onClick}
-                        variant="outlined"
-                        color="primary"
-                      >
-                        Match
-                      </Button>
-                    </div>
-                  </StyledTableCell>
-                </StyledTableRow>
-              ))} */}
-            </TableBody>
-          </Table>
-        </TableContainer>
-      </div>
-    );
-  }
+		return (
+			<div>
+				<h2>Match Selection Table</h2>
+				<table className="tablecontainer">
+					<thead>
+						<tr>
+							<th>Big or Couple Name</th>
+							<th>Little Name</th>
+							<th className="centered">Match / No Match</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Sam Jones</td>
+							<td>Jason Twinada</td>
+							{/* {tableBig.map((item, index) => {
+									return (
+										<td key={index}>
+											{item.first_name + " " + item.last_name}
+										</td>
+									);
+								})}
+								{tableLittles.map((item, index) => {
+									return (
+										<td key={index}>
+											{item.first_name + " " + item.last_name}
+										</td>
+									);
+								})} */}
+							<td className="centered">
+								<button
+									onClick={this.onClick}
+									variant="outlined"
+									className="matchselect">
+									Select Match Status
+								</button>
+							</td>
+						</tr>
+						<tr>
+							<td>Sam Jones</td>
+							<td>Demonta Miller</td>
+							{/* {tableBig.map((item, index) => {
+									return (
+										<td key={index}>
+											{item.first_name + " " + item.last_name}
+										</td>
+									);
+								})}
+								{tableLittles.map((item, index) => {
+									return (
+										<td key={index}>
+											{item.first_name + " " + item.last_name}
+										</td>
+									);
+								})} */}
+							<td className="centered">
+								<button
+									onClick={this.onClick}
+									variant="outlined"
+									className="matchselect">
+									Select Match Status
+								</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		);
+	}
 }
 
 export default connect(mapStoreToProps)(MatchTablePage);

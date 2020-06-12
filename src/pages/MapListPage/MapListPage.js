@@ -1,98 +1,203 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-import Map from "../../components/Map/Map";
+
+import Map from "../../components/Map/MapList";
+import { Element } from "react-scroll";
+import * as geolib from "geolib";
+
 import {
-	Button,
-	Card,
-	CardContent,
-	Checkbox,
-	Container,
-	FormControlLabel,
-	FormGroup,
-	Grid,
-	Slider,
-	withStyles,
-	createStyles,
+  Button,
+  Card,
+  CardContent,
+  Radio,
+  Container,
+  FormControlLabel,
+  RadioGroup,
+  Grid,
+  Slider,
 } from "@material-ui/core";
 
-const marks = [
-	{
-		value: 5,
-		label: "5",
-	},
-	{
-		value: 10,
-		label: "10",
-	},
-	{
-		value: 15,
-		label: "15",
-	},
-	{
-		value: 20,
-		label: "20",
-	},
-];
+// const marks = [
+//   {
+//     value: 5,
+//     label: "5",
+//   },
+//   {
+//     value: 10,
+//     label: "10",
+//   },
+//   {
+//     value: 15,
+//     label: "15",
+//   },
+//   {
+//     value: 20,
+//     label: "20",
+//   },
+// ];
 
 class MapListPage extends Component {
-	valuetext = (value) => {
-		return `${value}`;
-	};
+  state = {
+    sliderValue: "",
+  };
 
-	valueLabelFormat = (value) => {
-		return marks.findIndex((mark) => mark.value === value) + 1;
-	};
+  componentDidMount() {
+    this.props.dispatch({
+      type: "FETCH_PROFILES",
+    });
+  }
+  // valuetext = (value) => {
+  //   return `${value}`;
+  // };
 
-	render() {
-		const handleClick = () => {
-			this.props.history.push("/profile");
-		};
+  // valueLabelFormat = (value) => {
+  //   return marks.findIndex((mark) => mark.value === value) + 1;
+  // };
 
-		return (
-			<div>
-				<Container maxWidth={false}>
-					<Grid container spacing={2}>
-						<Grid item xs={12} sm={8} md={8}>
-							<Map />
-							<Slider
-								defaultValue={5}
-								valueLabelFormat={this.valueLabelFormat}
-								getAriaValueText={this.valuetext}
-								aria-labelledby="discrete-slider-restrict"
-								step={null}
-								valueLabelDisplay="auto"
-								marks={marks}
-							/>
-							<Card>
-								<CardContent>
-									<FormGroup>
-										<FormControlLabel
-											control={<Checkbox name="Interests" />}
-											label="Interests"
-										/>
-										<FormControlLabel
-											control={<Checkbox name="Preferences" />}
-											label="Preferences"
-										/>
-									</FormGroup>
-								</CardContent>
-							</Card>
-							<Button variant="outlined" onClick={handleClick}>
-								Profile View
-							</Button>
-						</Grid>
-						<Grid item xs={12} sm={4} md={4}>
-							<h1>Big Name</h1>
-							<Card>
-								<CardContent>Littles name</CardContent>
-							</Card>
-						</Grid>
-					</Grid>
-				</Container>
-			</div>
-		);
-	}
+  handleSlider = (event) => {
+    this.setState({
+      sliderValue: event.target.value,
+    });
+  };
+
+  render() {
+    const handleClick = () => {
+      this.props.history.push(`/table`);
+    };
+
+    //gets id of selected profile
+    const id = Number(this.props.match.params.id);
+
+    //assigns profile reducer data to profiles
+    const profiles = this.props.store.profiles;
+
+    //returns single selected profile
+    const profileFilter = profiles.filter((item, index) => {
+      return item.id === id;
+    });
+
+    //returns selected profile sex
+    const profileSex = profileFilter.map((item, index) => {
+      return item.sex;
+    });
+
+    //returns selected profile coordinates
+    const profileCoordinates = profileFilter.map((item, index) => {
+      return { latitude: item.latitude, longitude: item.longitude };
+    });
+
+    const coordinates = profileCoordinates[0] || { latitude: 0, longitude: 0 };
+
+    //returns little profiles that match selected profile sex
+    const profilesLittlesFilter = profiles.filter((item, index) => {
+      return item.profile_type === 2 && item.sex === Number(profileSex);
+    });
+
+    //renders selected profile information
+    const bigProfile = profileFilter.map((item, index) => {
+      return (
+        <div key={index}>
+          <h1>{item.first_name + " " + item.last_name}</h1>
+          <h3>Age: {item.dob_or_age}</h3>
+          <h3>Ethnicity: {item.race}</h3>
+          <h3>Address: {item.address}</h3>
+        </div>
+      );
+    });
+
+    profilesLittlesFilter.forEach((element, index) => {
+      element.distance = geolib
+        .convertDistance(
+          geolib.getPreciseDistance(
+            {
+              latitude: coordinates.latitude,
+              longitude: coordinates.longitude,
+            },
+            { latitude: element.latitude, longitude: element.longitude }
+          ),
+          "mi"
+        )
+        .toFixed(2);
+    });
+
+    //renders list of filtered littles as cards
+    const littlesList = profilesLittlesFilter.map((item, index) => {
+      return (
+        <Card key={index}>
+          <CardContent>
+            <div>
+              <h3>{item.first_name + " " + item.last_name}</h3>
+              <h4>Age: {item.dob_or_age}</h4>
+              <h4>Ethnicity: {item.race}</h4>
+              <h4>Distance: {item.distance} miles</h4>
+              <p>{item.summary}</p>
+            </div>
+          </CardContent>
+        </Card>
+      );
+    });
+
+    return (
+      <div>
+        <Container maxWidth={false}>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={8} md={8}>
+              <Map
+                selectedProfile={profileFilter}
+                radius={this.state.sliderValue}
+                selectedLittles={profilesLittlesFilter}
+              />
+              <Slider
+                defaultValue={5}
+                aria-labelledby="discrete-slider-restrict"
+                step={2.5}
+                valueLabelDisplay="on"
+                marks={true}
+                min={0}
+                max={20}
+                onChange={this.handleSlider}
+              />
+
+              {/* <Card>
+                <CardContent>
+                  <RadioGroup>
+                    <FormControlLabel
+                      control={<Radio name="Interests" />}
+                      label="Interests"
+                    />
+                    <FormControlLabel
+                      control={<Radio name="Preferences" />}
+                      label="Preferences"
+                    />
+                  </RadioGroup>
+                </CardContent>
+              </Card> */}
+              <Button variant="outlined" onClick={handleClick}>
+                Match Table
+              </Button>
+            </Grid>
+            <Grid item xs={12} sm={4} md={4}>
+              <div>{bigProfile}</div>
+              <Element
+                name="littles-list"
+                className="element"
+                style={{
+                  position: "relative",
+                  height: "65vh",
+                  overflow: "scroll",
+                  marginBottom: "100px",
+                  border: "solid 4px black",
+                }}
+              >
+                <div>{littlesList}</div>
+              </Element>
+            </Grid>
+          </Grid>
+        </Container>
+      </div>
+    );
+  }
 }
 
 export default connect(mapStoreToProps)(MapListPage);

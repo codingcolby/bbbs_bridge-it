@@ -14,7 +14,6 @@ function* fetchProfiles() {
     // If a user is logged in, this will return their information
     // from the server session (req.user)
     const response = yield axios.get("/api/user/profiles");
-    console.log("RESPONSE.DATA", response.data);
 
     yield put({
       type: "SET_PROFILES",

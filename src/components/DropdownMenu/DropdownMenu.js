@@ -1,9 +1,26 @@
 import React, { useState } from "react";
 import { Menu, MenuItem, ButtonBase } from "@material-ui/core";
 import { useHistory } from "react-router";
+import { makeStyles, createStyles } from "@material-ui/core/styles";
+import { connect } from "react-redux";
+
+const useStyles = makeStyles((theme) => {
+  return createStyles({
+    logo: {
+      padding: "20px 24px",
+      borderRadius: "100%",
+      backgroundColor: "#ffffff",
+      "&:hover": {
+        backgroundColor: "#fff",
+      },
+    },
+  });
+});
 
 function DropdownMenu(props) {
   const [anchorEl, setAnchorEl] = useState(null);
+
+  const classes = useStyles();
 
   const history = useHistory();
 
@@ -27,12 +44,16 @@ function DropdownMenu(props) {
     history.push({ pathname: "/map" });
   };
 
+  const logout = (event) => {
+    props.dispatch({ type: "LOGOUT" });
+  };
+
   // const logout = (event) => {
   //   history.push({ pathname: "/login" });
   // };
   return (
     <div>
-      <ButtonBase onClick={handleClick}>
+      <ButtonBase onClick={handleClick} className={classes.logo}>
         <img src="images/ButtonLogo.png" alt="logo" height="50" width="50" />
       </ButtonBase>
       <Menu
@@ -51,12 +72,12 @@ function DropdownMenu(props) {
         }}
       >
         <MenuItem onClick={search}>Search</MenuItem>
-        <MenuItem onClick={upload}>Upload</MenuItem>
         <MenuItem onClick={map}>Map</MenuItem>
-        <MenuItem>Logout</MenuItem>
+        <MenuItem onClick={upload}>Upload</MenuItem>
+        <MenuItem onClick={logout}>Logout</MenuItem>
       </Menu>
     </div>
   );
 }
 
-export default DropdownMenu;
+export default connect()(DropdownMenu);

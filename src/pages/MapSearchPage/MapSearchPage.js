@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import Map from "../../components/Map/Map";
-import Marker from "../../components/Map/Marker";
 
 import {
   Button,
-  Checkbox,
+  // Checkbox,
   FormControlLabel,
-  FormGroup,
+  // FormGroup,
   withStyles,
   createStyles,
+  Radio,
+  RadioGroup,
 } from "@material-ui/core";
 
 const customStyles = (theme) =>
@@ -25,19 +26,35 @@ const customStyles = (theme) =>
   });
 
 class MapSearchPage extends Component {
+  state = {
+    value: "",
+  };
+
   componentDidMount() {
     this.props.dispatch({
       type: "FETCH_PROFILES",
     });
   }
+
   render() {
     const { classes } = this.props;
 
-    const profiles = this.props.store.profiles;
-    console.log("Profiles", profiles);
-
     const handleClick = () => {
       this.props.history.push("/search");
+    };
+
+    const handleChange = (event) => {
+      this.setState(
+        {
+          value: event.target.value,
+        },
+        () => {
+          this.props.dispatch({
+            type: "SET_CHECKED",
+            payload: this.state.value,
+          });
+        }
+      );
     };
 
     return (
@@ -45,25 +62,26 @@ class MapSearchPage extends Component {
         <h1>All Unmatched Bigs and Littles</h1>
         <br />
         <div>
-          <Map>
-            <Marker lat={39.0756894} lng={-94.5305843} />
-          </Map>
+          <Map />
         </div>
         <div className={classes.position}>
-          <FormGroup row>
+          <RadioGroup onChange={handleChange} row>
             <FormControlLabel
-              control={<Checkbox name="checkedFemale" />}
+              control={<Radio name="checkedFemale" />}
               label="Female"
+              value="female"
             />
             <FormControlLabel
-              control={<Checkbox name="checkedMale" />}
+              control={<Radio name="checkedMale" />}
               label="Male"
+              value="male"
             />
             <FormControlLabel
-              control={<Checkbox name="checkedCouple" />}
+              control={<Radio name="checkedCouple" />}
               label="Couple"
+              value="couple"
             />
-          </FormGroup>
+          </RadioGroup>
         </div>
         <div>
           <Button variant="outlined" onClick={handleClick}>

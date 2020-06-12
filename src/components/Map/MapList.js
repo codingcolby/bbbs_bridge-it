@@ -5,7 +5,7 @@ import GoogleMapReact from "google-map-react";
 import { withRouter } from "react-router-dom";
 import Marker from "./Marker";
 
-class Map extends Component {
+class MapList extends Component {
   componentDidMount() {}
   static defaultProps = {
     center: {
@@ -15,7 +15,7 @@ class Map extends Component {
     zoom: 10,
   };
   render() {
-    const profiles = this.props.store.profiles;
+    const profiles = this.props.selectedLittles;
 
     let checked = this.props.store.checked;
 
@@ -32,8 +32,15 @@ class Map extends Component {
     }
 
     const profilesFiltered = profiles.filter((item, index) => {
-      return item.sex === checked;
+      const selected = this.props.selectedProfile;
+      //   console.log("distance:", selected[profile_type]);
+      return (
+        selected.sex === item.sex &&
+        selected.profile_type !== item.profile_type &&
+        profiles.distance <= this.props.radius
+      );
     });
+    console.log("PROFILES LITTLES:", profilesFiltered);
 
     return (
       <div>
@@ -61,4 +68,4 @@ class Map extends Component {
     );
   }
 }
-export default withRouter(connect(mapStoreToProps)(Map));
+export default withRouter(connect(mapStoreToProps)(MapList));
