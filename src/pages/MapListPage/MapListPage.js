@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
-import Map from "../../components/Map/Map";
+import Map from "../../components/Map/MapList";
 import { Element } from "react-scroll";
 import * as geolib from "geolib";
 
@@ -17,37 +17,47 @@ import {
   Slider,
 } from "@material-ui/core";
 
-const marks = [
-  {
-    value: 5,
-    label: "5",
-  },
-  {
-    value: 10,
-    label: "10",
-  },
-  {
-    value: 15,
-    label: "15",
-  },
-  {
-    value: 20,
-    label: "20",
-  },
-];
+// const marks = [
+//   {
+//     value: 5,
+//     label: "5",
+//   },
+//   {
+//     value: 10,
+//     label: "10",
+//   },
+//   {
+//     value: 15,
+//     label: "15",
+//   },
+//   {
+//     value: 20,
+//     label: "20",
+//   },
+// ];
 
 class MapListPage extends Component {
+  state = {
+    sliderValue: "",
+  };
+
   componentDidMount() {
     this.props.dispatch({
       type: "FETCH_PROFILES",
     });
   }
-  valuetext = (value) => {
-    return `${value}`;
-  };
+  // valuetext = (value) => {
+  //   return `${value}`;
+  // };
 
-  valueLabelFormat = (value) => {
-    return marks.findIndex((mark) => mark.value === value) + 1;
+  // valueLabelFormat = (value) => {
+  //   return marks.findIndex((mark) => mark.value === value) + 1;
+  // };
+
+  handleSlider = (event) => {
+    this.setState({
+      sliderValue: event.target.value,
+    });
   };
 
   render() {
@@ -76,16 +86,12 @@ class MapListPage extends Component {
       return { latitude: item.latitude, longitude: item.longitude };
     });
 
-    const coordinates = profileCoordinates[0];
-
-    console.log("Profile Coordinates", coordinates);
+    const coordinates = profileCoordinates[0] || { latitude: 0, longitude: 0 };
 
     //returns little profiles that match selected profile sex
     const profilesLittlesFilter = profiles.filter((item, index) => {
       return item.profile_type === 2 && item.sex === Number(profileSex);
     });
-
-    const miles = geolib.convertDistance(1828, "mi");
 
     //renders selected profile information
     const bigProfile = profileFilter.map((item, index) => {
@@ -98,6 +104,21 @@ class MapListPage extends Component {
       );
     });
 
+    profilesLittlesFilter.forEach((element, index) => {
+      element.distance = geolib
+        .convertDistance(
+          geolib.getPreciseDistance(
+            {
+              latitude: coordinates.latitude,
+              longitude: coordinates.longitude,
+            },
+            { latitude: element.latitude, longitude: element.longitude }
+          ),
+          "mi"
+        )
+        .toFixed(2);
+    });
+
     //renders list of filtered littles as cards
     const littlesList = profilesLittlesFilter.map((item, index) => {
       return (
@@ -106,13 +127,7 @@ class MapListPage extends Component {
             <div>
               <h3>{item.first_name + " " + item.last_name}</h3>
               <h4>{"Age: " + item.dob_or_age + " " + "Race: " + item.race}</h4>
-              <h4>
-                {geolib.getPreciseDistance(
-                  { latitude: 39.0560072, longitude: -94.5886469 },
-                  { latitude: item.latitude, longitude: item.longitude }
-                )}{" "}
-                miles
-              </h4>
+              <h4>{item.distance} miles</h4>
               <p>{item.summary}</p>
             </div>
           </CardContent>
@@ -120,21 +135,25 @@ class MapListPage extends Component {
       );
     });
 
-    console.log("DISTANCE:", miles);
     return (
       <div>
         <Container maxWidth={false}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={8} md={8}>
-              <Map />
+              <Map
+                selectedProfile={profileFilter}
+                radius={this.state.sliderValue}
+                selectedLittles={profilesLittlesFilter}
+              />
               <Slider
                 defaultValue={5}
-                valueLabelFormat={this.valueLabelFormat}
-                getAriaValueText={this.valuetext}
                 aria-labelledby="discrete-slider-restrict"
-                step={null}
-                valueLabelDisplay="auto"
-                marks={marks}
+                step={2.5}
+                valueLabelDisplay="on"
+                marks={true}
+                min={0}
+                max={20}
+                onChange={this.handleSlider}
               />
 
               <Card>
@@ -162,7 +181,7 @@ class MapListPage extends Component {
                 className="element"
                 style={{
                   position: "relative",
-                  height: "540px",
+                  height: "65vh",
                   overflow: "scroll",
                   marginBottom: "100px",
                   border: "solid 4px black",
