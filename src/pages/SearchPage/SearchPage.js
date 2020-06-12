@@ -97,7 +97,7 @@ class SearchPage extends Component {
 
   render() {
     const { classes } = this.props;
-    const profiles = Array.from(this.props.store.profiles);
+    const profiles = this.props.store.profiles;
     const profilesFilter = profiles.filter((item, index) => {
       const profileName = item.first_name + " " + item.last_name;
       const lowerProfileName = profileName.toLowerCase();

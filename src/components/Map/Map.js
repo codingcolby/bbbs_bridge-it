@@ -16,10 +16,24 @@ class Map extends Component {
   };
   render() {
     const profiles = this.props.store.profiles;
-    const renderThesePins = profiles.map((item, index) => {
-      return <Marker key={index} lat={item.latitude} lng={item.longitude} />;
+
+    let checked = this.props.store.checked;
+
+    if (checked) {
+      if (checked === "female") {
+        checked = 1;
+      } else if (checked === "male") {
+        checked = 2;
+      } else if (checked === "couple") {
+        checked = 3;
+      } else {
+        checked = this.props.store.checked;
+      }
+    }
+
+    const profilesFiltered = profiles.filter((item, index) => {
+      return item.sex === checked;
     });
-    console.log(profiles);
 
     return (
       <div>
@@ -29,7 +43,18 @@ class Map extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            {renderThesePins}
+            {profilesFiltered.map((item, index) => {
+              return (
+                <Marker
+                  key={index}
+                  lat={item.latitude}
+                  lng={item.longitude}
+                  name={item.first_name + " " + item.last_name}
+                  type={item.profile_type}
+                  id={item.id}
+                />
+              );
+            })}
           </GoogleMapReact>
         </div>
       </div>
