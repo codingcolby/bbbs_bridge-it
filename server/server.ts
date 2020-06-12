@@ -28,7 +28,7 @@ app.use(passport.session());
 /* Routes */
 app.use("/api/user", userRouter);
 app.use("/api/pdf", pdfRouter);
-app.use("/api/table", matchtableRouter);
+app.use("/api/table", tableRouter);
 
 // Serve static files
 app.use(express.static("build"));
