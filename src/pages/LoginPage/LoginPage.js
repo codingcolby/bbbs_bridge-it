@@ -134,6 +134,7 @@ class LoginPage extends Component {
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
                       <Button
+                        round
                         color="success"
                         type="submit"
                         name="submit"
