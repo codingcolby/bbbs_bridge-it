@@ -4,15 +4,16 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import Map from "../../components/Map/Map";
 
 import {
-  Button,
-  // Checkbox,
   FormControlLabel,
-  // FormGroup,
   withStyles,
   createStyles,
   Radio,
   RadioGroup,
 } from "@material-ui/core";
+
+import Button from "../../material-kit/components/CustomButtons/Button.js";
+
+import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
 
 const customStyles = (theme) =>
   createStyles({
@@ -23,6 +24,7 @@ const customStyles = (theme) =>
       display: "inline-block",
       padding: "15px",
     },
+    ...styles,
   });
 
 class MapSearchPage extends Component {
@@ -59,11 +61,8 @@ class MapSearchPage extends Component {
 
     return (
       <div className={classes.root}>
-        <h1>All Unmatched Bigs and Littles</h1>
-        <br />
-        <div>
-          <Map />
-        </div>
+        <Map />
+
         <div className={classes.position}>
           <RadioGroup onChange={handleChange} row>
             <FormControlLabel
@@ -83,8 +82,15 @@ class MapSearchPage extends Component {
             />
           </RadioGroup>
         </div>
+
         <div>
-          <Button variant="outlined" onClick={handleClick}>
+          <Button
+            round
+            color="success"
+            size="lg"
+            onClick={handleClick}
+            style={{ marginBottom: "50px" }}
+          >
             Search By Name
           </Button>
         </div>
