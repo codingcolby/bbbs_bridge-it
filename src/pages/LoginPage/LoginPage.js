@@ -6,9 +6,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import LockIcon from "@material-ui/icons/Lock";
 import Email from "@material-ui/icons/Email";
 import {
-  Button,
-  Container,
-  Paper,
+  FormControl,
+  Input,
+  InputLabel,
   withStyles,
   createStyles,
 } from "@material-ui/core";
@@ -21,14 +21,16 @@ import Card from "../../material-kit/components/Card/Card.js";
 import CardBody from "../../material-kit/components/Card/CardBody.js";
 import CardHeader from "../../material-kit/components/Card/CardHeader.js";
 import CardFooter from "../../material-kit/components/Card/CardFooter.js";
-import CustomInput from "../../material-kit/components/CustomInput/CustomInput.js";
+import Button from "../../material-kit/components/CustomButtons/Button.js";
 import image from "../../material-kit/assets/img/kc.jpg";
 
 import styles from "../../material-kit/assets/jss/material-kit-react/views/loginPage.js";
+import inputStyles from "../../material-kit/assets/jss/material-kit-react/components/customInputStyle.js";
 
 const customStyles = (theme) =>
   createStyles({
     ...styles,
+    ...inputStyles,
   });
 
 class LoginPage extends Component {
@@ -65,49 +67,6 @@ class LoginPage extends Component {
 
     return (
       <div>
-        {/* {this.props.store.errors.loginMessage && (
-          <h2 className="alert" role="alert">
-            {this.props.store.errors.loginMessage}
-          </h2>
-        )}
-
-        <center>
-          <Paper>
-            <Container>
-              <form onSubmit={this.login}>
-                <h1 className={classes.font}>Login</h1>
-                <div>
-                  <label htmlFor="email">
-                    Email:
-                    <input
-                      type="text"
-                      name="email"
-                      value={this.state.email}
-                      onChange={this.handleInputChangeFor("email")}
-                    />
-                  </label>
-                </div>
-                <div>
-                  <label htmlFor="password">
-                    Password:
-                    <input
-                      type="password"
-                      name="password"
-                      value={this.state.password}
-                      onChange={this.handleInputChangeFor("password")}
-                    />
-                  </label>
-                </div>
-                <div>
-                  <Button type="submit" name="submit" value="Log In">
-                    Sign In
-                  </Button>
-                </div>
-              </form>
-            </Container>
-          </Paper>
-        </center> */}
-        {/* // <div> */}
         <div
           className={classes.pageHeader}
           style={{
@@ -131,49 +90,56 @@ class LoginPage extends Component {
                     </CardHeader>
 
                     <CardBody>
-                      <CustomInput
-                        type="text"
-                        value={this.state.email}
-                        onChange={this.handleInputChangeFor("email")}
-                        labelText="Email..."
-                        id="email"
-                        name="email"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          endAdornment: (
+                      <FormControl
+                        fullWidth={true}
+                        style={{ marginBottom: "20px" }}
+                      >
+                        <InputLabel htmlFor="email">Email...</InputLabel>
+                        <Input
+                          type="text"
+                          value={this.state.email}
+                          onChange={this.handleInputChangeFor("email")}
+                          id="email"
+                          name="email"
+                          fullWidth={true}
+                          endAdornment={
                             <InputAdornment position="end">
                               <Email className={classes.inputIconsColor} />
                             </InputAdornment>
-                          ),
-                        }}
-                      />
-                      <CustomInput
-                        type="password"
-                        value={this.state.password}
-                        onChange={this.handleInputChangeFor("password")}
-                        labelText="Password"
-                        id="pass"
-                        name="password"
-                        formControlProps={{
-                          fullWidth: true,
-                        }}
-                        inputProps={{
-                          type: "password",
-                          endAdornment: (
+                          }
+                        />
+                      </FormControl>
+                      <br />
+                      <FormControl
+                        fullWidth={true}
+                        style={{ marginBottom: "20px" }}
+                      >
+                        <InputLabel htmlFor="pass">Password</InputLabel>
+                        <Input
+                          type="password"
+                          value={this.state.password}
+                          onChange={this.handleInputChangeFor("password")}
+                          labelText="Password"
+                          id="pass"
+                          name="password"
+                          endAdornment={
                             <InputAdornment position="end">
                               <LockIcon className={classes.inputIconsColor}>
                                 lock_outline
                               </LockIcon>
                             </InputAdornment>
-                          ),
-                          autoComplete: "off",
-                        }}
-                      />
+                          }
+                        />
+                      </FormControl>
                     </CardBody>
                     <CardFooter className={classes.cardFooter}>
-                      <Button type="submit" name="submit" value="Log In">
+                      <Button
+                        color="success"
+                        type="submit"
+                        name="submit"
+                        value="Log In"
+                        style={{ marginBottom: "20px" }}
+                      >
                         Sign In
                       </Button>
                     </CardFooter>
@@ -182,6 +148,7 @@ class LoginPage extends Component {
               </GridItem>
             </GridContainer>
           </div>
+          <Footer whiteFont />
         </div>
       </div>
     );
