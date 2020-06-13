@@ -6,6 +6,7 @@ import * as big_pdf_head from "../constants/headers/pdf.big.json";
 import * as big_profile_head from "../constants/headers/profile.big.json";
 import * as big_preferences_head from "../constants/headers/preferences.big.json";
 import chunker from "../modules/chunker";
+import bigSlimmer from "../modules/big.slimmer";
 import Profile from "../modules/profile.interface";
 import BigPreferences from "../modules/big.preferences.interface";
 import bigPreferenceChecker from "../modules/big-preference-checker";
@@ -291,8 +292,11 @@ router.post(
         // set the preferences on the profile object
         profile.preference = preferences;
 
+        // slim the summary to cm recommendation
+        const recommendation = bigSlimmer(chunks.cm_match_recommendation);
+
         //
-        // get the lat & lng from google, and the interests from twin word
+        // get the lat & lng from google
         //@ts-ignore
         const key = encodeURIComponent(process.env.API_GMAP);
         const address = encodeURIComponent(profile.address);
@@ -320,7 +324,7 @@ router.post(
               profile.latitude,
               profile.longitude,
               profile.ems,
-              chunks,
+              recommendation,
               profile.preference,
               profile.interest,
               profile.l_parent,

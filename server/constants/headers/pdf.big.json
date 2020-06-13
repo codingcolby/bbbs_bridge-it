@@ -13,5 +13,6 @@
   "authorities": "AUTHORITIES (DUI/DWI, moving violations, accidents, suspensions/revocations, etc.):",
   "match_expectations_and_preferences": "MATCH EXPECTATIONS & PREFERENCES:",
   "cm_match_recommendation": "CM MATCH RECOMMENDATION",
+  "cm_match_recommendation_helper": "sentences required):",
   "last_header": "CM Signature:"
 }
