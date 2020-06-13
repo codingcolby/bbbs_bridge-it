@@ -28,7 +28,7 @@ import SectionLogin from "./Sections/SectionLogin.js";
 import SectionExamples from "./Sections/SectionExamples.js";
 import SectionDownload from "./Sections/SectionDownload.js";
 
-import styles from "assets/jss/material-kit-react/views/components.js";
+import styles from "../../assets/jss/material-kit-react/views/components.js";
 
 const useStyles = makeStyles(styles);
 
@@ -44,11 +44,11 @@ export default function Components(props) {
         color="transparent"
         changeColorOnScroll={{
           height: 400,
-          color: "white"
+          color: "white",
         }}
         {...rest}
       />
-      <Parallax image={require("assets/img/bg4.jpg")}>
+      <Parallax image={require("../../assets/img/bg4.jpg")}>
         <div className={classes.container}>
           <GridContainer>
             <GridItem>

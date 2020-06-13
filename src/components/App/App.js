@@ -12,7 +12,7 @@ import Nav from "../Nav/Nav";
 import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
+// PAGE COMPONENTS
 import AboutPage from "../AboutPage/AboutPage";
 import AdminPage from "../../pages/AdminPage/AdminPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -28,6 +28,12 @@ import UploadPage from "../../pages/UploadPage/UploadPage";
 
 import "./App.css";
 
+// MATERIAL-UI KIT PAGES
+import KitComponents from "../../material-kit/views/Components/Components.js";
+import KitLandingPage from "../../material-kit/views/LandingPage/LandingPage.js";
+import KitProfilePage from "../../material-kit/views/ProfilePage/ProfilePage.js";
+import KitLoginPage from "../../material-kit/views/LoginPage/LoginPage.js";
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: "FETCH_USER" });
@@ -41,24 +47,10 @@ class App extends Component {
             <Nav />
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-
-              {/* Visiting localhost:3000/about will show the about page.
-
-
-
-  render() {
-    return (
-      <div className="maincontainer">
-        <Router>
-          <div>
-            <Nav />
-            <Switch>
-              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
               <Redirect exact from="/" to="/login" />
               {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
               <Route exact path="/about" component={AboutPage} />
-
               <Route exact path="/home" component={LandingPage} />
               <Route exact path="/map" component={MapSearchPage} />
               <Route exact path="/list/:id" component={MapListPage} />

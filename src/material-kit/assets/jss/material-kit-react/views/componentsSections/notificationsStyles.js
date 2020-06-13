@@ -1,4 +1,7 @@
-import { container, title } from "assets/jss/material-kit-react.js";
+import {
+  container,
+  title,
+} from "../../../../../assets/jss/material-kit-react.js";
 
 const notificationsStyles = {
   section: {
@@ -6,15 +9,15 @@ const notificationsStyles = {
     display: "block",
     width: "100%",
     position: "relative",
-    padding: "0"
+    padding: "0",
   },
   title: {
     ...title,
     marginTop: "30px",
     minHeight: "32px",
-    textDecoration: "none"
+    textDecoration: "none",
   },
-  container
+  container,
 };
 
 export default notificationsStyles;
