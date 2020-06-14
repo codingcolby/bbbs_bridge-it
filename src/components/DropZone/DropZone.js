@@ -25,6 +25,13 @@ function DropZone(props) {
       f.restart();
     });
   };
+
+  // starts the review process on successful upload
+  const startReview = (fileWithMeta, status, allFilesWithMeta) => {
+    if (status === "done") {
+      console.log(JSON.parse(fileWithMeta.xhr.response).id);
+    }
+  };
   console.log(props.disabled);
   return (
     <div>
@@ -41,6 +48,7 @@ function DropZone(props) {
         autoUpload={false}
         multiple={false}
         maxFiles={1}
+        onChangeStatus={startReview}
       />
     </div>
   );
