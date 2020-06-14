@@ -11,8 +11,9 @@ import {
   RadioGroup,
 } from "@material-ui/core";
 
+// core components
+import Footer from "../../material-kit/components/Footer/Footer.js";
 import Button from "../../material-kit/components/CustomButtons/Button.js";
-
 import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
 
 const customStyles = (theme) =>
@@ -84,16 +85,11 @@ class MapSearchPage extends Component {
         </div>
 
         <div>
-          <Button
-            round
-            color="success"
-            size="lg"
-            onClick={handleClick}
-            style={{ marginBottom: "50px" }}
-          >
+          <Button round color="success" size="lg" onClick={handleClick}>
             Search By Name
           </Button>
         </div>
+        <Footer />
       </div>
     );
   }

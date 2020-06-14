@@ -201,7 +201,6 @@ class SearchPage extends Component {
                   <CardFooter className={classes.cardFooter}>
                     <Button
                       onClick={handleClick}
-                      className={classes.btn}
                       color="success"
                       round
                       size="lg"
