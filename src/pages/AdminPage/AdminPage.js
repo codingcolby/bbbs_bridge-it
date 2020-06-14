@@ -28,33 +28,33 @@ import CardFooter from "../../material-kit/components/Card/CardFooter.js";
 import image from "../../material-kit/assets/img/kc.jpg";
 import Button from "../../material-kit/components/CustomButtons/Button.js";
 
-import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
+import styles from "../../material-kit/assets/jss/material-kit-react/views/loginPage.js";
 import inputStyles from "../../material-kit/assets/jss/material-kit-react/components/customInputStyle.js";
 
 const customStyles = (theme) =>
   createStyles({
-    paper: {
-      maxWidth: "45%",
-      backgroundColor: "black",
-      color: "white",
-      padding: "4%",
-      margin: "4%",
-    },
-    font: {
-      fontFamily: "Trebuchet",
-    },
-    card: {
-      width: "60vw",
-      height: "60vh",
-    },
-    containerz: {
-      zIndex: "2",
-      position: "relative",
-      paddingTop: "10vh",
-      color: "#FFFFFF",
-      paddingBottom: "200px",
-      textAlign: "center",
-    },
+    // paper: {
+    //   maxWidth: "45%",
+    //   backgroundColor: "black",
+    //   color: "white",
+    //   padding: "4%",
+    //   margin: "4%",
+    // },
+    // font: {
+    //   fontFamily: "Trebuchet",
+    // },
+    // card: {
+    //   width: "60vw",
+    //   height: "60vh",
+    // },
+    // containerz: {
+    //   zIndex: "2",
+    //   position: "relative",
+    //   paddingTop: "10vh",
+    //   color: "#FFFFFF",
+    //   paddingBottom: "200px",
+    //   textAlign: "center",
+    // },
     ...styles,
     ...inputStyles,
   });
@@ -122,69 +122,77 @@ class AdminPage extends Component {
           backgroundPosition: "top center",
         }}
       >
-        <div className={classes.containerz}>
+        <div className={classes.container}>
           <GridContainer justify="center">
-            <GridItem xs={12} sm={12} md={7}>
-              <Card className={classes.card}>
-                <CardHeader color="success" className={classes.cardHeader}>
-                  <h1>Admin</h1>
-                </CardHeader>
-                <CardBody>
-                  <FormControl style={{ marginBottom: "35px", width: "20vw" }}>
-                    <InputLabel htmlFor="email">Email...</InputLabel>
-                    <Input
-                      type="text"
-                      value={this.state.email}
-                      onChange={this.handleInputChangeFor("email")}
-                      id="email"
-                      name="email"
+            <GridItem xs={12} sm={12} md={4}>
+              <Card>
+                <form onSubmit={this.onClick} className={classes.form}>
+                  <CardHeader color="success" className={classes.cardHeader}>
+                    <h1>Admin</h1>
+                  </CardHeader>
+
+                  <CardBody>
+                    <FormControl
                       fullWidth={true}
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <Email className={classes.inputIconsColor} />
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
+                      style={{ marginBottom: "20px" }}
+                    >
+                      <InputLabel htmlFor="email">Email...</InputLabel>
+                      <Input
+                        type="text"
+                        value={this.state.email}
+                        onChange={this.handleInputChangeFor("email")}
+                        id="email"
+                        name="email"
+                        fullWidth={true}
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <Email className={classes.inputIconsColor} />
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
 
-                  <br />
-                  <FormControl style={{ marginBottom: "35px", width: "20vw" }}>
-                    <InputLabel htmlFor="pass">Password</InputLabel>
-                    <Input
-                      type="password"
-                      value={this.state.password}
-                      onChange={this.handleInputChangeFor("password")}
-                      labelText="Password"
-                      id="pass"
-                      name="password"
-                      endAdornment={
-                        <InputAdornment position="end">
-                          <LockIcon className={classes.inputIconsColor}>
-                            lock_outline
-                          </LockIcon>
-                        </InputAdornment>
-                      }
-                    />
-                  </FormControl>
+                    <br />
+                    <FormControl
+                      fullWidth={true}
+                      style={{ marginBottom: "20px" }}
+                    >
+                      <InputLabel htmlFor="pass">Password</InputLabel>
+                      <Input
+                        type="password"
+                        value={this.state.password}
+                        onChange={this.handleInputChangeFor("password")}
+                        labelText="Password"
+                        id="pass"
+                        name="password"
+                        endAdornment={
+                          <InputAdornment position="end">
+                            <LockIcon className={classes.inputIconsColor}>
+                              lock_outline
+                            </LockIcon>
+                          </InputAdornment>
+                        }
+                      />
+                    </FormControl>
 
-                  <label htmlFor="user_logged_in" className={classes.font}>
-                    <UserPage />
-                  </label>
-                </CardBody>
+                    <label htmlFor="user_logged_in" className={classes.font}>
+                      <UserPage />
+                    </label>
+                  </CardBody>
 
-                <CardFooter className={classes.cardFooter}>
-                  <Button
-                    round
-                    size="lg"
-                    type="submit"
-                    name="submit"
-                    value="Reset User"
-                    onClick={this.onClick}
-                    style={{ backgroundColor: "black" }}
-                  >
-                    Reset User
-                  </Button>
-                </CardFooter>
+                  <CardFooter className={classes.cardFooter}>
+                    <Button
+                      round
+                      size="lg"
+                      type="submit"
+                      name="submit"
+                      value="Reset User"
+                      style={{ backgroundColor: "black" }}
+                    >
+                      Reset User
+                    </Button>
+                  </CardFooter>
+                </form>
               </Card>
             </GridItem>
           </GridContainer>

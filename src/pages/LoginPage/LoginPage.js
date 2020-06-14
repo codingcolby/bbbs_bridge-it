@@ -135,11 +135,14 @@ class LoginPage extends Component {
                     <CardFooter className={classes.cardFooter}>
                       <Button
                         round
-                        color="success"
                         type="submit"
                         name="submit"
                         value="Log In"
-                        style={{ marginBottom: "20px" }}
+                        style={{
+                          marginBottom: "20px",
+                          backgroundColor: "black",
+                        }}
+                        size="lg"
                       >
                         Sign In
                       </Button>

@@ -112,7 +112,12 @@ class MapSearchPage extends Component {
           </div>
 
           <div>
-            <Button round color="success" size="lg" onClick={handleClick}>
+            <Button
+              round
+              style={{ backgroundColor: "black", border: "1px solid white" }}
+              size="lg"
+              onClick={handleClick}
+            >
               Search By Name
             </Button>
           </div>

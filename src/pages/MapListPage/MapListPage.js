@@ -223,7 +223,15 @@ class MapListPage extends Component {
                     marginTop: "20px",
                   }}
                 >
-                  <Button round color="success" size="lg" onClick={handleClick}>
+                  <Button
+                    round
+                    style={{
+                      backgroundColor: "black",
+                      border: "1px solid white",
+                    }}
+                    size="lg"
+                    onClick={handleClick}
+                  >
                     Match Table
                   </Button>
                 </div>

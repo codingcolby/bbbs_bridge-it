@@ -204,6 +204,7 @@ class SearchPage extends Component {
                       color="success"
                       round
                       size="lg"
+                      style={{ backgroundColor: "black" }}
                     >
                       Search By Map
                     </Button>
