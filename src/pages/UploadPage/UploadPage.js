@@ -67,7 +67,11 @@ function UploadPage(props) {
         <FormHelperText>Please select a document type</FormHelperText>
       </FormControl>
 
-      <DropZone docType={docType} disabled={!Boolean(docType)} />
+      <DropZone
+        docType={docType}
+        disabled={!Boolean(docType)}
+        resetComponent={props.resetComponent}
+      />
     </div>
   );
 }

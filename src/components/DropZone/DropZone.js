@@ -38,7 +38,17 @@ function DropZone(props) {
           console.log(response.data);
           const profile = response.data;
           swal(<Review profile={profile} />).then((confirmed) => {
-            console.log(profile);
+            const data = { profile: profile };
+            console.log(data);
+            axios
+              .put(`/api/pdf/review/finish/${profileId}`, data)
+              .then((response) => {
+                props.resetComponent();
+              })
+              .catch((err) => {
+                console.log(err);
+                props.resetComponent();
+              });
           });
         })
         .catch((err) => {
