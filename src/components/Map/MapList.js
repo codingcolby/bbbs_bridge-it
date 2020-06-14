@@ -33,7 +33,7 @@ class MapList extends Component {
 
     const profilesFiltered = profiles.filter((item, index) => {
       const selected = this.props.selectedProfile;
-      //   console.log("distance:", selected[profile_type]);
+      // console.log("distance:", selected[profile_type]);
       return (
         selected.sex === item.sex &&
         selected.profile_type !== item.profile_type &&
