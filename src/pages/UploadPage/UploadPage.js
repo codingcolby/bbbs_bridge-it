@@ -1,16 +1,43 @@
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 import {
   MenuItem,
   Select,
   FormControl,
   InputLabel,
   FormHelperText,
-  Button,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import DropZone from "../../components/DropZone/DropZone";
 
+// core components
+import Footer from "../../material-kit/components/Footer/Footer.js";
+import GridContainer from "../../material-kit/components/Grid/GridContainer.js";
+import GridItem from "../../material-kit/components/Grid/GridItem.js";
+import Card from "../../material-kit/components/Card/Card.js";
+import CardBody from "../../material-kit/components/Card/CardBody.js";
+import CardHeader from "../../material-kit/components/Card/CardHeader.js";
+import CardFooter from "../../material-kit/components/Card/CardFooter.js";
+import image from "../../material-kit/assets/img/kc.jpg";
+import Button from "../../material-kit/components/CustomButtons/Button.js";
+
+import styles from "../../material-kit/assets/jss/material-kit-react/views/loginPage.js";
+
+const useStyles = makeStyles((theme) => ({
+  card: {
+    width: "60vw",
+    height: "60vh",
+  },
+  containerz: {
+    zIndex: "2",
+    position: "relative",
+    paddingTop: "10vh",
+    color: "#FFFFFF",
+    paddingBottom: "200px",
+    textAlign: "center",
+  },
+}));
 /**
  * This component doesn't do anything other than reset the Upload Page.
  *
@@ -37,6 +64,7 @@ function UploadPageResetter(props) {
 function UploadPage(props) {
   const [docType, setDocType] = useState("");
   const [ready, setReady] = useState(false);
+  const classes = useStyles();
 
   const handleChange = (event) => {
     setDocType(event.target.value);
@@ -52,22 +80,48 @@ function UploadPage(props) {
 
   return (
     <div>
-      <FormControl required>
-        <InputLabel id="s3-dropzone-uploader-mat-ui-label">Type</InputLabel>
-        <Select
-          labelId="s3-dropzone-uploader-mat-ui-label"
-          onChange={handleChange}
-          value={docType}
-        >
-          {/* I hardcoded docTypes in reference to the ids in "profile_type" table */}
-          <MenuItem value={1}>Big</MenuItem>
-          <MenuItem value={2}>Little</MenuItem>
-          {/* <MenuItem value={3}>Couple</MenuItem> TODO: handle couples */}
-        </Select>
-        <FormHelperText>Please select a document type</FormHelperText>
-      </FormControl>
+      <div
+        className={classes.pageHeader}
+        style={{
+          backgroundImage: "url(" + image + ")",
+          backgroundSize: "cover",
+          backgroundPosition: "top center",
+        }}
+      >
+        <div className={classes.containerz}>
+          <GridContainer justify="center">
+            <GridItem xs={12} sm={12} md={7}>
+              <Card className={classes.card}>
+                <CardHeader color="success" className={classes.cardHeader}>
+                  <h2>Upload</h2>
+                </CardHeader>
 
-      <DropZone docType={docType} disabled={!Boolean(docType)} />
+                <FormControl required style={{ width: "10vw" }}>
+                  <InputLabel id="s3-dropzone-uploader-mat-ui-label">
+                    Type
+                  </InputLabel>
+                  <Select
+                    labelId="s3-dropzone-uploader-mat-ui-label"
+                    onChange={handleChange}
+                    value={docType}
+                  >
+                    {/* I hardcoded docTypes in reference to the ids in "profile_type" table */}
+                    <MenuItem value={1}>Big</MenuItem>
+                    <MenuItem value={2}>Little</MenuItem>
+                    {/* <MenuItem value={3}>Couple</MenuItem> TODO: handle couples */}
+                  </Select>
+                  <FormHelperText>Please select a document type</FormHelperText>
+                </FormControl>
+                <div style={{ width: "30vw" }}>
+                  <DropZone docType={docType} disabled={!Boolean(docType)} />
+                </div>
+              </Card>
+            </GridItem>
+          </GridContainer>
+        </div>
+
+        <Footer whiteFont />
+      </div>
     </div>
   );
 }
