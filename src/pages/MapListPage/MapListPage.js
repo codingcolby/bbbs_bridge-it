@@ -85,10 +85,15 @@ class MapListPage extends Component {
   //   return marks.findIndex((mark) => mark.value === value) + 1;
   // };
 
-  handleSlider = (event) => {
-    this.setState({
-      sliderValue: event.target.value,
-    });
+  handleSlider = (event, newValue) => {
+    this.setState(
+      {
+        sliderValue: newValue,
+      },
+      () => {
+        console.log("STATE:", this.state.sliderValue);
+      }
+    );
   };
 
   render() {

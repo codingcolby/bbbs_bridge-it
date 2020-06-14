@@ -34,7 +34,7 @@ class Map extends Component {
     const profilesFiltered = profiles.filter((item, index) => {
       return item.sex === checked;
     });
-
+    const visibleProfiles = checked ? profilesFiltered : profiles;
     return (
       <div>
         <div style={{ height: "80vh", width: "100%" }}>
@@ -43,7 +43,7 @@ class Map extends Component {
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            {profilesFiltered.map((item, index) => {
+            {visibleProfiles.map((item, index) => {
               return (
                 <Marker
                   key={index}

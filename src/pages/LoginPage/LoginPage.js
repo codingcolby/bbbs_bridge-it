@@ -119,7 +119,6 @@ class LoginPage extends Component {
                           type="password"
                           value={this.state.password}
                           onChange={this.handleInputChangeFor("password")}
-                          labelText="Password"
                           id="pass"
                           name="password"
                           endAdornment={
