@@ -30,7 +30,7 @@ CREATE TABLE "status"
     "id" SERIAL PRIMARY KEY,
     "big_id" int,
     "little_id" int,
-    "match" boolean DEFAULT FALSE,
+    "match" boolean DEFAULT NULL,
     "review" int DEFAULT NULL,
     "comment" text
 );
