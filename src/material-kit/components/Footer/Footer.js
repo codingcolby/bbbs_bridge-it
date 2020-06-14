@@ -33,7 +33,7 @@ export default function Footer(props) {
           <List className={classes.list}></List>
         </div>
         <div className={classes.center}>
-          &copy; {1900 + new Date().getYear()} Big Brothers Big Sisters
+          &copy; BIG BROTHERS BIG SISTERS KANSAS CITY
         </div>
       </div>
     </footer>

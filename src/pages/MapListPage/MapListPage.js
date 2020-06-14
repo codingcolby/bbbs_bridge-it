@@ -21,7 +21,6 @@ import Footer from "../../material-kit/components/Footer/Footer.js";
 import Button from "../../material-kit/components/CustomButtons/Button.js";
 import Card from "../../material-kit/components/Card/Card.js";
 import CardBody from "../../material-kit/components/Card/CardBody.js";
-import CardFooter from "../../material-kit/components/Card/CardFooter.js";
 import image from "../../material-kit/assets/img/kc.jpg";
 
 import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
