@@ -86,7 +86,7 @@ class LoginPage extends Component {
                 <Card>
                   <form className={classes.form} onSubmit={this.login}>
                     <CardHeader color="success" className={classes.cardHeader}>
-                      <h4>Login</h4>
+                      <h2>Login</h2>
                     </CardHeader>
 
                     <CardBody>

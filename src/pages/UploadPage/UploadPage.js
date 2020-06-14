@@ -37,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "200px",
     textAlign: "center",
   },
+  center: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+  },
 }));
 /**
  * This component doesn't do anything other than reset the Upload Page.
@@ -93,27 +98,36 @@ function UploadPage(props) {
             <GridItem xs={12} sm={12} md={7}>
               <Card className={classes.card}>
                 <CardHeader color="success" className={classes.cardHeader}>
-                  <h2>Upload</h2>
+                  <h1>Upload</h1>
                 </CardHeader>
 
-                <FormControl required style={{ width: "10vw" }}>
-                  <InputLabel id="s3-dropzone-uploader-mat-ui-label">
-                    Type
-                  </InputLabel>
-                  <Select
-                    labelId="s3-dropzone-uploader-mat-ui-label"
-                    onChange={handleChange}
-                    value={docType}
-                  >
-                    {/* I hardcoded docTypes in reference to the ids in "profile_type" table */}
-                    <MenuItem value={1}>Big</MenuItem>
-                    <MenuItem value={2}>Little</MenuItem>
-                    {/* <MenuItem value={3}>Couple</MenuItem> TODO: handle couples */}
-                  </Select>
-                  <FormHelperText>Please select a document type</FormHelperText>
-                </FormControl>
-                <div style={{ width: "30vw" }}>
-                  <DropZone docType={docType} disabled={!Boolean(docType)} />
+                <div className={classes.center}>
+                  <div>
+                    <FormControl required style={{ width: "10vw" }}>
+                      <InputLabel id="s3-dropzone-uploader-mat-ui-label">
+                        Type
+                      </InputLabel>
+                      <Select
+                        labelId="s3-dropzone-uploader-mat-ui-label"
+                        onChange={handleChange}
+                        value={docType}
+                      >
+                        {/* I hardcoded docTypes in reference to the ids in "profile_type" table */}
+                        <MenuItem value={1}>Big</MenuItem>
+                        <MenuItem value={2}>Little</MenuItem>
+                        {/* <MenuItem value={3}>Couple</MenuItem> TODO: handle couples */}
+                      </Select>
+                      <FormHelperText>
+                        Please select a document type
+                      </FormHelperText>
+                    </FormControl>
+                    <div style={{ margin: "30px" }}>
+                      <DropZone
+                        docType={docType}
+                        disabled={!Boolean(docType)}
+                      />
+                    </div>
+                  </div>
                 </div>
               </Card>
             </GridItem>

@@ -156,7 +156,7 @@ class SearchPage extends Component {
               <GridItem xs={12} sm={12} md={7}>
                 <Card className={classes.card}>
                   <CardHeader color="success" className={classes.cardHeader}>
-                    <h2>Big Brothers Big Sisters</h2>
+                    <h1>Search for Profiles!</h1>
                   </CardHeader>
                   <CardBody>
                     <div className={classes.search}>
