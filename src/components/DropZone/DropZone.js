@@ -43,7 +43,9 @@ function DropZone(props) {
             axios
               .put(`/api/pdf/review/finish/${profileId}`, data)
               .then((response) => {
-                props.resetComponent();
+                swal("Upload Successful!", { icon: "success" }).then(
+                  props.resetComponent()
+                );
               })
               .catch((err) => {
                 console.log(err);
