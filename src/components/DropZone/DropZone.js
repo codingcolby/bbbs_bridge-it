@@ -36,7 +36,10 @@ function DropZone(props) {
         .get(`/api/pdf/review/start/${profileId}`)
         .then((response) => {
           console.log(response.data);
-          swal(<Review profile={response.data} />);
+          const profile = response.data;
+          swal(<Review profile={profile} />).then((confirmed) => {
+            console.log(profile);
+          });
         })
         .catch((err) => {
           console.log("Err: Review process could not start", err);
