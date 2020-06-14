@@ -293,7 +293,9 @@ router.post(
         profile.preference = preferences;
 
         // slim the summary to cm recommendation
-        const recommendation = bigSlimmer(chunks.cm_match_recommendation);
+        const recommendation = bigSlimmer(
+          chunks.cm_match_recommendation
+        ).trim();
 
         //
         // get the lat & lng from google
@@ -360,4 +362,26 @@ router.post(
   }
 );
 
+/**
+ * Get a profile by id for review.
+ * Called after successful upload on client-side.
+ */
+router.get(
+  "/review/start/:profileId",
+  (req: Request, res: Response, next: express.NextFunction): void => {
+    const queryText = `SELECT "profile"."id" as "id", "profile_type", "first_name", "last_name", "sex_type"."type" as "sex", "dob_or_age", "race", "address", "latitude", "longitude", "ems", "summary", "preference", "interest", "l_parent", "l_parent_relationship_to_child", "b_employer", "b_marital_status", "ready" FROM "profile"
+    JOIN "sex_type" ON "sex_type"."id" = "profile"."sex"
+    WHERE "profile"."id" = $1;`;
+    const queryData = [req.params.profileId];
+    pool
+      .query(queryText, queryData)
+      .then((response) => {
+        res.send(response.rows![0]); // we're selecting by id, send that one back
+      })
+      .catch((err) => {
+        console.log("Err getting profile", err);
+        res.sendStatus(500);
+      });
+  }
+);
 export default router;
