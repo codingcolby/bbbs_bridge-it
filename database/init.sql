@@ -22,7 +22,8 @@ CREATE TABLE "profile"
     "l_parent_relationship_to_child" text,
     "b_employer" text,
     "b_occupation" text,
-    "b_marital_status" text
+    "b_marital_status" text,
+    "ready" boolean DEFAULT FALSE
 );
 
 CREATE TABLE "status"
