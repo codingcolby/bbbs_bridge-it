@@ -188,12 +188,12 @@ class SearchPage extends Component {
                       <Grid container spacing={1} direction="row">
                         {this.props.store.search &&
                           profilesFilter.map((item, index) => (
-                            <GridItem key={index} xs={3}>
+                            <Grid item key={index} xs={2}>
                               <Chip
                                 onClick={this.handleNameClick(item.id)}
                                 label={item.first_name + " " + item.last_name}
                               />
-                            </GridItem>
+                            </Grid>
                           ))}
                       </Grid>
                     </div>

@@ -9,7 +9,6 @@ import {
 import { connect } from "react-redux";
 
 import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 // PAGE COMPONENTS
@@ -29,7 +28,7 @@ import UploadPage from "../../pages/UploadPage/UploadPage";
 import "./App.css";
 
 // MATERIAL-UI KIT PAGES
-import KitComponents from "../../material-kit/views/Components/Components.js";
+
 import KitLandingPage from "../../material-kit/views/LandingPage/LandingPage.js";
 import KitProfilePage from "../../material-kit/views/ProfilePage/ProfilePage.js";
 import KitLoginPage from "../../material-kit/views/LoginPage/LoginPage.js";

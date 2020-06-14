@@ -22,7 +22,6 @@ import Button from "../../material-kit/components/CustomButtons/Button.js";
 import Card from "../../material-kit/components/Card/Card.js";
 import CardBody from "../../material-kit/components/Card/CardBody.js";
 import image from "../../material-kit/assets/img/kc.jpg";
-
 import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
 
 // const marks = [
@@ -46,6 +45,11 @@ import styles from "../../material-kit/assets/jss/material-kit-react/views/compo
 
 const customStyles = (theme) =>
   createStyles({
+    element: {
+      position: "relative",
+      height: "30vh",
+      overflow: "scroll",
+    },
     cardHeader: {
       backgroundColor: "black",
       color: "white",
@@ -130,12 +134,31 @@ class MapListPage extends Component {
             title={<h1>{item.first_name + " " + item.last_name}</h1>}
             className={classes.cardHeader}
           />
+          <Element name="littles-list" className={classes.element}>
+            <CardBody>
+              <Grid container spacing={0}>
+                <Grid item xs={12}>
+                  <h3>Address: {item.address}</h3>
+                </Grid>
 
-          <CardBody>
-            <h3>Age: {item.dob_or_age}</h3>
-            <h3>Ethnicity: {item.race}</h3>
-            <h3>Address: {item.address}</h3>
-          </CardBody>
+                <Grid item xs={3}>
+                  <h3>Age: {item.dob_or_age}</h3>
+                </Grid>
+                <Grid item xs={3}>
+                  <h3>Sex: {item.sex === 2 ? "Male" : "Female"}</h3>
+                </Grid>
+                <Grid item xs={6}>
+                  <h3>Ethnicity: {item.race}</h3>
+                </Grid>
+                <Grid item xs={12}>
+                  <h3>Preferences: {item.preference}</h3>
+                </Grid>
+                <Grid item xs={12}>
+                  <p>{item.summary}</p>
+                </Grid>
+              </Grid>
+            </CardBody>
+          </Element>
         </Card>
       );
     });
@@ -160,15 +183,35 @@ class MapListPage extends Component {
       return (
         <Card key={index} style={{ marginTop: "0", marginBottom: "5px" }}>
           <CardHeader
-            title={<h3>{item.first_name + " " + item.last_name}</h3>}
+            title={<h2>{item.first_name + " " + item.last_name}</h2>}
             className={classes.cardHeaderLittle}
           />
 
           <CardBody>
-            <h4>Age: {item.dob_or_age}</h4>
-            <h4>Ethnicity: {item.race}</h4>
-            <h4>Distance: {item.distance} miles</h4>
-            <p>{item.summary}</p>
+            <Grid container spacing={0}>
+              <Grid item xs={6}>
+                <h3>Distance: {item.distance} miles</h3>
+              </Grid>
+              <Grid item xs={12}>
+                <h3>Location: {item.address}</h3>
+              </Grid>
+
+              <Grid item xs={3}>
+                <h3>Age: {item.dob_or_age}</h3>
+              </Grid>
+              <Grid item xs={3}>
+                <h3>Sex: {item.sex === 2 ? "Male" : "Female"}</h3>
+              </Grid>
+              <Grid item xs={6}>
+                <h3>Ethnicity: {item.race}</h3>
+              </Grid>
+              <Grid item xs={12}>
+                <h3>Preferences: {item.preference}</h3>
+              </Grid>
+              <Grid item xs={12}>
+                <p>{item.summary}</p>
+              </Grid>
+            </Grid>
           </CardBody>
         </Card>
       );
@@ -242,7 +285,6 @@ class MapListPage extends Component {
                 <div>{bigProfile}</div>
                 <Element
                   name="littles-list"
-                  className="element"
                   style={{
                     position: "relative",
                     height: "50vh",
