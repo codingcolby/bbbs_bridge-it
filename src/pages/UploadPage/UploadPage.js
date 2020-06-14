@@ -5,7 +5,6 @@ import {
   FormControl,
   InputLabel,
   FormHelperText,
-  Button,
 } from "@material-ui/core";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
@@ -36,18 +35,9 @@ function UploadPageResetter(props) {
 
 function UploadPage(props) {
   const [docType, setDocType] = useState("");
-  const [ready, setReady] = useState(false);
 
   const handleChange = (event) => {
     setDocType(event.target.value);
-  };
-
-  const handleClick = (event) => {
-    props.dispatch({
-      type: "UPLOAD_PDF_SUMMARY",
-      // payload: { pdfUrl, docType },
-    });
-    props.resetComponent();
   };
 
   return (
