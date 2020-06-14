@@ -7,9 +7,12 @@ const router = express.Router();
 // ----- GET ALL CORRESPONDING MATCH POTENTIALS
 router.get("/", (req: Request, res: Response): void => {
 	// 	/api/table
-	const queryText = `SELECT * from "status"
-  JOIN "status" ON "profile"."id" = "status"."big_id", "profile"."id" = "status"."little_id"
-  ;`;
+	const queryText = `SELECT * from "status";`;
+
+	// -- THROWS AN ERROR
+	// const queryText = `SELECT * from "status"
+	// JOIN "status" ON "profile"."id" = "status"."big_id", "profile"."id" = "status"."little_id"
+	// ;`;
 
 	pool
 		.query(queryText)
