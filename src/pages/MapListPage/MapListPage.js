@@ -57,7 +57,9 @@ const customStyles = (theme) =>
       color: "white",
       textAlign: "center",
     },
-
+    margin: {
+      marginTop: "0",
+    },
     ...styles,
   });
 
@@ -123,7 +125,7 @@ class MapListPage extends Component {
     //renders selected profile information
     const bigProfile = profileFilter.map((item, index) => {
       return (
-        <Card key={index}>
+        <Card key={index} className={classes.margin}>
           <CardHeader
             title={<h1>{item.first_name + " " + item.last_name}</h1>}
             className={classes.cardHeader}
@@ -227,7 +229,7 @@ class MapListPage extends Component {
                     round
                     style={{
                       backgroundColor: "black",
-                      border: "1px solid white",
+                      border: "3px solid white",
                     }}
                     size="lg"
                     onClick={handleClick}
