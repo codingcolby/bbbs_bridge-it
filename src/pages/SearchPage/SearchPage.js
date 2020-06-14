@@ -2,17 +2,43 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
 import {
-  Button,
   withStyles,
   createStyles,
   InputBase,
   fade,
+  Chip,
+  Grid,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+
+// core components
+import Footer from "../../material-kit/components/Footer/Footer.js";
+import GridContainer from "../../material-kit/components/Grid/GridContainer.js";
+import GridItem from "../../material-kit/components/Grid/GridItem.js";
+import Card from "../../material-kit/components/Card/Card.js";
+import CardBody from "../../material-kit/components/Card/CardBody.js";
+import CardHeader from "../../material-kit/components/Card/CardHeader.js";
+import CardFooter from "../../material-kit/components/Card/CardFooter.js";
+import image from "../../material-kit/assets/img/kc.jpg";
+import Button from "../../material-kit/components/CustomButtons/Button.js";
+
+import styles from "../../material-kit/assets/jss/material-kit-react/views/loginPage.js";
 
 const customStyles = (theme) =>
   createStyles({
     root: {
+      textAlign: "center",
+    },
+    card: {
+      width: "60vw",
+      height: "60vh",
+    },
+    containerz: {
+      zIndex: "2",
+      position: "relative",
+      paddingTop: "10vh",
+      color: "#FFFFFF",
+      paddingBottom: "200px",
       textAlign: "center",
     },
     search: {
@@ -23,7 +49,7 @@ const customStyles = (theme) =>
         backgroundColor: fade(theme.palette.common.white, 0.2),
       },
       marginLeft: 0,
-      marginBottom: "200px",
+      marginBottom: "50px",
       width: "100%",
       [theme.breakpoints.up("sm")]: {
         marginLeft: theme.spacing(1),
@@ -58,6 +84,7 @@ const customStyles = (theme) =>
         },
       },
     },
+    ...styles,
   });
 
 class SearchPage extends Component {
@@ -115,48 +142,79 @@ class SearchPage extends Component {
     };
 
     return (
-      <div className={classes.root}>
-        <h2>Search Page</h2>
-        <br />
-
-        <div className={classes.search}>
-          <SearchIcon className={classes.searchIcon} />
-          <InputBase
-            placeholder="Search…"
-            classes={{
-              root: classes.inputRoot,
-              input: classes.inputInput,
-            }}
-            inputProps={{ "aria-label": "search" }}
-            onChange={this.changeSearch}
-          />
-
-          <Button
-            onClick={this.handleSearchClick}
-            className={classes.btn}
-            variant="outlined"
-          >
-            Search
-          </Button>
-        </div>
-        <br />
-        <div>
-          {this.props.store.search &&
-            profilesFilter.map((item, index) => (
-              <ul key={index} className={classes.ul}>
-                <li onClick={this.handleNameClick(item.id)}>
-                  {item.first_name + " " + item.last_name}
-                </li>
-              </ul>
-            ))}
-        </div>
-        <Button
-          onClick={handleClick}
-          className={classes.btn}
-          variant="outlined"
+      <div>
+        <div
+          className={classes.pageHeader}
+          style={{
+            backgroundImage: "url(" + image + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "top center",
+          }}
         >
-          Search By Map
-        </Button>
+          <div className={classes.containerz}>
+            <GridContainer justify="center">
+              <GridItem xs={12} sm={12} md={7}>
+                <Card className={classes.card}>
+                  <CardHeader color="success" className={classes.cardHeader}>
+                    <h1>Search for Profiles!</h1>
+                  </CardHeader>
+                  <CardBody>
+                    <div className={classes.search}>
+                      <SearchIcon className={classes.searchIcon} />
+                      <InputBase
+                        placeholder="Search…"
+                        classes={{
+                          root: classes.inputRoot,
+                          input: classes.inputInput,
+                        }}
+                        inputProps={{ "aria-label": "search" }}
+                        onChange={this.changeSearch}
+                      />
+
+                      <Button
+                        onClick={this.handleSearchClick}
+                        className={classes.btn}
+                        round
+                        style={{
+                          backgroundColor: "black",
+                          marginLeft: "15px",
+                        }}
+                      >
+                        Search
+                      </Button>
+                    </div>
+
+                    <div>
+                      <Grid container spacing={1} direction="row">
+                        {this.props.store.search &&
+                          profilesFilter.map((item, index) => (
+                            <GridItem key={index} xs={3}>
+                              <Chip
+                                onClick={this.handleNameClick(item.id)}
+                                label={item.first_name + " " + item.last_name}
+                              />
+                            </GridItem>
+                          ))}
+                      </Grid>
+                    </div>
+                  </CardBody>
+                  <CardFooter className={classes.cardFooter}>
+                    <Button
+                      onClick={handleClick}
+                      color="success"
+                      round
+                      size="lg"
+                      style={{ backgroundColor: "black" }}
+                    >
+                      Search By Map
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </GridItem>
+            </GridContainer>
+          </div>
+          <Footer whiteFont />
+        </div>
       </div>
     );
   }
