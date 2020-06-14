@@ -7,16 +7,23 @@ import { Element } from "react-scroll";
 import * as geolib from "geolib";
 
 import {
-  Button,
-  Card,
-  CardContent,
-  Radio,
   Container,
-  FormControlLabel,
-  RadioGroup,
+  Typography,
   Grid,
   Slider,
+  withStyles,
+  createStyles,
+  CardHeader,
 } from "@material-ui/core";
+
+// core components
+import Footer from "../../material-kit/components/Footer/Footer.js";
+import Button from "../../material-kit/components/CustomButtons/Button.js";
+import Card from "../../material-kit/components/Card/Card.js";
+import CardBody from "../../material-kit/components/Card/CardBody.js";
+import image from "../../material-kit/assets/img/kc.jpg";
+
+import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
 
 // const marks = [
 //   {
@@ -36,6 +43,25 @@ import {
 //     label: "20",
 //   },
 // ];
+
+const customStyles = (theme) =>
+  createStyles({
+    cardHeader: {
+      backgroundColor: "black",
+      color: "white",
+      textAlign: "center",
+      borderRadius: "5px",
+    },
+    cardHeaderLittle: {
+      backgroundColor: "#4caf50",
+      color: "white",
+      textAlign: "center",
+    },
+    margin: {
+      marginTop: "0",
+    },
+    ...styles,
+  });
 
 class MapListPage extends Component {
   state = {
@@ -62,6 +88,8 @@ class MapListPage extends Component {
   };
 
   render() {
+    const { classes } = this.props;
+
     const handleClick = () => {
       this.props.history.push(`/table`);
     };
@@ -97,12 +125,18 @@ class MapListPage extends Component {
     //renders selected profile information
     const bigProfile = profileFilter.map((item, index) => {
       return (
-        <div key={index}>
-          <h1>{item.first_name + " " + item.last_name}</h1>
-          <h3>Age: {item.dob_or_age}</h3>
-          <h3>Ethnicity: {item.race}</h3>
-          <h3>Address: {item.address}</h3>
-        </div>
+        <Card key={index} className={classes.margin}>
+          <CardHeader
+            title={<h1>{item.first_name + " " + item.last_name}</h1>}
+            className={classes.cardHeader}
+          />
+
+          <CardBody>
+            <h3>Age: {item.dob_or_age}</h3>
+            <h3>Ethnicity: {item.race}</h3>
+            <h3>Address: {item.address}</h3>
+          </CardBody>
+        </Card>
       );
     });
 
@@ -124,80 +158,110 @@ class MapListPage extends Component {
     //renders list of filtered littles as cards
     const littlesList = profilesLittlesFilter.map((item, index) => {
       return (
-        <Card key={index}>
-          <CardContent>
-            <div>
-              <h3>{item.first_name + " " + item.last_name}</h3>
-              <h4>Age: {item.dob_or_age}</h4>
-              <h4>Ethnicity: {item.race}</h4>
-              <h4>Distance: {item.distance} miles</h4>
-              <p>{item.summary}</p>
-            </div>
-          </CardContent>
+        <Card key={index} style={{ marginTop: "0", marginBottom: "5px" }}>
+          <CardHeader
+            title={<h3>{item.first_name + " " + item.last_name}</h3>}
+            className={classes.cardHeaderLittle}
+          />
+
+          <CardBody>
+            <h4>Age: {item.dob_or_age}</h4>
+            <h4>Ethnicity: {item.race}</h4>
+            <h4>Distance: {item.distance} miles</h4>
+            <p>{item.summary}</p>
+          </CardBody>
         </Card>
       );
     });
 
     return (
       <div>
-        <Container maxWidth={false}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={8} md={8}>
-              <Map
-                selectedProfile={profileFilter}
-                radius={this.state.sliderValue}
-                selectedLittles={profilesLittlesFilter}
-              />
-              <Slider
-                defaultValue={5}
-                aria-labelledby="discrete-slider-restrict"
-                step={2.5}
-                valueLabelDisplay="on"
-                marks={true}
-                min={0}
-                max={20}
-                onChange={this.handleSlider}
-              />
+        <div
+          className={classes.pageHeader}
+          style={{
+            backgroundImage: "url(" + image + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "top center",
+          }}
+        >
+          <Container maxWidth={false}>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={8} md={8}>
+                <div
+                  style={{
+                    backgroundColor: "white",
+                    border: "5px solid white",
+                    borderRadius: "5px",
+                  }}
+                >
+                  <Map
+                    selectedProfile={profileFilter}
+                    radius={this.state.sliderValue}
+                    selectedLittles={profilesLittlesFilter}
+                  />
+                  <div
+                    style={{
+                      textAlign: "center",
+                      marginTop: "15px",
+                    }}
+                  >
+                    <Typography gutterBottom> Radius Slider</Typography>
+                    <Slider
+                      defaultValue={5}
+                      aria-labelledby="discrete-slider-restrict"
+                      step={2.5}
+                      valueLabelDisplay="on"
+                      marks={true}
+                      min={0}
+                      max={20}
+                      onChange={this.handleSlider}
+                    />
+                  </div>
+                </div>
 
-              {/* <Card>
-                <CardContent>
-                  <RadioGroup>
-                    <FormControlLabel
-                      control={<Radio name="Interests" />}
-                      label="Interests"
-                    />
-                    <FormControlLabel
-                      control={<Radio name="Preferences" />}
-                      label="Preferences"
-                    />
-                  </RadioGroup>
-                </CardContent>
-              </Card> */}
-              <Button variant="outlined" onClick={handleClick}>
-                Match Table
-              </Button>
+                <div
+                  style={{
+                    textAlign: "center",
+                    marginTop: "20px",
+                  }}
+                >
+                  <Button
+                    round
+                    style={{
+                      backgroundColor: "black",
+                      border: "3px solid white",
+                    }}
+                    size="lg"
+                    onClick={handleClick}
+                  >
+                    Match Table
+                  </Button>
+                </div>
+              </Grid>
+              <Grid item xs={12} sm={4} md={4}>
+                <div>{bigProfile}</div>
+                <Element
+                  name="littles-list"
+                  className="element"
+                  style={{
+                    position: "relative",
+                    height: "50vh",
+                    overflow: "scroll",
+                    border: "solid 5px white",
+                    borderRadius: "10px",
+                    backgroundColor: "white",
+                  }}
+                >
+                  <div>{littlesList}</div>
+                </Element>
+              </Grid>
             </Grid>
-            <Grid item xs={12} sm={4} md={4}>
-              <div>{bigProfile}</div>
-              <Element
-                name="littles-list"
-                className="element"
-                style={{
-                  position: "relative",
-                  height: "65vh",
-                  overflow: "scroll",
-                  marginBottom: "100px",
-                  border: "solid 4px black",
-                }}
-              >
-                <div>{littlesList}</div>
-              </Element>
-            </Grid>
-          </Grid>
-        </Container>
+          </Container>
+          <Footer whiteFont />
+        </div>
       </div>
     );
   }
 }
 
-export default connect(mapStoreToProps)(MapListPage);
+export default withStyles(customStyles)(connect(mapStoreToProps)(MapListPage));

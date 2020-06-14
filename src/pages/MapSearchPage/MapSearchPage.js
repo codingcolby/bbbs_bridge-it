@@ -4,15 +4,19 @@ import mapStoreToProps from "../../redux/mapStoreToProps";
 import Map from "../../components/Map/Map";
 
 import {
-  Button,
-  // Checkbox,
   FormControlLabel,
-  // FormGroup,
   withStyles,
   createStyles,
   Radio,
   RadioGroup,
+  Chip,
 } from "@material-ui/core";
+
+// core components
+import Footer from "../../material-kit/components/Footer/Footer.js";
+import Button from "../../material-kit/components/CustomButtons/Button.js";
+import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
+import image from "../../material-kit/assets/img/kc.jpg";
 
 const customStyles = (theme) =>
   createStyles({
@@ -23,6 +27,7 @@ const customStyles = (theme) =>
       display: "inline-block",
       padding: "15px",
     },
+    ...styles,
   });
 
 class MapSearchPage extends Component {
@@ -59,34 +64,64 @@ class MapSearchPage extends Component {
 
     return (
       <div className={classes.root}>
-        <h1>All Unmatched Bigs and Littles</h1>
-        <br />
-        <div>
+        <div
+          className={classes.pageHeader}
+          style={{
+            backgroundImage: "url(" + image + ")",
+            backgroundSize: "cover",
+            backgroundPosition: "top center",
+          }}
+        >
           <Map />
-        </div>
-        <div className={classes.position}>
-          <RadioGroup onChange={handleChange} row>
-            <FormControlLabel
-              control={<Radio name="checkedFemale" />}
-              label="Female"
-              value="female"
-            />
-            <FormControlLabel
-              control={<Radio name="checkedMale" />}
-              label="Male"
-              value="male"
-            />
-            <FormControlLabel
-              control={<Radio name="checkedCouple" />}
-              label="Couple"
-              value="couple"
-            />
-          </RadioGroup>
-        </div>
-        <div>
-          <Button variant="outlined" onClick={handleClick}>
-            Search By Name
-          </Button>
+
+          <div
+            className={classes.position}
+            style={{
+              backgroundColor: "black",
+              border: "2px solid white",
+              borderRadius: "20px",
+              margin: "10px",
+            }}
+          >
+            <RadioGroup onChange={handleChange} row>
+              <FormControlLabel
+                control={
+                  <Radio name="checkedFemale" style={{ color: "white" }} />
+                }
+                label="FEMALE"
+                value="female"
+                style={{ color: "white", marginLeft: "30px" }}
+              />
+              <FormControlLabel
+                control={
+                  <Radio name="checkedMale" style={{ color: "white" }} />
+                }
+                label="MALE"
+                value="male"
+                style={{ color: "white", marginLeft: "30px" }}
+              />
+              <FormControlLabel
+                control={
+                  <Radio name="checkedCouple" style={{ color: "white" }} />
+                }
+                label="COUPLE"
+                value="couple"
+                style={{ color: "white", marginLeft: "30px" }}
+              />
+            </RadioGroup>
+          </div>
+
+          <div>
+            <Button
+              round
+              style={{ backgroundColor: "black", border: "1px solid white" }}
+              size="lg"
+              onClick={handleClick}
+            >
+              Search By Name
+            </Button>
+          </div>
+          <Footer whiteFont />
         </div>
       </div>
     );
