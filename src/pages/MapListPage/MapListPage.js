@@ -22,8 +22,6 @@ import Button from "../../material-kit/components/CustomButtons/Button.js";
 import Card from "../../material-kit/components/Card/Card.js";
 import CardBody from "../../material-kit/components/Card/CardBody.js";
 import image from "../../material-kit/assets/img/kc.jpg";
-import GridContainer from "../../material-kit/components/Grid/GridContainer.js";
-import GridItem from "../../material-kit/components/Grid/GridItem.js";
 import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
 
 // const marks = [
@@ -139,22 +137,10 @@ class MapListPage extends Component {
           <Element name="littles-list" className={classes.element}>
             <CardBody>
               <Grid container spacing={0}>
-                {/* <Grid item xs={6} style={{ marginBottom: "0" }}>
-                  <h3>Case Manager: {item.ems}</h3>
-                </Grid>
-                <Grid item xs={6}>
-                  <h3>Marital Status: {item.b_marital_status}</h3>
-                </Grid> */}
-
                 <Grid item xs={12}>
                   <h3>Address: {item.address}</h3>
                 </Grid>
-                {/* <Grid item xs={7}>
-                  <h3>Employer: {item.b_employer}</h3>
-                </Grid>
-                <Grid item xs={5}>
-                  <h3>Occupation: {item.b_occupation}</h3>
-                </Grid> */}
+
                 <Grid item xs={3}>
                   <h3>Age: {item.dob_or_age}</h3>
                 </Grid>
@@ -197,29 +183,19 @@ class MapListPage extends Component {
       return (
         <Card key={index} style={{ marginTop: "0", marginBottom: "5px" }}>
           <CardHeader
-            title={<h3>{item.first_name + " " + item.last_name}</h3>}
+            title={<h2>{item.first_name + " " + item.last_name}</h2>}
             className={classes.cardHeaderLittle}
           />
 
           <CardBody>
             <Grid container spacing={0}>
-              {/* <Grid item xs={6}>
-                <h3>EMS: {item.ems} </h3>
-              </Grid> */}
               <Grid item xs={6}>
                 <h3>Distance: {item.distance} miles</h3>
               </Grid>
               <Grid item xs={12}>
                 <h3>Location: {item.address}</h3>
               </Grid>
-              {/* <Grid item xs={6}>
-                <h3>Parent/Guardian: {item.l_parent} </h3>
-              </Grid>
-              <Grid item xs={6}>
-                <h3>
-                  Relationship to child: {item.l_parent_relationship_to_child}{" "}
-                </h3>
-              </Grid> */}
+
               <Grid item xs={3}>
                 <h3>Age: {item.dob_or_age}</h3>
               </Grid>
@@ -309,7 +285,6 @@ class MapListPage extends Component {
                 <div>{bigProfile}</div>
                 <Element
                   name="littles-list"
-                  className="element"
                   style={{
                     position: "relative",
                     height: "50vh",

@@ -16,11 +16,10 @@ import Footer from "../../material-kit/components/Footer/Footer.js";
 import GridContainer from "../../material-kit/components/Grid/GridContainer.js";
 import GridItem from "../../material-kit/components/Grid/GridItem.js";
 import Card from "../../material-kit/components/Card/Card.js";
-import CardBody from "../../material-kit/components/Card/CardBody.js";
+
 import CardHeader from "../../material-kit/components/Card/CardHeader.js";
-import CardFooter from "../../material-kit/components/Card/CardFooter.js";
+
 import image from "../../material-kit/assets/img/kc.jpg";
-import Button from "../../material-kit/components/CustomButtons/Button.js";
 
 import styles from "../../material-kit/assets/jss/material-kit-react/views/loginPage.js";
 
