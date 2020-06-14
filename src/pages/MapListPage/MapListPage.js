@@ -67,6 +67,36 @@ const customStyles = (theme) =>
     ...styles,
   });
 
+const PrettoSlider = withStyles({
+  root: {
+    color: "#52af77",
+    height: 5,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#fff",
+    border: "2px solid currentColor",
+    marginTop: -8,
+    marginLeft: -12,
+    "&:focus, &:hover, &$active": {
+      boxShadow: "inherit",
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: "calc(-50% + 4px)",
+  },
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4,
+  },
+})(Slider);
+
 class MapListPage extends Component {
   state = {
     sliderValue: "",
@@ -237,8 +267,8 @@ class MapListPage extends Component {
               <Grid item xs={12} sm={8} md={8}>
                 <div
                   style={{
-                    backgroundColor: "white",
-                    border: "5px solid white",
+                    backgroundColor: "black",
+                    border: "5px solid black",
                     borderRadius: "5px",
                   }}
                 >
@@ -250,11 +280,12 @@ class MapListPage extends Component {
                   <div
                     style={{
                       textAlign: "center",
-                      marginTop: "15px",
+                      margin: "40px 10px 10px",
+                      // border: "5px solid black",
+                      // borderRadius: "10px",
                     }}
                   >
-                    <Typography gutterBottom> Radius Slider</Typography>
-                    <Slider
+                    <PrettoSlider
                       defaultValue={5}
                       aria-labelledby="discrete-slider-restrict"
                       step={2.5}
@@ -264,6 +295,9 @@ class MapListPage extends Component {
                       max={20}
                       onChange={this.handleSlider}
                     />
+                    <Typography gutterBottom style={{ color: "white" }}>
+                      Radius Slider
+                    </Typography>
                   </div>
                 </div>
 
