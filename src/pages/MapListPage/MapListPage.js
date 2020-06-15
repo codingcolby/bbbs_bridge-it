@@ -449,6 +449,7 @@ class MapListPage extends Component {
             <CardActions>
               {/* TODO: update assess handler to work with littles */}
               <Button
+                round
                 style={{
                   backgroundColor: "black",
                 }}
