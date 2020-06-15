@@ -70,14 +70,29 @@ function Review(props) {
   };
 
   const handlePreferenceChange = (property) => (event) => {
-    setPreference({
-      ...preference,
-      [property]: event.target.value,
-    });
-    props.profile.preference = {
-      ...profile.preference,
-      [property]: event.target.value,
-    };
+    switch (property) {
+      case "max_distance_miles":
+        // datatype number
+        setPreference({
+          ...preference,
+          [property]: Number(event.target.value),
+        });
+        props.profile.preference = {
+          ...profile.preference,
+          [property]: event.target.value,
+        };
+        break;
+      default:
+        setPreference({
+          ...preference,
+          [property]: event.target.value,
+        });
+        props.profile.preference = {
+          ...profile.preference,
+          [property]: event.target.value,
+        };
+        break;
+    }
   };
 
   const classes = useStyles();
@@ -177,6 +192,13 @@ function Review(props) {
         onChange={handlePreferenceChange("lvl_of_problems")}
         value={preference.lvl_of_problems}
         label="Level of problems"
+        fullWidth
+      />
+      <TextField
+        onChange={handlePreferenceChange("max_distance_miles")}
+        type="number"
+        value={preference.max_distance_miles}
+        label="Max distance (miles)"
         fullWidth
       />
     </div>

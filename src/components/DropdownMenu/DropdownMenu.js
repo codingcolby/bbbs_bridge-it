@@ -13,6 +13,7 @@ const useStyles = makeStyles((theme) => {
       "&:hover": {
         backgroundColor: "#fff",
       },
+      transform: "translate(6px, 0px)",
     },
   });
 });

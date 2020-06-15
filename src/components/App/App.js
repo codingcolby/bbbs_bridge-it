@@ -9,10 +9,9 @@ import {
 import { connect } from "react-redux";
 
 import Nav from "../Nav/Nav";
-import Footer from "../Footer/Footer";
 
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
+// PAGE COMPONENTS
 import AboutPage from "../AboutPage/AboutPage";
 import AdminPage from "../../pages/AdminPage/AdminPage";
 import InfoPage from "../InfoPage/InfoPage";
@@ -28,6 +27,12 @@ import UploadPage from "../../pages/UploadPage/UploadPage";
 
 import "./App.css";
 
+// MATERIAL-UI KIT PAGES
+
+import KitLandingPage from "../../material-kit/views/LandingPage/LandingPage.js";
+import KitProfilePage from "../../material-kit/views/ProfilePage/ProfilePage.js";
+import KitLoginPage from "../../material-kit/views/LoginPage/LoginPage.js";
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch({ type: "FETCH_USER" });
@@ -41,24 +46,10 @@ class App extends Component {
             <Nav />
             <Switch>
               {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-
-              {/* Visiting localhost:3000/about will show the about page.
-
-
-
-  render() {
-    return (
-      <div className="maincontainer">
-        <Router>
-          <div>
-            <Nav />
-            <Switch>
-              {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
               <Redirect exact from="/" to="/login" />
               {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
               <Route exact path="/about" component={AboutPage} />
-
               <Route exact path="/home" component={LandingPage} />
               <Route exact path="/map" component={MapSearchPage} />
               <Route exact path="/list/:id" component={MapListPage} />
@@ -67,6 +58,10 @@ class App extends Component {
               <Route exact path="/search" component={SearchPage} />
               <Route exact path="/admin" component={AdminPage} />
               <Route exact path="/upload" component={UploadPage} />
+
+              <Route exact path="/kitlogin" component={KitLoginPage} />
+              <Route exact path="/kitlanding" component={KitLandingPage} />
+              <Route exact path="/kitprofile" component={KitProfilePage} />
               {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -93,7 +88,6 @@ class App extends Component {
               {/* If none of the other routes matched, we will show a 404. */}
               <Route render={() => <h1>404</h1>} />
             </Switch>
-            <Footer />
           </div>
         </Router>
       </div>

@@ -395,35 +395,53 @@ router.put(
   (req: Request, res: Response, next: express.NextFunction): void => {
     const profileId = req.params.profileId;
     const profile = req.body.profile;
-    const queryText = `UPDATE "profile" SET ("address", "b_employer", "b_marital_status", "dob_or_age", "ems", "first_name", "interest", "l_parent", "l_parent_relationship_to_child", "last_name", "latitude", "longitude", "preference", "race", "summary", "ready") = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
-    WHERE "id" = $17;`;
-    const queryData = [
-      profile.address,
-      profile.b_employer,
-      profile.b_marital_status,
-      profile.dob_or_age,
-      profile.ems,
-      profile.first_name,
-      profile.interest,
-      profile.l_parent,
-      profile.l_parent_relationship_to_child,
-      profile.last_name,
-      profile.latitude,
-      profile.longitude,
-      profile.preference,
-      profile.race,
-      profile.summary,
-      true,
-      profileId,
-    ];
-    pool
-      .query(queryText, queryData)
-      .then((response) => {
-        console.log("UPDATED");
 
-        res.sendStatus(200);
+    // get coordinates in case location was updated
+    //@ts-ignore
+    const key = encodeURIComponent(process.env.API_GMAP);
+    axios
+      .get(
+        `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${profile.address}`
+      )
+      .then((response) => {
+        profile.latitude = response.data.results![0].geometry.location.lat;
+        profile.longitude = response.data.results![0].geometry.location.lng;
+
+        const queryText = `UPDATE "profile" SET ("address", "b_employer", "b_marital_status", "dob_or_age", "ems", "first_name", "interest", "l_parent", "l_parent_relationship_to_child", "last_name", "latitude", "longitude", "preference", "race", "summary", "ready") = ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+        WHERE "id" = $17;`;
+        const queryData = [
+          profile.address,
+          profile.b_employer,
+          profile.b_marital_status,
+          profile.dob_or_age,
+          profile.ems,
+          profile.first_name,
+          profile.interest,
+          profile.l_parent,
+          profile.l_parent_relationship_to_child,
+          profile.last_name,
+          profile.latitude,
+          profile.longitude,
+          profile.preference,
+          profile.race,
+          profile.summary,
+          true,
+          profileId,
+        ];
+        pool
+          .query(queryText, queryData)
+          .then((response) => {
+            console.log("UPDATED");
+
+            res.sendStatus(200);
+          })
+          .catch((err) => {
+            res.sendStatus(500);
+          });
       })
       .catch((err) => {
+        console.log("Err getting address on update", err);
+
         res.sendStatus(500);
       });
   }
