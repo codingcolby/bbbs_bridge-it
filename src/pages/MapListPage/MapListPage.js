@@ -156,9 +156,10 @@ class MapListPage extends Component {
           text: "Unlikely",
           value: 1, // unlikely
         },
+        cancel: "Cancel",
       },
-      cancel: "Cancel",
     }).then((value) => {
+      if (value === null) return swal("Canceled!");
       const payload = {
         comment: null,
         review: value,
@@ -169,6 +170,7 @@ class MapListPage extends Component {
         type: "CREATE_MATCH",
         payload,
       });
+      swal("Success! You've added this relationship to the Match Table.");
     });
   };
 

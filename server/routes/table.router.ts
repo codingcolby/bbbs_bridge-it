@@ -11,7 +11,8 @@ router.get("/", (req: Request, res: Response): void => {
   JOIN "profile" "profile1" ON "profile1"."id" = "big_id"
   JOIN "profile" "profile2" ON "profile2"."id" = "little_id"
   JOIN "review_type" ON "review_type"."id" = "status"."review"
-  WHERE "status"."match" IS NULL AND "status"."review" IS NOT NULL AND "status"."match" IS NOT FALSE;`;
+  WHERE ("status"."match" IS NULL AND "status"."review" IS NOT NULL) OR "status"."match" IS TRUE
+  ORDER BY "big_id";`;
   pool
     .query(queryText)
     .then((response) => {
@@ -73,7 +74,8 @@ router.post("/", (req: Request, res: Response) => {
 router.put("/match", (req: Request, res: Response): void => {
   const { big_id, little_id, comment, match } = req.body;
   const queryData = [big_id, little_id, comment, match];
-  const queryText = `UPDATE "status" SET ("match", "comment") = ($4, '$3')
+
+  const queryText = `UPDATE "status" SET ("match", "comment") = ($4, $3)
 	WHERE ("big_id" = $1) AND ("little_id" = $2) RETURNING "id";`;
 
   pool

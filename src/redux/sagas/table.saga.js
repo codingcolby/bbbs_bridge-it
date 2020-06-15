@@ -49,7 +49,7 @@ function* createStatusRelationship(action) {
  */
 function* selectMatchStatus(action) {
   try {
-    yield axios.put(`/api/table/match`); // this is returning id, so you can grab that here if needed
+    yield axios.put(`/api/table/match`, action.payload); // this is returning id, so you can grab that here if needed
     yield put({
       type: "FETCH_TABLE",
     });
