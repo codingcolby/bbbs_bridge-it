@@ -163,7 +163,7 @@ class MatchTablePage extends Component {
         <td>{item.big_name}</td>
         <td>{item.little_name}</td>
         {/* Capitalize the review status */}
-        <td>{item.review}</td>
+        <td>{item.review.charAt(0).toUpperCase() + item.review.slice(1)}</td>
         <td>
           <Button
             onClick={this.handleUpsert}
