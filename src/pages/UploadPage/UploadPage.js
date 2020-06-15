@@ -74,14 +74,6 @@ function UploadPage(props) {
     setDocType(event.target.value);
   };
 
-  const handleClick = (event) => {
-    props.dispatch({
-      type: "UPLOAD_PDF_SUMMARY",
-      // payload: { pdfUrl, docType },
-    });
-    props.resetComponent();
-  };
-
   return (
     <div>
       <div
@@ -124,6 +116,7 @@ function UploadPage(props) {
                       <DropZone
                         docType={docType}
                         disabled={!Boolean(docType)}
+                        resetComponent={props.resetComponent}
                       />
                     </div>
                   </div>

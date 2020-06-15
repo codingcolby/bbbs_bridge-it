@@ -163,6 +163,78 @@ class MapListPage extends Component {
 
     //renders selected profile information
     const bigProfile = profileFilter.map((item, index) => {
+      // unpack preference object
+      console.log(Object.entries(item.preference));
+      const preferences =
+        item.profile_type !== 2
+          ? [
+              <p key={1}>
+                <strong>Age: </strong>
+                {item.preference.age}
+              </p>,
+              <p key={2}>
+                <strong>Ethnicity: </strong>
+                {item.preference.race}
+              </p>,
+              <p key={3}>
+                <strong>Religion: </strong>
+                {item.preference.religion}
+              </p>,
+              <p key={4}>
+                <strong>P doesn't speak english: </strong>
+                {item.preference.speak_english}
+              </p>,
+              <p key={5}>
+                <strong>Level of problems: </strong>
+                {item.preference.lvl_of_problems}
+              </p>,
+              <p key={6}>
+                <strong>Max distance (miles): </strong>
+                {item.preference.max_distance_miles}
+              </p>,
+            ]
+          : [
+              <p key={1}>
+                <strong>Age: </strong>
+                {item.preference.age}
+              </p>,
+              <p key={2}>
+                <strong>Ethnicity: </strong>
+                {item.preference.race}
+              </p>,
+              <p key={3}>
+                <strong>Religion: </strong>
+                {item.preference.religion}
+              </p>,
+              <p key={4}>
+                <strong>Sexual Orientation: </strong>
+                {item.preference.sexuality}
+              </p>,
+              <p key={5}>
+                <strong>Smoking/Drinking: </strong>
+                {item.preference.smoking_drinking}
+              </p>,
+              <p key={6}>
+                <strong>Have children of their own at home: </strong>
+                {item.preference.children}
+              </p>,
+              <p key={7}>
+                <strong>Pets: </strong>
+                {item.preference.pets}
+              </p>,
+              <p key={8}>
+                <strong>Firearms/Weapons in home: </strong>
+                {item.preference.weapons}
+              </p>,
+              <p key={9}>
+                <strong>Big Couple: </strong>
+                {item.preference.big_couple}
+              </p>,
+              <p key={10}>
+                <strong>Big Sister: </strong>
+                {item.preference.big_sister}
+              </p>,
+            ];
       return (
         <Card key={index} className={classes.margin}>
           <CardHeader
@@ -186,7 +258,8 @@ class MapListPage extends Component {
                   <h3>Ethnicity: {item.race}</h3>
                 </Grid>
                 <Grid item xs={12}>
-                  <h3>Preferences: {item.preference}</h3>
+                  <h3>Preferences: </h3>
+                  {preferences}
                 </Grid>
                 <Grid item xs={12}>
                   <p>{item.summary}</p>
@@ -198,6 +271,7 @@ class MapListPage extends Component {
       );
     });
 
+    // adds distance from selected individual to littles
     profilesLittlesFilter.forEach((element, index) => {
       element.distance = geolib
         .convertDistance(
@@ -214,44 +288,119 @@ class MapListPage extends Component {
     });
 
     //renders list of filtered littles as cards
-    const littlesList = profilesLittlesFilter.map((item, index) => {
-      return (
-        <Card key={index} style={{ marginTop: "0", marginBottom: "5px" }}>
-          <CardHeader
-            title={<h2>{item.first_name + " " + item.last_name}</h2>}
-            className={classes.cardHeaderLittle}
-          />
+    const littlesList = profilesLittlesFilter
+      .sort((a, b) => {
+        return a.distance - b.distance;
+      })
+      .map((item, index) => {
+        const preferences =
+          item.profile_type !== 2
+            ? [
+                <p key={1}>
+                  <strong>Age: </strong>
+                  {item.preference.age}
+                </p>,
+                <p key={2}>
+                  <strong>Ethnicity: </strong>
+                  {item.preference.race}
+                </p>,
+                <p key={3}>
+                  <strong>Religion: </strong>
+                  {item.preference.religion}
+                </p>,
+                <p key={4}>
+                  <strong>P doesn't speak english: </strong>
+                  {item.preference.speak_english}
+                </p>,
+                <p key={5}>
+                  <strong>Level of problems: </strong>
+                  {item.preference.lvl_of_problems}
+                </p>,
+                <p key={6}>
+                  <strong>Max distance (miles): </strong>
+                  {item.preference.max_distance_miles}
+                </p>,
+              ]
+            : [
+                <p key={1}>
+                  <strong>Age: </strong>
+                  {item.preference.age}
+                </p>,
+                <p key={2}>
+                  <strong>Ethnicity: </strong>
+                  {item.preference.race}
+                </p>,
+                <p key={3}>
+                  <strong>Religion: </strong>
+                  {item.preference.religion}
+                </p>,
+                <p key={4}>
+                  <strong>Sexual Orientation: </strong>
+                  {item.preference.sexuality}
+                </p>,
+                <p key={5}>
+                  <strong>Smoking/Drinking: </strong>
+                  {item.preference.smoking_drinking}
+                </p>,
+                <p key={6}>
+                  <strong>Have children of their own at home: </strong>
+                  {item.preference.children}
+                </p>,
+                <p key={7}>
+                  <strong>Pets: </strong>
+                  {item.preference.pets}
+                </p>,
+                <p key={8}>
+                  <strong>Firearms/Weapons in home: </strong>
+                  {item.preference.weapons}
+                </p>,
+                <p key={9}>
+                  <strong>Big Couple: </strong>
+                  {item.preference.big_couple}
+                </p>,
+                <p key={10}>
+                  <strong>Big Sister: </strong>
+                  {item.preference.big_sister}
+                </p>,
+              ];
 
-          <CardBody>
-            <Grid container spacing={0}>
-              <Grid item xs={6}>
-                <h3>Distance: {item.distance} miles</h3>
-              </Grid>
-              <Grid item xs={12}>
-                <h3>Location: {item.address}</h3>
-              </Grid>
+        return (
+          <Card key={index} style={{ marginTop: "0", marginBottom: "5px" }}>
+            <CardHeader
+              title={<h2>{item.first_name + " " + item.last_name}</h2>}
+              className={classes.cardHeaderLittle}
+            />
 
-              <Grid item xs={3}>
-                <h3>Age: {item.dob_or_age}</h3>
-              </Grid>
-              <Grid item xs={3}>
-                <h3>Sex: {item.sex === 2 ? "Male" : "Female"}</h3>
-              </Grid>
-              <Grid item xs={6}>
-                <h3>Ethnicity: {item.race}</h3>
-              </Grid>
-              <Grid item xs={12}>
-                <h3>Preferences: {item.preference}</h3>
-              </Grid>
-              <Grid item xs={12}>
-                <p>{item.summary}</p>
-              </Grid>
-            </Grid>
-          </CardBody>
-        </Card>
-      );
-    });
+            <CardBody>
+              <Grid container spacing={0}>
+                <Grid item xs={6}>
+                  <h3>Distance: {item.distance} miles</h3>
+                </Grid>
+                <Grid item xs={12}>
+                  <h3>Location: {item.address}</h3>
+                </Grid>
 
+                <Grid item xs={3}>
+                  <h3>Age: {item.dob_or_age}</h3>
+                </Grid>
+                <Grid item xs={3}>
+                  <h3>Sex: {item.sex === 2 ? "Male" : "Female"}</h3>
+                </Grid>
+                <Grid item xs={6}>
+                  <h3>Ethnicity: {item.race}</h3>
+                </Grid>
+                <Grid item xs={12}>
+                  <h3>Preferences:</h3>
+                  {preferences}
+                </Grid>
+                <Grid item xs={12}>
+                  <p>{item.summary}</p>
+                </Grid>
+              </Grid>
+            </CardBody>
+          </Card>
+        );
+      });
     return (
       <div>
         <div

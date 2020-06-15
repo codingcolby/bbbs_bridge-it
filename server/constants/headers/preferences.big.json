@@ -1,0 +1,9 @@
+{
+  "age": "Age:",
+  "race": "Race:",
+  "religion": "Religion",
+  "speak_english": "P doesn’t speak English:",
+  "lvl_of_problems": "Level of problems:",
+  "max_distance_miles": "Location:",
+  "max_distance_miles_end": "miles"
+}
