@@ -158,40 +158,43 @@ class MatchTablePage extends Component {
       this.props.history.push("/search");
     };
 
-    const tableRowElements = this.props.store.table.map((item, index) => (
-      <tr>
-        <td>{item.big_name}</td>
-        <td>{item.little_name}</td>
-        {/* Capitalize the review status */}
-        <td>{item.review.charAt(0).toUpperCase() + item.review.slice(1)}</td>
-        <td>
-          <Button
-            onClick={this.handleUpsert}
-            round
-            style={{ backgroundColor: "black" }}
-            size="sm"
-            className="matchselect"
-          >
-            Review Comments
-          </Button>
-        </td>
-        <td>
-          {item.match ? (
+    const tableRowElements = this.props.store.table.map((item, index) => {
+      console.log(item);
+      return (
+        <tr>
+          <td>{item.big_name}</td>
+          <td>{item.little_name}</td>
+          {/* Capitalize the review status */}
+          <td>{item.review.charAt(0).toUpperCase() + item.review.slice(1)}</td>
+          <td>
             <Button
-              onClick={this.onClick}
+              onClick={this.handleUpsert}
               round
               style={{ backgroundColor: "black" }}
               size="sm"
               className="matchselect"
             >
-              Select Match Status
+              Review Comments
             </Button>
-          ) : (
-            <p>Matched!</p>
-          )}
-        </td>
-      </tr>
-    ));
+          </td>
+          <td>
+            {item.match === null || item.match === false ? (
+              <Button
+                onClick={this.onClick}
+                round
+                style={{ backgroundColor: "black" }}
+                size="sm"
+                className="matchselect"
+              >
+                Select Match Status
+              </Button>
+            ) : (
+              <p>Matched!</p>
+            )}
+          </td>
+        </tr>
+      );
+    });
 
     return (
       <div>
