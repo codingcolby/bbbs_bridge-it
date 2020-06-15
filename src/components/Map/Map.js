@@ -12,7 +12,7 @@ class Map extends Component {
       lat: 39.099789,
       lng: -94.57856,
     },
-    zoom: 10,
+    zoom: 10.3,
   };
   render() {
     const profiles = this.props.store.profiles;
@@ -34,16 +34,16 @@ class Map extends Component {
     const profilesFiltered = profiles.filter((item, index) => {
       return item.sex === checked;
     });
-
+    const visibleProfiles = checked ? profilesFiltered : profiles;
     return (
       <div>
-        <div style={{ height: "70vh", width: "100%" }}>
+        <div style={{ height: "80vh", width: "100%" }}>
           <GoogleMapReact
             bootstrapURLKeys={{ key: process.env.REACT_APP_API_GMAP }}
             defaultCenter={this.props.center}
             defaultZoom={this.props.zoom}
           >
-            {profilesFiltered.map((item, index) => {
+            {visibleProfiles.map((item, index) => {
               return (
                 <Marker
                   key={index}

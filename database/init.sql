@@ -16,13 +16,14 @@ CREATE TABLE "profile"
     "longitude" double precision,
     "ems" text,
     "summary" text,
-    "preference" text,
+    "preference" jsonb,
     "interest" text,
     "l_parent" text,
     "l_parent_relationship_to_child" text,
     "b_employer" text,
     "b_occupation" text,
-    "b_marital_status" text
+    "b_marital_status" text,
+    "ready" boolean DEFAULT FALSE
 );
 
 CREATE TABLE "status"
@@ -30,7 +31,7 @@ CREATE TABLE "status"
     "id" SERIAL PRIMARY KEY,
     "big_id" int,
     "little_id" int,
-    "match" boolean DEFAULT FALSE,
+    "match" boolean DEFAULT NULL,
     "review" int DEFAULT NULL,
     "comment" text
 );
@@ -86,11 +87,4 @@ VALUES
     ('little'),
     ('couple');
 
-INSERT INTO "status"
-    ("big_id", "little_id", "match", "review", "comment")
-VALUES
-    ($1, $2, $3, $4, $5)
-ON CONFLICT ON CONSTRAINT unique_relationship_key
-DO
-UPDATE SET 
-"match" = $3, "review" = $4, "comment" = $5;
+
