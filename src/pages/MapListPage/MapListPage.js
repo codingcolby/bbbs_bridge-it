@@ -451,7 +451,6 @@ class MapListPage extends Component {
               <Button
                 style={{
                   backgroundColor: "black",
-                  border: "3px solid white",
                 }}
                 onClick={this.handleAssess(this.props.match.params.id, item.id)}
               >
