@@ -30,14 +30,16 @@ class MapList extends Component {
         checked = this.props.store.checked;
       }
     }
+    console.log("PROFILES:", profiles);
 
     const profilesFiltered = profiles.filter((item, index) => {
       const selected = this.props.selectedProfile;
-      //   console.log("distance:", selected[profile_type]);
+      console.log("RADIUS:", this.props.radius, item.distance);
+
       return (
-        selected.sex === item.sex &&
-        selected.profile_type !== item.profile_type &&
-        profiles.distance <= this.props.radius
+        // selected[0].sex === item.sex &&
+        // selected[0].profile_type !== item.profile_type
+        Number(item.distance) <= this.props.radius
       );
     });
     console.log("PROFILES LITTLES:", profilesFiltered);

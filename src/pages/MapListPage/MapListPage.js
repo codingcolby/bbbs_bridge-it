@@ -22,7 +22,6 @@ import Button from "../../material-kit/components/CustomButtons/Button.js";
 import Card from "../../material-kit/components/Card/Card.js";
 import CardBody from "../../material-kit/components/Card/CardBody.js";
 import image from "../../material-kit/assets/img/kc.jpg";
-
 import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
 
 // const marks = [
@@ -46,6 +45,11 @@ import styles from "../../material-kit/assets/jss/material-kit-react/views/compo
 
 const customStyles = (theme) =>
   createStyles({
+    element: {
+      position: "relative",
+      height: "30vh",
+      overflow: "scroll",
+    },
     cardHeader: {
       backgroundColor: "black",
       color: "white",
@@ -62,6 +66,36 @@ const customStyles = (theme) =>
     },
     ...styles,
   });
+
+const PrettoSlider = withStyles({
+  root: {
+    color: "#52af77",
+    height: 5,
+  },
+  thumb: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#fff",
+    border: "2px solid currentColor",
+    marginTop: -8,
+    marginLeft: -12,
+    "&:focus, &:hover, &$active": {
+      boxShadow: "inherit",
+    },
+  },
+  active: {},
+  valueLabel: {
+    left: "calc(-50% + 4px)",
+  },
+  track: {
+    height: 8,
+    borderRadius: 4,
+  },
+  rail: {
+    height: 8,
+    borderRadius: 4,
+  },
+})(Slider);
 
 class MapListPage extends Component {
   state = {
@@ -81,10 +115,15 @@ class MapListPage extends Component {
   //   return marks.findIndex((mark) => mark.value === value) + 1;
   // };
 
-  handleSlider = (event) => {
-    this.setState({
-      sliderValue: event.target.value,
-    });
+  handleSlider = (event, newValue) => {
+    this.setState(
+      {
+        sliderValue: newValue,
+      },
+      () => {
+        console.log("STATE:", this.state.sliderValue);
+      }
+    );
   };
 
   render() {
@@ -130,12 +169,31 @@ class MapListPage extends Component {
             title={<h1>{item.first_name + " " + item.last_name}</h1>}
             className={classes.cardHeader}
           />
+          <Element name="littles-list" className={classes.element}>
+            <CardBody>
+              <Grid container spacing={0}>
+                <Grid item xs={12}>
+                  <h3>Address: {item.address}</h3>
+                </Grid>
 
-          <CardBody>
-            <h3>Age: {item.dob_or_age}</h3>
-            <h3>Ethnicity: {item.race}</h3>
-            <h3>Address: {item.address}</h3>
-          </CardBody>
+                <Grid item xs={3}>
+                  <h3>Age: {item.dob_or_age}</h3>
+                </Grid>
+                <Grid item xs={3}>
+                  <h3>Sex: {item.sex === 2 ? "Male" : "Female"}</h3>
+                </Grid>
+                <Grid item xs={6}>
+                  <h3>Ethnicity: {item.race}</h3>
+                </Grid>
+                <Grid item xs={12}>
+                  <h3>Preferences: {item.preference}</h3>
+                </Grid>
+                <Grid item xs={12}>
+                  <p>{item.summary}</p>
+                </Grid>
+              </Grid>
+            </CardBody>
+          </Element>
         </Card>
       );
     });
@@ -160,15 +218,35 @@ class MapListPage extends Component {
       return (
         <Card key={index} style={{ marginTop: "0", marginBottom: "5px" }}>
           <CardHeader
-            title={<h3>{item.first_name + " " + item.last_name}</h3>}
+            title={<h2>{item.first_name + " " + item.last_name}</h2>}
             className={classes.cardHeaderLittle}
           />
 
           <CardBody>
-            <h4>Age: {item.dob_or_age}</h4>
-            <h4>Ethnicity: {item.race}</h4>
-            <h4>Distance: {item.distance} miles</h4>
-            <p>{item.summary}</p>
+            <Grid container spacing={0}>
+              <Grid item xs={6}>
+                <h3>Distance: {item.distance} miles</h3>
+              </Grid>
+              <Grid item xs={12}>
+                <h3>Location: {item.address}</h3>
+              </Grid>
+
+              <Grid item xs={3}>
+                <h3>Age: {item.dob_or_age}</h3>
+              </Grid>
+              <Grid item xs={3}>
+                <h3>Sex: {item.sex === 2 ? "Male" : "Female"}</h3>
+              </Grid>
+              <Grid item xs={6}>
+                <h3>Ethnicity: {item.race}</h3>
+              </Grid>
+              <Grid item xs={12}>
+                <h3>Preferences: {item.preference}</h3>
+              </Grid>
+              <Grid item xs={12}>
+                <p>{item.summary}</p>
+              </Grid>
+            </Grid>
           </CardBody>
         </Card>
       );
@@ -189,8 +267,8 @@ class MapListPage extends Component {
               <Grid item xs={12} sm={8} md={8}>
                 <div
                   style={{
-                    backgroundColor: "white",
-                    border: "5px solid white",
+                    backgroundColor: "black",
+                    border: "5px solid black",
                     borderRadius: "5px",
                   }}
                 >
@@ -202,11 +280,12 @@ class MapListPage extends Component {
                   <div
                     style={{
                       textAlign: "center",
-                      marginTop: "15px",
+                      margin: "40px 10px 10px",
+                      // border: "5px solid black",
+                      // borderRadius: "10px",
                     }}
                   >
-                    <Typography gutterBottom> Radius Slider</Typography>
-                    <Slider
+                    <PrettoSlider
                       defaultValue={5}
                       aria-labelledby="discrete-slider-restrict"
                       step={2.5}
@@ -216,6 +295,9 @@ class MapListPage extends Component {
                       max={20}
                       onChange={this.handleSlider}
                     />
+                    <Typography gutterBottom style={{ color: "white" }}>
+                      Radius Slider
+                    </Typography>
                   </div>
                 </div>
 
@@ -242,7 +324,6 @@ class MapListPage extends Component {
                 <div>{bigProfile}</div>
                 <Element
                   name="littles-list"
-                  className="element"
                   style={{
                     position: "relative",
                     height: "50vh",

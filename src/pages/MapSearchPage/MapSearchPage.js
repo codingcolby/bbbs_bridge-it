@@ -9,7 +9,6 @@ import {
   createStyles,
   Radio,
   RadioGroup,
-  Chip,
 } from "@material-ui/core";
 
 // core components
