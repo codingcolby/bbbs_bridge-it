@@ -170,7 +170,7 @@ class MapListPage extends Component {
         type: "CREATE_MATCH",
         payload,
       });
-      swal("Success! You've added this relationship to the Match Table.");
+      swal("Assessed!");
     });
   };
 
