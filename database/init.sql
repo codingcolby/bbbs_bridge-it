@@ -16,13 +16,14 @@ CREATE TABLE "profile"
     "longitude" double precision,
     "ems" text,
     "summary" text,
-    "preference" text,
+    "preference" jsonb,
     "interest" text,
     "l_parent" text,
     "l_parent_relationship_to_child" text,
     "b_employer" text,
     "b_occupation" text,
-    "b_marital_status" text
+    "b_marital_status" text,
+    "ready" boolean DEFAULT FALSE
 );
 
 CREATE TABLE "status"

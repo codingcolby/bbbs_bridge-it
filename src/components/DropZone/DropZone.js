@@ -1,8 +1,10 @@
 import React from "react";
 import DropZoneUploader from "react-dropzone-uploader";
 import "react-dropzone-uploader/dist/styles.css";
-
+import axios from "axios";
 import CustomSubmit from "./CustomSubmit";
+import swal from "@sweetalert/with-react";
+import Review from "./Review";
 
 function DropZone(props) {
   const disabled = props.disabled;
@@ -25,6 +27,37 @@ function DropZone(props) {
       f.restart();
     });
   };
+
+  // starts the review process on successful upload
+  const startReview = (fileWithMeta, status, allFilesWithMeta) => {
+    if (status === "done") {
+      const profileId = JSON.parse(fileWithMeta.xhr.response).id;
+      axios
+        .get(`/api/pdf/review/start/${profileId}`)
+        .then((response) => {
+          console.log(response.data);
+          const profile = response.data;
+          swal(<Review profile={profile} />).then((confirmed) => {
+            const data = { profile: profile };
+            console.log(data);
+            axios
+              .put(`/api/pdf/review/finish/${profileId}`, data)
+              .then((response) => {
+                swal("Upload Successful!", { icon: "success" }).then(
+                  props.resetComponent()
+                );
+              })
+              .catch((err) => {
+                console.log(err);
+                props.resetComponent();
+              });
+          });
+        })
+        .catch((err) => {
+          console.log("Err: Review process could not start", err);
+        });
+    }
+  };
   console.log(props.disabled);
   return (
     <div>
@@ -41,6 +74,7 @@ function DropZone(props) {
         autoUpload={false}
         multiple={false}
         maxFiles={1}
+        onChangeStatus={startReview}
       />
     </div>
   );

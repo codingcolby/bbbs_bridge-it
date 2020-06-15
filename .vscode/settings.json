@@ -1,0 +1,24 @@
+{
+    "cSpell.words": [
+        "chunker"
+    ],
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#5e6aa9",
+        "activityBar.activeBorder": "#c7979f",
+        "activityBar.background": "#5e6aa9",
+        "activityBar.foreground": "#e7e7e7",
+        "activityBar.inactiveForeground": "#e7e7e799",
+        "activityBarBadge.background": "#c7979f",
+        "activityBarBadge.foreground": "#15202b",
+        "statusBar.background": "#4a548a",
+        "statusBar.border": "#4a548a",
+        "statusBar.foreground": "#e7e7e7",
+        "statusBarItem.hoverBackground": "#5e6aa9",
+        "titleBar.activeBackground": "#4a548a",
+        "titleBar.activeForeground": "#e7e7e7",
+        "titleBar.border": "#4a548a",
+        "titleBar.inactiveBackground": "#4a548a99",
+        "titleBar.inactiveForeground": "#e7e7e799"
+    },
+    "peacock.color": "#4a548a"
+}
