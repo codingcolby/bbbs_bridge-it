@@ -449,6 +449,10 @@ class MapListPage extends Component {
             <CardActions>
               {/* TODO: update assess handler to work with littles */}
               <Button
+                style={{
+                  backgroundColor: "black",
+                  border: "3px solid white",
+                }}
                 onClick={this.handleAssess(this.props.match.params.id, item.id)}
               >
                 Assess Match
