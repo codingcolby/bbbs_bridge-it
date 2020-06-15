@@ -14,6 +14,7 @@ import {
   withStyles,
   createStyles,
   CardHeader,
+  CardActions,
 } from "@material-ui/core";
 
 // core components
@@ -23,6 +24,7 @@ import Card from "../../material-kit/components/Card/Card.js";
 import CardBody from "../../material-kit/components/Card/CardBody.js";
 import image from "../../material-kit/assets/img/kc.jpg";
 import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
+import swal from "@sweetalert/with-react";
 
 // const marks = [
 //   {
@@ -97,6 +99,16 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
+// function Comments(props) {
+//   return (
+//     <TextField
+//       value={props.comments}
+//       onChange={props.onChange}
+//       label="Comments"
+//     />
+//   );
+// }
+
 class MapListPage extends Component {
   state = {
     sliderValue: "",
@@ -124,6 +136,42 @@ class MapListPage extends Component {
         console.log("STATE:", this.state.sliderValue);
       }
     );
+  };
+
+  handleAssess = (big_id, little_id) => (event) => {
+    swal({
+      title: "Assess This Match:",
+      // text: `{ currentComment }`,
+      // content: {<Comments />},
+      buttons: {
+        likely: {
+          text: "Likely",
+          value: 3, // likely
+        },
+        maybe: {
+          text: "Maybe",
+          value: 2, // maybe
+        },
+        unlikely: {
+          text: "Unlikely",
+          value: 1, // unlikely
+        },
+        cancel: "Cancel",
+      },
+    }).then((value) => {
+      if (value === null) return swal("Canceled!");
+      const payload = {
+        comment: null,
+        review: value,
+        big_id: big_id,
+        little_id: little_id,
+      };
+      this.props.dispatch({
+        type: "CREATE_MATCH",
+        payload,
+      });
+      swal("Success! You've added this relationship to the Match Table.");
+    });
   };
 
   render() {
@@ -398,6 +446,14 @@ class MapListPage extends Component {
                 </Grid>
               </Grid>
             </CardBody>
+            <CardActions>
+              {/* TODO: update assess handler to work with littles */}
+              <Button
+                onClick={this.handleAssess(this.props.match.params.id, item.id)}
+              >
+                Assess Match
+              </Button>
+            </CardActions>
           </Card>
         );
       });

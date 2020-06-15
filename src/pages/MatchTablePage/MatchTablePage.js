@@ -1,101 +1,148 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import mapStoreToProps from "../../redux/mapStoreToProps";
+import { withStyles, createStyles } from "@material-ui/core";
 import swal from "@sweetalert/with-react";
-// import "./Table.css";
 
-import { withStyles, createStyles, Paper } from "@material-ui/core";
+// core components
 import Footer from "../../material-kit/components/Footer/Footer.js";
-import Button from "../../material-kit/components/CustomButtons/Button.js";
-import image from "../../material-kit/assets/img/kc.jpg";
-import styles from "../../material-kit/assets/jss/material-kit-react/views/loginPage.js";
+import GridContainer from "../../material-kit/components/Grid/GridContainer.js";
+import GridItem from "../../material-kit/components/Grid/GridItem.js";
 import Card from "../../material-kit/components/Card/Card.js";
 import CardBody from "../../material-kit/components/Card/CardBody.js";
+import CardHeader from "../../material-kit/components/Card/CardHeader.js";
+import CardFooter from "../../material-kit/components/Card/CardFooter.js";
+import image from "../../material-kit/assets/img/kc.jpg";
+import Button from "../../material-kit/components/CustomButtons/Button.js";
 
-import { BottomNavigationAction } from "@material-ui/core";
-// import Button from "@material-ui/core/Button";
-// import { withStyles, makeStyles } from "@material-ui/core/styles";
-// import Table from "@material-ui/core/Table";
-// import TableBody from "@material-ui/core/TableBody";
-// import TableCell from "@material-ui/core/TableCell";
-// import TableContainer from "@material-ui/core/TableContainer";
-// import tablehea from "@material-ui/core/tablehea";
-// import tr from "@material-ui/core/tr";
-// import Paper from "@material-ui/core/Paper";
-
-// const useStyles = makeStyles((theme) => ({
-// 	root: {
-// 		"& > *": {
-// 			margin: theme.spacing(72),
-// 		},
-// 	},
-// 	width: 90,
-// }));
-
-// const td = withStyles((theme) => ({
-// 	head: {
-// 		backgroundColor: "green",
-// 		color: theme.palette.common.white,
-// 	},
-// 	body: {
-// 		fontSize: 16,
-// 	},
-// }))(TableCell);
-
-// const Styledtr = withStyles((theme) => ({
-// 	root: {
-// 		"&:nth-of-type(odd)": {
-// 			backgroundColor: theme.palette.action.hover,
-// 		},
-// 	},
-// 	tablehea: {
-// 		fontSize: 20,
-// 	},
-// }))(tr);
+import styles from "../../material-kit/assets/jss/material-kit-react/views/loginPage.js";
+import "./Table.css";
 
 const customStyles = (theme) =>
   createStyles({
+    root: {
+      textAlign: "center",
+    },
+    card: {
+      width: "83vw",
+      height: "60vh",
+    },
+
+    tr: {
+      borderBottom: "5px",
+      borderColor: "solid black",
+    },
+    td: {
+      textAlign: "left",
+    },
+
+    th: {
+      textAlign: "left",
+    },
+
+    containerz: {
+      zIndex: "2",
+      position: "relative",
+      paddingTop: "10vh",
+      color: "#FFFFFF",
+      paddingBottom: "200px",
+    },
+    cardbody: {
+      overflow: "scroll",
+    },
+    center: {
+      textAlign: "center",
+    },
     ...styles,
   });
 
 class MatchTablePage extends Component {
+  state = {
+    match: "",
+    review: "",
+    comment: "",
+    big_id: "",
+    little_id: "",
+  };
+
   componentDidMount() {
     this.props.dispatch({ type: "FETCH_TABLE" });
   }
 
-  onClick = () => {
+  handleComment = () => {
+    const currentComment = this.props.store.table.map((item, index) => {
+      return <p key={index}>item.comment</p>;
+    });
+
+    swal({
+      title: "Comments:",
+      text: `{ currentComment }`,
+      content: "input",
+    }).then((value) => {
+      swal(`Saved Comments: ${value}`);
+      this.setState({
+        comment: this.state.value,
+      });
+      this.props.dispatch({
+        type: "UPDATE_MATCH_STATUS",
+        payload: {
+          comment: this.state.comment,
+          big_id: this.state.big_id,
+          little_id: this.state.little_id,
+        },
+      });
+    });
+  };
+
+  onClick = (big_id, little_id, comment) => (event) => {
     swal({
       text:
         "Please confirm your Match selection below, or cancel and return to the Match Table",
       buttons: {
         catch: {
           text: "It's a Match!",
-          value: "match",
+          value: true,
           color: "green",
         },
 
         nomatch: {
           text: "No Match",
+          value: false,
         },
         cancel: "Cancel",
       },
     }).then((value) => {
+      if (value === null)
+        return swal(
+          "No changes made",
+          "You can safely return to the Match Table and make your selection",
+          "info"
+        );
+      const payload = {
+        big_id: big_id,
+        little_id: little_id,
+        comment: comment,
+        match: value, // true/false from swal select
+      };
+      this.props.dispatch({
+        type: "UPDATE_MATCH_STATUS",
+        payload,
+      });
       switch (value) {
-        case "nomatch":
+        case false:
           swal(
             "So many Littles, so many Bigs",
             "You'll find a match soon!",
             "error"
           );
           break;
-        case "match":
+        case true:
           swal(
             "Hooray",
             "Congratulations on a successful Big/Little match!",
             "success"
           );
           break;
-
         default:
           swal(
             "No changes made",
@@ -108,16 +155,52 @@ class MatchTablePage extends Component {
 
   render() {
     const { classes } = this.props;
-    // const id = Number(this.props.match.params.id);
-    // const table = this.props.store.table;
 
-    // const tableBig = table.filter((item, index) => {
-    // 	return item.id === id, item.first_name, item.last_name;
-    // });
+    const handleReturn = () => {
+      this.props.history.push("/search");
+    };
 
-    // const tableLittles = table.filter((item, index) => {
-    // 	return item.id === id, item.first_name, item.last_name;
-    // });
+    const tableRowElements = this.props.store.table.map((item, index) => {
+      console.log(item);
+      return (
+        <tr key={index} className={classes.tr}>
+          <td>{item.big_name}</td>
+          <td>{item.little_name}</td>
+          {/* Capitalize the review status */}
+          <td>{item.review.charAt(0).toUpperCase() + item.review.slice(1)}</td>
+          <td>{item.comment}</td>
+          <td className={classes.center}>
+            {item.match === null || item.match === false ? (
+              <Button
+                fullWidth
+                onClick={this.onClick(
+                  item.big_id,
+                  item.little_id,
+                  item.comment
+                )}
+                round
+                style={{ backgroundColor: "black" }}
+                size="sm"
+                className="matchselect"
+              >
+                Select Match Status
+              </Button>
+            ) : (
+              <Button
+                fullWidth
+                color="success"
+                disabled
+                round
+                size="sm"
+                className="matchselect"
+              >
+                Matched
+              </Button>
+            )}
+          </td>
+        </tr>
+      );
+    });
 
     return (
       <div>
@@ -129,78 +212,44 @@ class MatchTablePage extends Component {
             backgroundPosition: "top center",
           }}
         >
-          <Card>
-            <h2>Match Selection Table</h2>
-            <table className="tablecontainer">
-              <thead>
-                <tr>
-                  <th>Big or Couple Name</th>
-                  <th>Little Name</th>
-                  <th className="centered">Match / No Match</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Sam Jones</td>
-                  <td>Jason Twinada</td>
-                  {/* {tableBig.map((item, index) => {
-									return (
-										<td key={index}>
-											{item.first_name + " " + item.last_name}
-										</td>
-									);
-								})}
-								{tableLittles.map((item, index) => {
-									return (
-										<td key={index}>
-											{item.first_name + " " + item.last_name}
-										</td>
-									);
-								})} */}
-                  <td className="centered">
+          <div className={classes.containerz}>
+            <GridContainer justify="center">
+              <GridItem xs={12} sm={12} md={10}>
+                <Card className={classes.card}>
+                  <CardHeader color="success" className={classes.cardHeader}>
+                    <h1>Complete a Match!</h1>
+                  </CardHeader>
+                  <CardBody className={classes.cardbody}>
+                    <div>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Big or Couple Name</th>
+                            <th>Little Name</th>
+                            <th>Match Assessement</th>
+                            <th>Comments</th>
+                            <th>Match / No Match</th>
+                          </tr>
+                        </thead>
+                        <tbody>{tableRowElements}</tbody>
+                      </table>
+                    </div>
+                  </CardBody>
+                  <CardFooter className={classes.cardFooter}>
                     <Button
-                      onClick={this.onClick}
+                      onClick={handleReturn}
+                      color="success"
                       round
+                      size="lg"
                       style={{ backgroundColor: "black" }}
-                      size="md"
-                      className="matchselect"
                     >
-                      Select Match Status
+                      Return to Name Search
                     </Button>
-                  </td>
-                </tr>
-                <tr>
-                  <td>Sam Jones</td>
-                  <td>Demonta Miller</td>
-                  {/* {tableBig.map((item, index) => {
-									return (
-										<td key={index}>
-											{item.first_name + " " + item.last_name}
-										</td>
-									);
-								})}
-								{tableLittles.map((item, index) => {
-									return (
-										<td key={index}>
-											{item.first_name + " " + item.last_name}
-										</td>
-									);
-								})} */}
-                  <td className="centered">
-                    <Button
-                      onClick={this.onClick}
-                      round
-                      style={{ backgroundColor: "black" }}
-                      size="md"
-                      className="matchselect"
-                    >
-                      Select Match Status
-                    </Button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </Card>
+                  </CardFooter>
+                </Card>
+              </GridItem>
+            </GridContainer>
+          </div>
           <Footer whiteFont />
         </div>
       </div>
