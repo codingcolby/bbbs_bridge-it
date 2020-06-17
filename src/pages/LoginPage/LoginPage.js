@@ -63,7 +63,6 @@ class LoginPage extends Component {
 
   render() {
     const { classes } = this.props;
-    console.log(this.state);
 
     return (
       <div>

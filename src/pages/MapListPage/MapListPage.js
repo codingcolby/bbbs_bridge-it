@@ -26,25 +26,6 @@ import image from "../../material-kit/assets/img/kc.jpg";
 import styles from "../../material-kit/assets/jss/material-kit-react/views/components.js";
 import swal from "@sweetalert/with-react";
 
-// const marks = [
-//   {
-//     value: 5,
-//     label: "5",
-//   },
-//   {
-//     value: 10,
-//     label: "10",
-//   },
-//   {
-//     value: 15,
-//     label: "15",
-//   },
-//   {
-//     value: 20,
-//     label: "20",
-//   },
-// ];
-
 const customStyles = (theme) =>
   createStyles({
     element: {
@@ -99,16 +80,6 @@ const PrettoSlider = withStyles({
   },
 })(Slider);
 
-// function Comments(props) {
-//   return (
-//     <TextField
-//       value={props.comments}
-//       onChange={props.onChange}
-//       label="Comments"
-//     />
-//   );
-// }
-
 class MapListPage extends Component {
   state = {
     sliderValue: "",
@@ -119,23 +90,12 @@ class MapListPage extends Component {
       type: "FETCH_PROFILES",
     });
   }
-  // valuetext = (value) => {
-  //   return `${value}`;
-  // };
 
-  // valueLabelFormat = (value) => {
-  //   return marks.findIndex((mark) => mark.value === value) + 1;
-  // };
-
+  //set the slider value state
   handleSlider = (event, newValue) => {
-    this.setState(
-      {
-        sliderValue: newValue,
-      },
-      () => {
-        console.log("STATE:", this.state.sliderValue);
-      }
-    );
+    this.setState({
+      sliderValue: newValue,
+    });
   };
 
   handleAssess = (big_id, little_id) => (event) => {
@@ -176,7 +136,7 @@ class MapListPage extends Component {
 
   render() {
     const { classes } = this.props;
-
+    //event handler to send to table page
     const handleClick = () => {
       this.props.history.push(`/table`);
     };
@@ -212,7 +172,7 @@ class MapListPage extends Component {
     //renders selected profile information
     const bigProfile = profileFilter.map((item, index) => {
       // unpack preference object
-      console.log(Object.entries(item.preference));
+
       const preferences =
         item.profile_type !== 2
           ? [
@@ -295,7 +255,6 @@ class MapListPage extends Component {
                 <Grid item xs={12}>
                   <h3>Address: {item.address}</h3>
                 </Grid>
-
                 <Grid item xs={3}>
                   <h3>Age: {item.dob_or_age}</h3>
                 </Grid>
