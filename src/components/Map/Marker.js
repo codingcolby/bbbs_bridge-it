@@ -31,8 +31,11 @@ const customStyles = (theme) =>
 class Marker extends Component {
   render() {
     const handleClick = () => {
-      this.props.history.push(`/list/${this.props.id}`);
+      if (this.props.type === 1) {
+        this.props.history.push(`/list/${this.props.id}`);
+      }
     };
+
     const { classes } = this.props;
     return (
       <div className={classes.root}>

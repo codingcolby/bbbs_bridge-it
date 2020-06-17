@@ -32,8 +32,13 @@ class Map extends Component {
     }
 
     const profilesFiltered = profiles.filter((item, index) => {
-      return item.sex === checked;
+      if (checked === 3) {
+        return item.profile_type === 2 || item.profile_type === 3;
+      } else {
+        return item.sex === checked;
+      }
     });
+
     const visibleProfiles = checked ? profilesFiltered : profiles;
     return (
       <div>
