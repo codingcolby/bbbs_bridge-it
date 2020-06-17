@@ -99,12 +99,14 @@ class SearchPage extends Component {
     });
   }
 
+  //set search term state
   changeSearch = (event) => {
     this.setState({
       searchTerm: event.target.value,
     });
   };
 
+  //dispatch state to search term reducer
   handleSearchClick = (event) => {
     this.props.dispatch({
       type: "SET_SEARCH",
@@ -112,9 +114,8 @@ class SearchPage extends Component {
     });
   };
 
+  //event handler to navigate to list page and set selected profiles reducer
   handleNameClick = (id) => (event) => {
-    console.log(id);
-
     this.props.dispatch({
       type: "SET_SELECTED_PROFILES",
       payload: id,
@@ -124,7 +125,11 @@ class SearchPage extends Component {
 
   render() {
     const { classes } = this.props;
+
+    //sets all profiles to variable
     const profiles = this.props.store.profiles;
+
+    //filter through profiles and return profiles that meet search term requirements
     const profilesFilter = profiles.filter((item, index) => {
       const profileName = item.first_name + " " + item.last_name;
       const lowerProfileName = profileName.toLowerCase();
@@ -137,6 +142,7 @@ class SearchPage extends Component {
       return true;
     });
 
+    //event handler that navigates users to map page
     const handleClick = () => {
       this.props.history.push("/map");
     };

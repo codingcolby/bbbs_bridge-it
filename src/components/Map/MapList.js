@@ -15,10 +15,13 @@ class MapList extends Component {
     zoom: 10,
   };
   render() {
+    //set all profiles from database to variable
     const profiles = this.props.selectedLittles;
 
+    //set checked value to variable
     let checked = this.props.store.checked;
 
+    //
     if (checked) {
       if (checked === "female") {
         checked = 1;
@@ -30,12 +33,10 @@ class MapList extends Component {
         checked = this.props.store.checked;
       }
     }
-    console.log("PROFILES:", profiles);
 
     const profilesFiltered = profiles.filter((item, index) => {
       return Number(item.distance) <= this.props.radius;
     });
-    console.log("PROFILES LITTLES:", profilesFiltered);
 
     return (
       <div>
