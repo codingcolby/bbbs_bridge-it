@@ -35,11 +35,10 @@ function DropZone(props) {
       axios
         .get(`/api/pdf/review/start/${profileId}`)
         .then((response) => {
-          console.log(response.data);
           const profile = response.data;
           swal(<Review profile={profile} />).then((confirmed) => {
             const data = { profile: profile };
-            console.log(data);
+
             axios
               .put(`/api/pdf/review/finish/${profileId}`, data)
               .then((response) => {
@@ -58,7 +57,7 @@ function DropZone(props) {
         });
     }
   };
-  console.log(props.disabled);
+
   return (
     <div>
       <DropZoneUploader
