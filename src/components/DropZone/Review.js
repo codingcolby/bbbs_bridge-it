@@ -142,42 +142,39 @@ function Review(props) {
         />
       </div>
     ) : (
-      profile.profile_type ==
-      2(
-        <div>
-          <TextField
-            onChange={handleFirstNameChange}
-            value={firstName}
-            label="First Name"
-            fullWidth
-          />
-          <TextField
-            onChange={handleLastNameChange}
-            value={lastName}
-            label="Last Name"
-            fullWidth
-          />
-          <TextField
-            onChange={handleAgeChange}
-            value={age}
-            label="Age"
-            type="number"
-            fullWidth
-          />
-          <TextField
-            onChange={handleAddressChange}
-            value={address}
-            label="Address"
-            fullWidth
-          />
-          <TextField
-            onChange={handleRaceChange}
-            value={race}
-            label="Ethnicity"
-            fullWidth
-          />
-        </div>
-      )
+      <div>
+        <TextField
+          onChange={handleFirstNameChange}
+          value={firstName}
+          label="First Name"
+          fullWidth
+        />
+        <TextField
+          onChange={handleLastNameChange}
+          value={lastName}
+          label="Last Name"
+          fullWidth
+        />
+        <TextField
+          onChange={handleAgeChange}
+          value={age}
+          label="Age"
+          type="number"
+          fullWidth
+        />
+        <TextField
+          onChange={handleAddressChange}
+          value={address}
+          label="Address"
+          fullWidth
+        />
+        <TextField
+          onChange={handleRaceChange}
+          value={race}
+          label="Ethnicity"
+          fullWidth
+        />
+      </div>
     )
   ) : profile.profile_type !== 2 ? (
     <div>
@@ -261,59 +258,56 @@ function Review(props) {
         />
       </div>
     ) : (
-      profile.profile_type ==
-      2(
-        <div>
-          <TextField
-            onChange={handlePreferenceChange("age")}
-            value={preference.age}
-            label="Age"
-            fullWidth
-          />
-          <TextField
-            onChange={handlePreferenceChange("race")}
-            value={preference.race}
-            label="Ethnicity"
-            fullWidth
-          />
-          <TextField
-            onChange={handlePreferenceChange("religion")}
-            value={preference.religion}
-            label="Religion"
-            fullWidth
-          />
-          <TextField
-            onChange={handlePreferenceChange("sexuality")}
-            value={preference.sexuality}
-            label="Sexuality"
-            fullWidth
-          />
-          <TextField
-            onChange={handlePreferenceChange("smoking_drinking")}
-            value={preference.smoking_drinking}
-            label="Smoking/Drinking"
-            fullWidth
-          />
-          <TextField
-            onChange={handlePreferenceChange("children")}
-            value={preference.children}
-            label="Have children of their own at home:"
-            fullWidth
-          />
-          <TextField
-            onChange={handlePreferenceChange("pets")}
-            value={preference.pets}
-            label="Pets"
-            fullWidth
-          />
-          <TextField
-            onChange={handlePreferenceChange("weapons")}
-            value={preference.weapons}
-            label="Firearms/Weapons in home"
-            fullWidth
-          />
-        </div>
-      )
+      <div>
+        <TextField
+          onChange={handlePreferenceChange("age")}
+          value={preference.age}
+          label="Age"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("race")}
+          value={preference.race}
+          label="Ethnicity"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("religion")}
+          value={preference.religion}
+          label="Religion"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("sexuality")}
+          value={preference.sexuality}
+          label="Sexuality"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("smoking_drinking")}
+          value={preference.smoking_drinking}
+          label="Smoking/Drinking"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("children")}
+          value={preference.children}
+          label="Have children of their own at home:"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("pets")}
+          value={preference.pets}
+          label="Pets"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("weapons")}
+          value={preference.weapons}
+          label="Firearms/Weapons in home"
+          fullWidth
+        />
+      </div>
     )
   ) : profile.profile_type !== 2 ? (
     <div>
