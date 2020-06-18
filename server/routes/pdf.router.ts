@@ -17,6 +17,7 @@ import bigPreferenceForwardChecker from "../modules/big-preference-forward-check
 import LittlePreferences from "../modules/little.preferencs.interface";
 import littlePreferenceChecker from "../modules/little-preference-checker";
 import axios from "axios";
+import moment from "moment";
 
 const router: express.Router = express.Router();
 
@@ -558,11 +559,21 @@ router.post(
 
         //
         // 3. Get the dob_or_age (this is a Little. We need age)
-        profile.dob_or_age = chunker(
+        const dob = chunker(
           chunks.personal_info,
           little_profile_head.age_pre,
           little_profile_head.age_post
         ).trim();
+
+        profile.dob_or_age = String(
+          moment().diff(
+            dob === "10/ X X /2005" // if the dummy pdf is loaded, get a real dob
+              ? "10/21/2005"
+              : dob,
+            "years",
+            false
+          )
+        );
 
         //
         // 4. Get the race
@@ -665,7 +676,7 @@ router.post(
           /\r?\n|\r/g,
           ""
         )}
-        
+
         ${chunks.description_of_child.replace(/\r?\n|\r/g, "")}`;
         //
         // get the lat & lng from google
