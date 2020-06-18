@@ -1,11 +1,12 @@
 import { Request, Response, query } from "express";
 import express from "express";
 import pool from "../modules/pool";
+import rejectUnauthenticated from "../modules/authentication-middleware";
 
 const router = express.Router();
 
 // ----- GET ALL CORRESPONDING MATCH POTENTIALS
-router.get("/", (req: Request, res: Response): void => {
+router.get("/", rejectUnauthenticated, (req: Request, res: Response): void => {
   // 	/api/table
   const queryText: string = `SELECT "status"."id", "review_type"."type" as "review", "status"."match", "status"."comment", CONCAT("profile1"."first_name", ' ', "profile1"."last_name") AS "big_name", CONCAT("profile2"."first_name", ' ', "profile2"."last_name") AS "little_name", "status"."big_id", "status"."little_id" FROM "status"
   JOIN "profile" "profile1" ON "profile1"."id" = "big_id"
@@ -28,7 +29,7 @@ router.get("/", (req: Request, res: Response): void => {
  * Create the initial match relationship.
  * This relationship displays as an entry on the match table page.
  */
-router.post("/", (req: Request, res: Response) => {
+router.post("/", rejectUnauthenticated, (req: Request, res: Response) => {
   /**
    * Req. body expects this data object
    *   {
@@ -71,22 +72,26 @@ router.post("/", (req: Request, res: Response) => {
  *     match: Boolean
  *   }
  */
-router.put("/match", (req: Request, res: Response): void => {
-  const { big_id, little_id, comment, match } = req.body;
-  const queryData = [big_id, little_id, comment, match];
+router.put(
+  "/match",
+  rejectUnauthenticated,
+  (req: Request, res: Response): void => {
+    const { big_id, little_id, comment, match } = req.body;
+    const queryData = [big_id, little_id, comment, match];
 
-  const queryText = `UPDATE "status" SET ("match", "comment") = ($4, $3)
+    const queryText = `UPDATE "status" SET ("match", "comment") = ($4, $3)
 	WHERE ("big_id" = $1) AND ("little_id" = $2) RETURNING "id";`;
 
-  pool
-    .query(queryText, queryData)
-    .then((response) => {
-      res.send(response); // send the id
-    })
-    .catch((err) => {
-      console.warn(err);
-      res.sendStatus(500);
-    });
-});
+    pool
+      .query(queryText, queryData)
+      .then((response) => {
+        res.send(response); // send the id
+      })
+      .catch((err) => {
+        console.warn(err);
+        res.sendStatus(500);
+      });
+  }
+);
 
 export default router;
