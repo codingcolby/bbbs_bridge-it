@@ -1,0 +1,18 @@
+{
+  "name_pre": "Child Name:",
+  "name_post": "Gender:",
+  "age_pre": "DOB:",
+  "age_post": "Race:",
+  "address_pre": "Location:",
+  "address_post": "Parent/Guardian:",
+  "sex_pre": "Gender:",
+  "sex_post": "DOB:",
+  "race_pre": "Race:",
+  "race_post": "Location:",
+  "ems_pre": "(EMS):",
+  "ems_post": "",
+  "parent_pre": "Parent/Guardian:",
+  "parent_post": "Relationship to Child:",
+  "relationship_to_child_pre": "Relationship to Child:",
+  "relationship_to_child_post": "Enrollment and Matching"
+}

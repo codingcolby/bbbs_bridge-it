@@ -8,7 +8,8 @@ import escapeStringRegexp from "escape-string-regexp";
 export default function chunker(
   pdf_text: string,
   header_1: string,
-  header_2: string
+  header_2: string,
+  altMode: boolean = false
 ): string {
   // example regex for text between headings: /(?<=DESCRIPTION OF VOLUNTEER:[\n | \r])(.*[\s\S]*?)(?=EXPERIENCE WITH CHILDREN)/gm
   // that regex gets the Big's description
@@ -16,11 +17,18 @@ export default function chunker(
     const header_1_escaped: string = escapeStringRegexp(header_1);
     const header_2_escaped: string = escapeStringRegexp(header_2);
 
-    const regexp = new RegExp(
-      `(?<=${header_1_escaped}[\n \r])(.*[\\s\\S]*?)(?=${header_2_escaped})`,
-      "gm"
-    );
-
+    let regexp;
+    if (altMode) {
+      regexp = new RegExp(
+        `(?<=${header_1_escaped})(.*[\\s\\S]*?)(?=${header_2_escaped})`,
+        "g"
+      );
+    } else {
+      regexp = new RegExp(
+        `(?<=${header_1_escaped}[\n \r])(.*[\\s\\S]*?)(?=${header_2_escaped})`,
+        "gm"
+      );
+    }
     const result: RegExpMatchArray | null = pdf_text.match(regexp); // match returns array, get the first match & return
 
     console.log(`
