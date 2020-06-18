@@ -10,26 +10,26 @@ Big Brothers Big Sisters plays an important role in pairing Bigs and Littles. Cu
 
 Bridge-iT generates a pinned location on a map once the Big or Little information has been loaded. You can reduce the number of pins by selecting preferences or radius. Once the pins have been narrowed, you can select on the toggle button to have a side by side view of the Big and Little profiles. This allows you to easily compare the two profiles and see if the two would be a good match.
 
-To see the fully functional site, please visit: DEPLOYED VERSION OF THE APP ![Bridge-iT](https://bbbs-bridgeit.herokuapp.com/#/login)
+To see the fully functional site, please visit: DEPLOYED VERSION OF THE APP https://bbbs-bridgeit.herokuapp.com/#/logingit
 
 ## Screen Shots
 
-The mentor/mentee profile PDFs are uploaded through a drag and drop action which includes a review opportunity before submitting
+Mentor/mentee profile PDFs are uploaded through a drag and drop action which includes a review opportunity before submitting
 ![Upload Page](documentation/images/UploadReview.png)
 
 All active profiles appear on a map that can be filtered and/or scaled, the clickable pins change the page focus to the List page where comparisons can be viewed
 ![Map Page](documentation/images/FullMap.png)
 
-Alternatively, a search by name also changes to the List page
+Alternatively, a search by name also changes to the List page on the click of a name
 ![Search Page](documentation/images/SearchByName.png)
 
-The scaleable map shows proximity of a mentor to the mentees; displayed on the right are demographic, match preferences, and a summary display for the mentor and all available mentees within the given radius
+The List page features a scaleable map showing proximity of a mentor to the mentees; displayed on the right are demographic, match preferences, and a summary display for the mentor and all available mentees within the given radius
 ![List Page](documentation/images/PotentialsList.png)
 
-Match Support Specialist assess the potential match likelihood for the mentor displayed
+Match Support Specialist assess the likelihood of match for the mentor displayed in relationship to the mentees who appear on their list
 ![Assess Alert](documentation/images/AssessPotential.png)
 
-If an assessment has been made, the mentor/mentee pair appear on the Match Table, where final selections are made
+If an assessment has been made, the mentor/mentee pair appear on the Match Table, where final selections can be made
 ![Table Page](documentation/images/MatchTable.png)
 
 ## Prerequisites
