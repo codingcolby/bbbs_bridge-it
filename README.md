@@ -26,6 +26,22 @@ _COMING SOON!_
 2. Do This
 3. Do This
 
+<!-- ## Create database and table
+
+Create a new database called `bbbs_matches` and create a `user` table:
+
+```SQL
+CREATE TABLE "user" (
+    "id" SERIAL PRIMARY KEY,
+    "username" VARCHAR (80) UNIQUE NOT NULL,
+    "password" VARCHAR (1000) NOT NULL
+);
+```
+
+If you would like to name your database something else, you will need to change `bbbs_matches` to the name of your new database name in `server/modules/pool.js`
+
+Copy and paste the content into your init.sql  -->
+
 ## Usage
 
 _[Tell a user story "as an admin, as a visitor, as a registered user..."]_
@@ -49,7 +65,7 @@ Staff -
 - Node
 - Nodemailer _(if time permits)_
 - PDF- Parse
-- Postgresql
+- PostgreSQL
 - React
 - Redux
 - Redux-Saga
@@ -178,12 +194,19 @@ This code is also heavily commented. We recommend reading through the comments, 
 
 ## Deployment
 
+### API Keys
+
+For deployment, you will need to register and an API key for:
+
+- [Google Maps](https://developers.google.com/maps/gmp-get-started)
+
 1. Create a new Heroku project
 1. Link the Heroku project to the project GitHub Repo
 1. Create an Heroku Postgres database
 1. Connect to the Heroku Postgres database from Postico
 1. Create the necessary tables
 1. Add an environment variable for `SERVER_SESSION_SECRET` with a nice random string for security
+1. Add an environment variable for `REACT_APP_API_GMAP` with your Google Maps API key
 1. In the deploy section, select manual deploy
 
 ## Update Documentation
