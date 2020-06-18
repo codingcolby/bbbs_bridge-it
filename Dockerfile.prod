@@ -40,6 +40,7 @@ RUN apk --no-cache add --virtual native-deps \
   apk del native-deps
 # install and cache server dependencies
 RUN npm install
+RUN npm run build
 COPY . /app
 # Run final command to kick off server
 CMD ["npm", "run", "start"]
