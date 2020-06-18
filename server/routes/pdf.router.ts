@@ -12,6 +12,7 @@ import BigPreferences from "../modules/big.preferences.interface";
 import bigPreferenceChecker from "../modules/big-preference-checker";
 import bigPreferenceForwardChecker from "../modules/big-preference-forward-checker";
 import axios from "axios";
+import rejectUnauthenticated from "../modules/authentication-middleware";
 
 const router: express.Router = express.Router();
 
@@ -20,6 +21,7 @@ const router: express.Router = express.Router();
  */
 router.post(
   "/upload/big",
+  rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
     // check for file
     try {
@@ -369,6 +371,7 @@ router.post(
  */
 router.get(
   "/review/start/:profileId",
+  rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
     const queryText = `SELECT "profile"."id" as "id", "profile_type", "first_name", "last_name", "sex_type"."type" as "sex", "dob_or_age", "race", "address", "latitude", "longitude", "ems", "summary", "preference", "interest", "l_parent", "l_parent_relationship_to_child", "b_employer", "b_marital_status", "ready" FROM "profile"
     JOIN "sex_type" ON "sex_type"."id" = "profile"."sex"
@@ -392,6 +395,7 @@ router.get(
  */
 router.put(
   "/review/finish/:profileId",
+  rejectUnauthenticated,
   (req: Request, res: Response, next: express.NextFunction): void => {
     const profileId = req.params.profileId;
     const profile = req.body.profile;
