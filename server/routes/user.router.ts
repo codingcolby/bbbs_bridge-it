@@ -13,19 +13,23 @@ router.get("/", rejectUnauthenticated, (req: Request, res: Response): void => {
   res.send(req.user);
 });
 
-router.get("/profiles", (req: Request, res: Response): void => {
-  //get all profiles
-  const queryText: string = `SELECT * FROM "profile";`;
-  pool
-    .query(queryText)
-    .then((response) => {
-      res.send(response.rows);
-    })
-    .catch((err) => {
-      console.log(`Error getting profiles from database: ${err}`);
-      res.sendStatus(500);
-    });
-});
+router.get(
+  "/profiles",
+  rejectUnauthenticated,
+  (req: Request, res: Response): void => {
+    //get all profiles
+    const queryText: string = `SELECT * FROM "profile" WHERE "ready" IS TRUE;`; // "ready" indicates that the profile has been reviewed
+    pool
+      .query(queryText)
+      .then((response) => {
+        res.send(response.rows);
+      })
+      .catch((err) => {
+        console.log(`Error getting profiles from database: ${err}`);
+        res.sendStatus(500);
+      });
+  }
+);
 
 router.post(
   "/register",
@@ -60,18 +64,22 @@ router.post("/logout", (req: Request, res: Response): void => {
   res.sendStatus(200);
 });
 
-router.put("/reset", (req: Request, res: Response): void => {
-  console.log(req.body);
+router.put(
+  "/reset",
+  rejectUnauthenticated,
+  (req: Request, res: Response): void => {
+    console.log(req.body);
 
-  const queryText = `UPDATE "user" SET email=$1, password=$2 WHERE id=$3;`;
-  //@ts-ignore
-  const password: string | null = encryptPassword(req.body.password);
+    const queryText = `UPDATE "user" SET email=$1, password=$2 WHERE id=$3;`;
+    //@ts-ignore
+    const password: string | null = encryptPassword(req.body.password);
 
-  pool
-    .query(queryText, [req.body.email, password, req.body.userid])
-    .then(() => res.sendStatus(200))
-    .catch((err) => {
-      console.log("error in RESET user", err);
-    });
-});
+    pool
+      .query(queryText, [req.body.email, password, req.body.userid])
+      .then(() => res.sendStatus(200))
+      .catch((err) => {
+        console.log("error in RESET user", err);
+      });
+  }
+);
 export default router;

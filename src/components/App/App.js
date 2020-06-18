@@ -48,19 +48,27 @@ class App extends Component {
               <Redirect exact from="/" to="/login" />
               {/* Visiting localhost:3000/about will show the about page.
             This is a route anyone can see, no login necessary */}
-              <Route exact path="/about" component={AboutPage} />
-              <Route exact path="/home" component={LandingPage} />
-              <Route exact path="/map" component={MapSearchPage} />
-              <Route exact path="/list/:id" component={MapListPage} />
-              <Route exact path="/table" component={MatchTablePage} />
+              <ProtectedRoute exact path="/about" component={AboutPage} />
+              <ProtectedRoute exact path="/home" component={LandingPage} />
+              <ProtectedRoute exact path="/map" component={MapSearchPage} />
+              <ProtectedRoute exact path="/list/:id" component={MapListPage} />
+              <ProtectedRoute exact path="/table" component={MatchTablePage} />
 
-              <Route exact path="/search" component={SearchPage} />
-              <Route exact path="/admin" component={AdminPage} />
-              <Route exact path="/upload" component={UploadPage} />
+              <ProtectedRoute exact path="/search" component={SearchPage} />
+              <ProtectedRoute exact path="/admin" component={AdminPage} />
+              <ProtectedRoute exact path="/upload" component={UploadPage} />
 
-              <Route exact path="/kitlogin" component={KitLoginPage} />
-              <Route exact path="/kitlanding" component={KitLandingPage} />
-              <Route exact path="/kitprofile" component={KitProfilePage} />
+              <ProtectedRoute exact path="/kitlogin" component={KitLoginPage} />
+              <ProtectedRoute
+                exact
+                path="/kitlanding"
+                component={KitLandingPage}
+              />
+              <ProtectedRoute
+                exact
+                path="/kitprofile"
+                component={KitProfilePage}
+              />
               {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

@@ -18,13 +18,26 @@ _COMING SOON!_
 
 ## Prerequisites
 
-_COMING SOON!_
+Before you get started, make sure you have the following software installed on your computer:
+
+- [Node.js](https://nodejs.org/en/)
+- [PostrgeSQL](https://www.postgresql.org/)
+- [Nodemon](https://nodemon.io/)
 
 ## Installation
 
-1. Do This
-2. Do This
-3. Do This
+- Run `npm install` in your terminal
+- Create a `.env` file at the root of the project and paste this line into the file:
+  ```
+  SERVER_SESSION_SECRET=superDuperSecret
+  ```
+  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
+- Start postgres if not running already by using `brew services start postgresql`
+
+- Run `npm run server`
+
+- Run `npm run client`
+- Navigate to `localhost:3000`
 
 <!-- ## Create database and table
 
@@ -44,11 +57,18 @@ Copy and paste the content into your init.sql  -->
 
 ## Usage
 
-_[Tell a user story "as an admin, as a visitor, as a registered user..."]_
+### Administrator-
 
-Administrator -
+When the administrator is logged in, they will be able to view the user credential
+Clicking the “Reset User” button begins the process of resetting the shared Big Brothers Big Sisters account credentials.
 
-Staff -
+**The Reset Process:**
+
+1. Click the “Reset User” button
+1. Enter a new username and password for the shared Big Brothers Big Sisters account
+1. Click “Save” to finish changing the shared account credentials
+
+### Staff -
 
 ## Built With These Technologies
 
@@ -59,18 +79,16 @@ Staff -
 - Google Maps API
 - Heroku
 - JavaScript
-- Lodash
 - HTML
 - Material- UI
+- Moment
 - Node
-- Nodemailer _(if time permits)_
 - PDF- Parse
 - PostgreSQL
 - React
 - Redux
 - Redux-Saga
 - SweetAlert
-- Twinword API
 - TypeScript
 
 ## License
@@ -103,14 +121,6 @@ We **STRONGLY** recommend following these instructions carefully. It's a lot, an
 - Unzip the project and start with the code in that folder.
 - Create a new GitHub project and push this code to the new repository.
 
-## Prerequisites
-
-Before you get started, make sure you have the following software installed on your computer:
-
-- [Node.js](https://nodejs.org/en/)
-- [PostrgeSQL](https://www.postgresql.org/)
-- [Nodemon](https://nodemon.io/)
-
 ## Create database and table
 
 Create a new database called `prime_app` and create a `user` table:
@@ -124,19 +134,6 @@ CREATE TABLE "user" (
 ```
 
 If you would like to name your database something else, you will need to change `prime_app` to the name of your new database name in `server/modules/pool.js`
-
-## Development Setup Instructions
-
-- Run `npm install`
-- Create a `.env` file at the root of the project and paste this line into the file:
-  ```
-  SERVER_SESSION_SECRET=superDuperSecret
-  ```
-  While you're in your new `.env` file, take the time to replace `superDuperSecret` with some long random string like `25POUbVtx6RKVNWszd9ERB9Bb6` to keep your application secure. Here's a site that can help you: [https://passwordsgenerator.net/](https://passwordsgenerator.net/). If you don't do this step, create a secret with less than eight characters, or leave it as `superDuperSecret`, you will get a warning.
-- Start postgres if not running already by using `brew services start postgresql`
-- Run `npm run server`
-- Run `npm run client`
-- Navigate to `localhost:3000`
 
 ## Debugging
 
