@@ -7,6 +7,7 @@ import Marker from "./Marker";
 
 class Map extends Component {
   componentDidMount() {}
+  //default zoom and centering for the map
   static defaultProps = {
     center: {
       lat: 39.099789,
@@ -15,10 +16,13 @@ class Map extends Component {
     zoom: 10.3,
   };
   render() {
+    //all profiles from reducer
     const profiles = this.props.store.profiles;
 
+    //radio button checked status from reducer
     let checked = this.props.store.checked;
 
+    //converting checked value to match values from incoming profiles
     if (checked) {
       if (checked === "female") {
         checked = 1;
@@ -31,10 +35,18 @@ class Map extends Component {
       }
     }
 
+    //filtering of profiles to render on map based on checked value
     const profilesFiltered = profiles.filter((item, index) => {
-      return item.sex === checked;
+      if (checked === 3) {
+        return item.profile_type === 2 || item.profile_type === 3;
+      } else {
+        return item.sex === checked;
+      }
     });
+
+    //ternary operator to render all profiles on map until checked reducer has a value
     const visibleProfiles = checked ? profilesFiltered : profiles;
+
     return (
       <div>
         <div style={{ height: "80vh", width: "100%" }}>

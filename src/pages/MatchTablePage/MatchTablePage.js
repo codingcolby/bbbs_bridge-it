@@ -156,12 +156,12 @@ class MatchTablePage extends Component {
   render() {
     const { classes } = this.props;
 
+    //event handler for navigating to search page
     const handleReturn = () => {
       this.props.history.push("/search");
     };
 
     const tableRowElements = this.props.store.table.map((item, index) => {
-      console.log(item);
       return (
         <tr key={index} className={classes.tr}>
           <td>{item.big_name}</td>

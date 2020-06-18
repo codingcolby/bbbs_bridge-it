@@ -42,11 +42,12 @@ class MapSearchPage extends Component {
 
   render() {
     const { classes } = this.props;
-
+    //event handler to navigate to search page
     const handleClick = () => {
       this.props.history.push("/search");
     };
 
+    //event handler to set checked value and dispatch to checked reducer
     const handleChange = (event) => {
       this.setState(
         {

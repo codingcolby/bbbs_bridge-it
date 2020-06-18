@@ -30,9 +30,13 @@ const customStyles = (theme) =>
 
 class Marker extends Component {
   render() {
+    //event handler for clicking on bigs
     const handleClick = () => {
-      this.props.history.push(`/list/${this.props.id}`);
+      if (this.props.type === 1 || 3) {
+        this.props.history.push(`/list/${this.props.id}`);
+      }
     };
+
     const { classes } = this.props;
     return (
       <div className={classes.root}>
