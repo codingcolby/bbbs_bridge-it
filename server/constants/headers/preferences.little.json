@@ -1,0 +1,12 @@
+{
+  "age": "Age:",
+  "race": "Race/Ethnicity:",
+  "religion": "Religion/Faith:",
+  "sexuality": "Sexual orientation:",
+  "smoking_drinking": "Smoking/Drinking:",
+  "children": "Have children of their own at home:",
+  "pets": "Pets:",
+  "weapons": "Firearms/Weapons in home:",
+  "big_couple": "Big Couple:",
+  "big_sister": "Big Sister:"
+}

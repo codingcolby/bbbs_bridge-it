@@ -21,8 +21,6 @@ import CardHeader from "../../material-kit/components/Card/CardHeader.js";
 
 import image from "../../material-kit/assets/img/kc.jpg";
 
-import styles from "../../material-kit/assets/jss/material-kit-react/views/loginPage.js";
-
 const useStyles = makeStyles((theme) => ({
   card: {
     width: "60vw",

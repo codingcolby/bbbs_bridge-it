@@ -101,45 +101,81 @@ function Review(props) {
 
   // TODO: Re-order to match MapListPage
   const infoElement = editMode ? (
-    <div>
-      <TextField
-        onChange={handleFirstNameChange}
-        value={firstName}
-        label="First Name"
-        fullWidth
-      />
-      <TextField
-        onChange={handleLastNameChange}
-        value={lastName}
-        label="Last Name"
-        fullWidth
-      />
-      <TextField
-        onChange={handleAgeChange}
-        value={age}
-        label="Age"
-        type="number"
-        fullWidth
-      />
-      {/*
+    profile.profile_type !== 2 ? (
+      <div>
+        <TextField
+          onChange={handleFirstNameChange}
+          value={firstName}
+          label="First Name"
+          fullWidth
+        />
+        <TextField
+          onChange={handleLastNameChange}
+          value={lastName}
+          label="Last Name"
+          fullWidth
+        />
+        <TextField
+          onChange={handleAgeChange}
+          value={age}
+          label="Age"
+          type="number"
+          fullWidth
+        />
+        {/*
       Sex will need selection
       <p>
         <span className={classes.label}>Sex: </span>
         <TextField onChange={handleSexChange} value={sex} label="Sex" />
       </p> */}
-      <TextField
-        onChange={handleAddressChange}
-        value={address}
-        label="Address"
-        fullWidth
-      />
-      <TextField
-        onChange={handleRaceChange}
-        value={race}
-        label="Ethnicity"
-        fullWidth
-      />
-    </div>
+        <TextField
+          onChange={handleAddressChange}
+          value={address}
+          label="Address"
+          fullWidth
+        />
+        <TextField
+          onChange={handleRaceChange}
+          value={race}
+          label="Ethnicity"
+          fullWidth
+        />
+      </div>
+    ) : (
+      <div>
+        <TextField
+          onChange={handleFirstNameChange}
+          value={firstName}
+          label="First Name"
+          fullWidth
+        />
+        <TextField
+          onChange={handleLastNameChange}
+          value={lastName}
+          label="Last Name"
+          fullWidth
+        />
+        <TextField
+          onChange={handleAgeChange}
+          value={age}
+          label="Age"
+          type="number"
+          fullWidth
+        />
+        <TextField
+          onChange={handleAddressChange}
+          value={address}
+          label="Address"
+          fullWidth
+        />
+        <TextField
+          onChange={handleRaceChange}
+          value={race}
+          label="Ethnicity"
+          fullWidth
+        />
+      </div>
+    )
   ) : profile.profile_type !== 2 ? (
     <div>
       <p>
@@ -160,48 +196,119 @@ function Review(props) {
       </p>
     </div>
   ) : (
-    <p>Little Info</p>
-  );
-  const preferencesElement = editMode ? (
     <div>
-      <TextField
-        onChange={handlePreferenceChange("age")}
-        value={preference.age}
-        label="Age"
-        fullWidth
-      />
-      <TextField
-        onChange={handlePreferenceChange("race")}
-        value={preference.race}
-        label="Ethnicity"
-        fullWidth
-      />
-      <TextField
-        onChange={handlePreferenceChange("religion")}
-        value={preference.religion}
-        label="Religion"
-        fullWidth
-      />
-      <TextField
-        onChange={handlePreferenceChange("speak_english")}
-        value={preference.speak_english}
-        label="P doesn't speak english"
-        fullWidth
-      />
-      <TextField
-        onChange={handlePreferenceChange("lvl_of_problems")}
-        value={preference.lvl_of_problems}
-        label="Level of problems"
-        fullWidth
-      />
-      <TextField
-        onChange={handlePreferenceChange("max_distance_miles")}
-        type="number"
-        value={preference.max_distance_miles}
-        label="Max distance (miles)"
-        fullWidth
-      />
+      <p>
+        <span className={classes.label}>Age: </span>
+        {age}
+      </p>
+      <p>
+        <span className={classes.label}>Sex: </span>
+        {sex}
+      </p>
+      <p>
+        <span className={classes.label}>Address: </span>
+        {address}
+      </p>
+      <p>
+        <span className={classes.label}>Ethnicity: </span>
+        {race}
+      </p>
     </div>
+  );
+
+  const preferencesElement = editMode ? (
+    profile.profile_type !== 2 ? (
+      <div>
+        <TextField
+          onChange={handlePreferenceChange("age")}
+          value={preference.age}
+          label="Age"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("race")}
+          value={preference.race}
+          label="Ethnicity"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("religion")}
+          value={preference.religion}
+          label="Religion"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("speak_english")}
+          value={preference.speak_english}
+          label="P doesn't speak english"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("lvl_of_problems")}
+          value={preference.lvl_of_problems}
+          label="Level of problems"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("max_distance_miles")}
+          type="number"
+          value={preference.max_distance_miles}
+          label="Max distance (miles)"
+          fullWidth
+        />
+      </div>
+    ) : (
+      <div>
+        <TextField
+          onChange={handlePreferenceChange("age")}
+          value={preference.age}
+          label="Age"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("race")}
+          value={preference.race}
+          label="Ethnicity"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("religion")}
+          value={preference.religion}
+          label="Religion"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("sexuality")}
+          value={preference.sexuality}
+          label="Sexuality"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("smoking_drinking")}
+          value={preference.smoking_drinking}
+          label="Smoking/Drinking"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("children")}
+          value={preference.children}
+          label="Have children of their own at home:"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("pets")}
+          value={preference.pets}
+          label="Pets"
+          fullWidth
+        />
+        <TextField
+          onChange={handlePreferenceChange("weapons")}
+          value={preference.weapons}
+          label="Firearms/Weapons in home"
+          fullWidth
+        />
+      </div>
+    )
   ) : profile.profile_type !== 2 ? (
     <div>
       <p>
@@ -226,7 +333,42 @@ function Review(props) {
       </p>
     </div>
   ) : (
-    <p>Little Pref</p>
+    <div>
+      <p>
+        <span className={classes.label}>Age: </span>
+        {preference.age}
+      </p>
+      <p>
+        <span className={classes.label}>Ethnicity: </span>
+        {preference.race}
+      </p>
+      <p>
+        <span className={classes.label}>Religion: </span>
+        {preference.religion}
+      </p>
+      <p>
+        <span className={classes.label}>Sexuality: </span>
+        {preference.sexuality}
+      </p>
+      <p>
+        <span className={classes.label}>Smoking/Drinking: </span>
+        {preference.smoking_drinking}
+      </p>
+      <p>
+        <span className={classes.label}>
+          "Have children of their own at home:":
+        </span>
+        {preference.children}
+      </p>
+      <p>
+        <span className={classes.label}>Pets: </span>
+        {preference.pets}
+      </p>
+      <p>
+        <span className={classes.label}>Weapons: </span>
+        {preference.weapons}
+      </p>
+    </div>
   );
 
   const summaryElement = editMode ? (

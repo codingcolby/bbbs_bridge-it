@@ -4,7 +4,6 @@ import { put, takeLatest } from "redux-saga/effects";
 function* fetchMatchCandidates() {
   try {
     const response = yield axios.get("/api/table");
-    console.log("RESPONSE.DATA", response.data);
 
     yield put({
       type: "SET_TABLE",
