@@ -38,9 +38,11 @@ RUN apk --no-cache add --virtual native-deps \
   npm install --quiet node-gyp -g &&\
   npm install --quiet && \
   apk del native-deps
+
 # install and cache server dependencies
 RUN npm install
-RUN npm run build
 COPY . /app
+RUN npm run build
+
 # Run final command to kick off server
 CMD ["npm", "run", "start"]
